@@ -36,8 +36,7 @@ func Register(u model.SysUser) (err error, userInter model.SysUser) {
 
 func Login(u *model.SysUser) (err error, userInter *model.SysUser) {
 	var user model.SysUser
-	u.Password = utils.MD5V([]byte(u.Password))
-	err = global.GVA_DB.Where("username = ? AND password = ?", u.Username, u.Password).Preload("Authority").First(&user).Error
+	err = global.GVA_DB.Where("code = ?", u.Code).Preload("Authority").First(&user).Error
 	return err, &user
 }
 

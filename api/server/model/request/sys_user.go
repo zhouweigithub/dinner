@@ -13,10 +13,7 @@ type Register struct {
 
 // User login structure
 type Login struct {
-	Username  string `json:"username"`
-	Password  string `json:"password"`
-	Captcha   string `json:"captcha"`
-	CaptchaId string `json:"captchaId"`
+	Code  string `json:"code"`
 }
 
 // Modify password structure
