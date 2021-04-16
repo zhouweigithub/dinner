@@ -1,0 +1,17 @@
+阿里代理仓库
+https://mirrors.aliyun.com/goproxy,direct
+
+全球代理
+https://goproxy.io,direct
+
+
+goland设置
+GOPROXY=https://goproxy.io,direct
+
+
+
+git@github.com:zhouweigithub/dinner.git
+
+
+root
+hS7dQi82.#(*W
