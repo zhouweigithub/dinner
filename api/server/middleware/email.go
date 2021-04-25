@@ -18,14 +18,14 @@ func ErrorToEmail() gin.HandlerFunc {
 		var username string
 		if claims, ok := c.Get("claims"); ok {
 			waitUse := claims.(*request.CustomClaims)
-			username = waitUse.Username
+			username = waitUse.Code
 		} else {
 			id, _ := strconv.Atoi(c.Request.Header.Get("x-user-id"))
 			err, user := service.FindUserById(id)
 			if err != nil {
 				username = "Unknown"
 			}
-			username = user.Username
+			username = user.Code
 		}
 		body, _ := ioutil.ReadAll(c.Request.Body)
 		record := model.SysOperationRecord{

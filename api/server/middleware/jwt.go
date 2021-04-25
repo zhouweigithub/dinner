@@ -41,7 +41,7 @@ func JWTAuth() gin.HandlerFunc {
 			c.Abort()
 			return
 		}
-		if err, _ = service.FindUserByUuid(claims.UUID.String()); err != nil {
+		if err, _ = service.FindUserByCode(claims.Code); err != nil {
 			_ = service.JsonInBlacklist(model.JwtBlacklist{Jwt: token})
 			response.FailWithDetailed(gin.H{"reload": true}, err.Error(), c)
 			c.Abort()
@@ -53,14 +53,14 @@ func JWTAuth() gin.HandlerFunc {
 			c.Header("new-token", newToken)
 			c.Header("new-expires-at", strconv.FormatInt(newClaims.ExpiresAt, 10))
 			if global.GVA_CONFIG.System.UseMultipoint {
-				err, RedisJwtToken := service.GetRedisJWT(newClaims.Username)
+				err, RedisJwtToken := service.GetRedisJWT(newClaims.Code)
 				if err != nil {
 					global.GVA_LOG.Error("get redis jwt failed", zap.Any("err", err))
 				} else { // 当之前的取成功时才进行拉黑操作
 					_ = service.JsonInBlacklist(model.JwtBlacklist{Jwt: RedisJwtToken})
 				}
 				// 无论如何都要记录当前的活跃状态
-				_ = service.SetRedisJWT(newToken, newClaims.Username)
+				_ = service.SetRedisJWT(newToken, newClaims.Code)
 			}
 		}
 		c.Set("claims", claims)

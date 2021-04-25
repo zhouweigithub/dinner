@@ -54,11 +54,11 @@ captcha:
 
 # mysql connect configuration
 mysql:
-  path: ''
+  path: 'localhost'
   config: ''
-  db-name: ''
-  username: ''
-  password: ''
+  db-name: 'dinner'
+  username: 'root'
+  password: 'k8&E2lOs8%$3.@%f'
   max-idle-conns: 10
   max-open-conns: 100
   log-mode: false
