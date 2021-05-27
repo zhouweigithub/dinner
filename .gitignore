@@ -5,6 +5,8 @@
 *.exe.*
 *.user
 */*.user
+/bin
+/obj
 bin
 obj
 bin/*
