@@ -9,8 +9,8 @@ bin
 obj
 bin/*
 obj/*
-Log
-Log/*
+/Log
+/Log/*
 Export
 Export/*
 .vs
