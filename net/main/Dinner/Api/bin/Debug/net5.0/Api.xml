@@ -1,0 +1,71 @@
+<?xml version="1.0"?>
+<doc>
+    <assembly>
+        <name>Api</name>
+    </assembly>
+    <members>
+        <member name="M:Api.Controllers.CompanyController.Add(Model.Request.CompanyAdd)">
+            <summary>
+            添加公司
+            </summary>
+            <param name="company">公司基本信息</param>
+            <returns></returns>
+        </member>
+        <member name="M:Api.Controllers.HomeController.Login(System.String)">
+            <summary>
+            登录
+            </summary>
+            <param name="openid">微信openid</param>
+            <returns></returns>
+        </member>
+        <member name="M:Api.Controllers.HomeController.GenerateToken(System.String)">
+            <summary>
+            生成token
+            </summary>
+            <param name="username">用户名</param>
+            <returns></returns>
+        </member>
+        <member name="M:Api.Controllers.UserController.Add(Model.TUser)">
+            <summary>
+            添加用户
+            </summary>
+            <param name="user"></param>
+            <returns></returns>
+        </member>
+        <member name="M:Api.Controllers.UserController.Show(System.Int32)">
+            <summary>
+            添加用户
+            </summary>
+            <param name="id"></param>
+            <returns></returns>
+        </member>
+        <member name="T:Api.JwtExtention">
+            <summary>
+            jwt服务相关
+            </summary>
+        </member>
+        <member name="M:Api.JwtExtention.AddJwt(Microsoft.Extensions.DependencyInjection.IServiceCollection)">
+            <summary>
+            注册JWT服务
+            </summary>
+            <param name="services"></param>
+        </member>
+        <member name="T:Api.SwaggerExtention">
+            <summary>
+            swagger服务相关
+            </summary>
+        </member>
+        <member name="M:Api.SwaggerExtention.AddSwaggerService(Microsoft.Extensions.DependencyInjection.IServiceCollection)">
+            <summary>
+            注册Swagger服务
+            </summary>
+            <param name="services"></param>
+        </member>
+        <member name="M:Api.SwaggerExtention.UseSwaggerWare(Microsoft.AspNetCore.Builder.IApplicationBuilder)">
+            <summary>
+            引入Swagger中间件
+            </summary>
+            <param name="app"></param>
+        </member>
+    </members>
+</doc>

@@ -1,0 +1,9 @@
+E:\code\dinner\net\main\Dinner\Model\bin\Debug\netcoreapp3.1\Model.deps.json
+E:\code\dinner\net\main\Dinner\Model\bin\Debug\netcoreapp3.1\Model.dll
+E:\code\dinner\net\main\Dinner\Model\bin\Debug\netcoreapp3.1\Model.pdb
+E:\code\dinner\net\main\Dinner\Model\obj\Debug\netcoreapp3.1\Model.csprojAssemblyReference.cache
+E:\code\dinner\net\main\Dinner\Model\obj\Debug\netcoreapp3.1\Model.AssemblyInfoInputs.cache
+E:\code\dinner\net\main\Dinner\Model\obj\Debug\netcoreapp3.1\Model.AssemblyInfo.cs
+E:\code\dinner\net\main\Dinner\Model\obj\Debug\netcoreapp3.1\Model.csproj.CoreCompileInputs.cache
+E:\code\dinner\net\main\Dinner\Model\obj\Debug\netcoreapp3.1\Model.dll
+E:\code\dinner\net\main\Dinner\Model\obj\Debug\netcoreapp3.1\Model.pdb

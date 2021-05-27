@@ -1,0 +1,13 @@
+E:\code\dinner\net\main\Dinner\Model\bin\Debug\net5.0\Model.deps.json
+E:\code\dinner\net\main\Dinner\Model\bin\Debug\net5.0\Model.dll
+E:\code\dinner\net\main\Dinner\Model\bin\Debug\net5.0\ref\Model.dll
+E:\code\dinner\net\main\Dinner\Model\bin\Debug\net5.0\Model.pdb
+E:\code\dinner\net\main\Dinner\Model\obj\Debug\net5.0\Model.csprojAssemblyReference.cache
+E:\code\dinner\net\main\Dinner\Model\obj\Debug\net5.0\Model.GeneratedMSBuildEditorConfig.editorconfig
+E:\code\dinner\net\main\Dinner\Model\obj\Debug\net5.0\Model.AssemblyInfoInputs.cache
+E:\code\dinner\net\main\Dinner\Model\obj\Debug\net5.0\Model.AssemblyInfo.cs
+E:\code\dinner\net\main\Dinner\Model\obj\Debug\net5.0\Model.csproj.CoreCompileInputs.cache
+E:\code\dinner\net\main\Dinner\Model\obj\Debug\net5.0\Model.dll
+E:\code\dinner\net\main\Dinner\Model\obj\Debug\net5.0\ref\Model.dll
+E:\code\dinner\net\main\Dinner\Model\obj\Debug\net5.0\Model.pdb
+E:\code\dinner\net\main\Dinner\Model\bin\Debug\net5.0\Model.xml

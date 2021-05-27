@@ -1,0 +1,12 @@
+E:\code\dinner\net\main\Dinner\Util\bin\Debug\net5.0\Util.deps.json
+E:\code\dinner\net\main\Dinner\Util\bin\Debug\net5.0\Util.dll
+E:\code\dinner\net\main\Dinner\Util\bin\Debug\net5.0\ref\Util.dll
+E:\code\dinner\net\main\Dinner\Util\bin\Debug\net5.0\Util.pdb
+E:\code\dinner\net\main\Dinner\Util\obj\Debug\net5.0\Util.csprojAssemblyReference.cache
+E:\code\dinner\net\main\Dinner\Util\obj\Debug\net5.0\Util.GeneratedMSBuildEditorConfig.editorconfig
+E:\code\dinner\net\main\Dinner\Util\obj\Debug\net5.0\Util.AssemblyInfoInputs.cache
+E:\code\dinner\net\main\Dinner\Util\obj\Debug\net5.0\Util.AssemblyInfo.cs
+E:\code\dinner\net\main\Dinner\Util\obj\Debug\net5.0\Util.csproj.CoreCompileInputs.cache
+E:\code\dinner\net\main\Dinner\Util\obj\Debug\net5.0\Util.dll
+E:\code\dinner\net\main\Dinner\Util\obj\Debug\net5.0\ref\Util.dll
+E:\code\dinner\net\main\Dinner\Util\obj\Debug\net5.0\Util.pdb
