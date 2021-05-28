@@ -36,11 +36,11 @@ namespace Api.Controllers
         [HttpPost]
         [Route("[action]")]
         [Authorize]
-        public TUser Add(TUser user)
+        public async Task<TUser> Add(TUser user)
         {
             Console.WriteLine(User.Identity.Name);
             Console.WriteLine(User.Identity.AuthenticationType);
-            return _services.Add(user);
+            return await _services.AddAsync(user);
         }
 
         /// <summary>
@@ -50,7 +50,7 @@ namespace Api.Controllers
         /// <returns></returns>
         [HttpGet]
         [Route("[action]/{id}")]
-        public TUser Show(int id)
+        public async Task<TUser> Show(int id)
         {
             var user = new TUser()
             {
@@ -60,7 +60,7 @@ namespace Api.Controllers
                 Crtime = DateTime.Now
             };
 
-            return _services.Add(user);
+            return await _services.AddAsync(user);
         }
 
     }

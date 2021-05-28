@@ -4,13 +4,17 @@ using Model.Response.Com;
 using System;
 using System.Collections.Generic;
 using System.Text;
+using System.Threading.Tasks;
 
 namespace BLL.Interface
 {
+    /// <summary>
+    /// 公司信息
+    /// </summary>
     public interface ICompanyService : IBaseService
     {
-        RespData<TCompany> Add(CompanyAdd company);
+        Task<RespData<TCompany>> AddAsync(CompanyAdd company);
 
-        RespData<TCompany> GetEntity(string companyId);
+        Task<RespData<TCompany>> GetEntity(string companyId);
     }
 }

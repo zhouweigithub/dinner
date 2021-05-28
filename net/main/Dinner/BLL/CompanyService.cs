@@ -24,12 +24,12 @@ namespace BLL
 
 
 
-        public RespData<TCompany> GetEntity(String companyId)
+        public async Task<RespData<TCompany>> GetEntity(String companyId)
         {
             RespData<TCompany> result = new RespData<TCompany>();
             try
             {
-                result.data = context.Find<TCompany>(companyId);
+                result.data = await context.FindAsync<TCompany>(companyId);
             }
             catch (Exception e)
             {
@@ -41,7 +41,7 @@ namespace BLL
             return result;
         }
 
-        public RespData<TCompany> Add(CompanyAdd company)
+        public async Task<RespData<TCompany>> AddAsync(CompanyAdd company)
         {
             RespData<TCompany> result = new();
             try
@@ -58,7 +58,7 @@ namespace BLL
                         Code = Strings.GetRandomString(5, Strings.RandStringType.NumberOnly, Strings.LetterType.LowerOnly)
                     };
 
-                    result.data = Add(t);
+                    result.data = await AddAsync(t);
                 }
                 else
                 {

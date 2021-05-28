@@ -27,8 +27,8 @@ namespace Util
         {
             string sources = GetSourceChars(stringType, letterType);
 
-            StringBuilder sb = new StringBuilder(length);
-            Random rnd = new Random();
+            StringBuilder sb = new(length);
+            Random rnd = new();
             for (int i = 0; i < length; i++)
             {
                 int index = rnd.Next(0, sources.Length);

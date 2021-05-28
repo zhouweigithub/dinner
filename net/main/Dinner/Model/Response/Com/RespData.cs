@@ -35,6 +35,18 @@ namespace Model.Response.Com
     }
 
     /// <summary>
+    /// 请求返回的数据
+    /// </summary>
+    /// <typeparam name="T">数据模型</typeparam>
+    public class RespDataList<T> : RespData
+    {
+        /// <summary>
+        /// 成功后返回的数据
+        /// </summary>
+        public List<T> datas { get; set; }
+    }
+
+    /// <summary>
     /// 请求返回值
     /// </summary>
     /// <typeparam name="T">数据模型</typeparam>

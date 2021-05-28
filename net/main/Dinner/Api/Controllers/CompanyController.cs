@@ -29,9 +29,9 @@ namespace Api.Controllers
         /// <returns></returns>
         [HttpPost]
         [Route("[action]")]
-        public RespData<TCompany> Add(CompanyAdd company)
+        public Task<RespData<TCompany>> Add(CompanyAdd company)
         {
-            return _services.Add(company);
+            return _services.AddAsync(company);
         }
     }
 }

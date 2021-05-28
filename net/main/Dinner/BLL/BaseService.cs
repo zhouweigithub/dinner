@@ -4,6 +4,7 @@ using Microsoft.EntityFrameworkCore.ChangeTracking;
 using System;
 using System.Collections.Generic;
 using System.Text;
+using System.Threading.Tasks;
 
 namespace BLL
 {
@@ -18,23 +19,24 @@ namespace BLL
             this.context = context;
         }
 
-        public virtual T Add<T>(T t) where T : class
+
+        public virtual async Task<T> AddAsync<T>(T t) where T : class
         {
-            context.Set<T>().Add(t);
-            context.SaveChanges();
+            await context.Set<T>().AddAsync(t);
+            await context.SaveChangesAsync();
             return t;
         }
 
-        public virtual int Delete<T>(T t) where T : class
+        public virtual async Task<int> DeleteAsync<T>(T t) where T : class
         {
             context.Entry(t).State = Microsoft.EntityFrameworkCore.EntityState.Deleted;
-            return context.SaveChanges();
+            return await context.SaveChangesAsync();
         }
 
-        public virtual int Update<T>(T t) where T : class
+        public virtual async Task<int> UpdateAsync<T>(T t) where T : class
         {
             context.Set<T>().Update(t);
-            return context.SaveChanges();
+            return await context.SaveChangesAsync();
         }
     }
 }

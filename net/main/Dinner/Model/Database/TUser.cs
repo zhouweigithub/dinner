@@ -31,7 +31,7 @@ namespace Model
         /// &#20844;&#21496;id
         /// </summary>
         [Column("companyid")]
-        public int? Companyid { get; set; }
+        public int Companyid { get; set; }
 
         /// <summary>
         /// &#26165;&#31216;
@@ -39,6 +39,11 @@ namespace Model
         [Column("nick")]
         [StringLength(20)]
         public string Nick { get; set; }
+
+        public string HeadImg { get; set; }
+
+        public string Phone { get; set; }
+
 
         /// <summary>
         /// &#21019;&#24314;&#26102;&#38388;
