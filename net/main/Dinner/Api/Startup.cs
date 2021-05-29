@@ -25,6 +25,7 @@ using Model;
 using Newtonsoft.Json;
 using Newtonsoft.Json.Serialization;
 using NLog.Extensions.Logging;
+using BLL.EasyCaching;
 
 namespace Api
 {
@@ -57,7 +58,10 @@ namespace Api
             JwtSetting jswSetting = Configuration.GetSection("JwtSetting").Get<JwtSetting>();
 
             services.Configure<JwtSetting>(Configuration.GetSection("JwtSetting"));
-
+            services.AddCache(opt =>
+            {
+                opt.UseCSRedis(Configuration, "mine_redis", "easycaching:csredis");
+            });
             services.AddSwaggerService();
             services.AddJwt(jswSetting);
             services.AddDataServices();

@@ -6,6 +6,9 @@ using System.Threading.Tasks;
 using BLL.Interface;
 using DAL;
 using Microsoft.Extensions.Logging;
+using Model.Database;
+using Model.Request;
+using Model.Response.Com;
 
 namespace BLL
 {
@@ -16,6 +19,16 @@ namespace BLL
         public CartService(DbService context, ILogger<CartService> logger) : base(context)
         {
             _logger = logger;
+        }
+
+        public Task<RespData> AddAsync(Int32 openid, CartAdd t)
+        {
+            throw new NotImplementedException();
+        }
+
+        public RespData<List<TCart>> GetList(String openid)
+        {
+            throw new NotImplementedException();
         }
     }
 }

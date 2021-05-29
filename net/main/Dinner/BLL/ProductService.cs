@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using BLL.EasyCaching;
 using BLL.Interface;
 using DAL;
 using Microsoft.EntityFrameworkCore;
@@ -17,9 +18,13 @@ namespace BLL
     {
         private readonly ILogger<ProductService> _logger;
 
-        public ProductService(DbService context, ILogger<ProductService> logger) : base(context)
+        private readonly ICache _cache;
+
+
+        public ProductService(DbService context, ILogger<ProductService> logger, ICache cache) : base(context)
         {
             _logger = logger;
+            _cache = cache;
         }
 
         public RespDataList<TProduct> GetList(Int32 categoryid, int pageSize, int page)
@@ -51,6 +56,8 @@ namespace BLL
             try
             {
                 result.data = context.Set<TProduct>().Include(a => a.CategoryNavigation).FirstOrDefault(b => b.Id == productid);
+
+                _cache.TryAdd("prod", "rrrr", new TimeSpan(0, 1, 0));
             }
             catch (Exception e)
             {

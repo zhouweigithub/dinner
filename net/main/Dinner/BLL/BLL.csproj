@@ -5,6 +5,7 @@
 	</PropertyGroup>
 
 	<ItemGroup>
+	  <PackageReference Include="EasyCaching.CSRedis" Version="1.2.0" />
 	  <PackageReference Include="Microsoft.AspNetCore.Http.Abstractions" Version="2.2.0" />
 	  <PackageReference Include="Newtonsoft.Json" Version="13.0.1" />
 	  <PackageReference Include="NLog.Extensions.Logging" Version="1.7.2" />
@@ -14,6 +15,10 @@
 		<ProjectReference Include="..\DAL\DAL.csproj" />
 		<ProjectReference Include="..\Model\Model.csproj" />
 		<ProjectReference Include="..\Util\Util.csproj" />
+	</ItemGroup>
+
+	<ItemGroup>
+	  <Folder Include="EasyCaching\" />
 	</ItemGroup>
 
 </Project>

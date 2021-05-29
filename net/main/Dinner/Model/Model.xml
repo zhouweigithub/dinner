@@ -484,6 +484,21 @@
             秘钥
             </summary>
         </member>
+        <member name="T:Model.Request.CartAdd">
+            <summary>
+            添加商品到购物车参数
+            </summary>
+        </member>
+        <member name="P:Model.Request.CartAdd.Productid">
+            <summary>
+            商品id
+            </summary>
+        </member>
+        <member name="P:Model.Request.CartAdd.Count">
+            <summary>
+            商品数量
+            </summary>
+        </member>
         <member name="T:Model.Request.CompanyAdd">
             <summary>
             公司信息
