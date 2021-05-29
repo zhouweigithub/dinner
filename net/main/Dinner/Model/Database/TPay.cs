@@ -7,33 +7,26 @@ using System.Collections.Generic;
 namespace Model.Database
 {
     /// <summary>
-    /// 订单中的商品信息
+    /// 支付信息
     /// </summary>
-    public partial class TOrderProduct
+    public partial class TPay
     {
+        public int Id { get; set; }
         /// <summary>
         /// 订单编号
         /// </summary>
         public string Orderid { get; set; }
         /// <summary>
-        /// 商品id
+        /// 微信订单号
         /// </summary>
-        public int Productid { get; set; }
+        public string WxOrderid { get; set; }
         /// <summary>
-        /// 单价
+        /// 状态
         /// </summary>
-        public decimal Price { get; set; }
-        /// <summary>
-        /// 数量
-        /// </summary>
-        public int Count { get; set; }
-        /// <summary>
-        /// 金额
-        /// </summary>
-        public decimal Money { get; set; }
+        public int Status { get; set; }
         /// <summary>
         /// 创建时间
         /// </summary>
-        public DateTime? Crtime { get; set; }
+        public DateTime Crtime { get; set; }
     }
 }

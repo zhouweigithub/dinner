@@ -7,25 +7,26 @@ using System.Collections.Generic;
 namespace Model.Database
 {
     /// <summary>
-    /// 评论
+    /// 购物车
     /// </summary>
-    public partial class TComment
+    public partial class TCart
     {
-        /// <summary>
-        /// 自增id
-        /// </summary>
         public int Id { get; set; }
         /// <summary>
-        /// 订单编号
+        /// 用户id
         /// </summary>
-        public string Orderid { get; set; }
+        public uint Userid { get; set; }
         /// <summary>
-        /// 内容
+        /// 商品id
         /// </summary>
-        public string Msg { get; set; }
+        public uint Productid { get; set; }
+        /// <summary>
+        /// 商品数量
+        /// </summary>
+        public uint Count { get; set; }
         /// <summary>
         /// 创建时间
         /// </summary>
-        public DateTime? Crtime { get; set; }
+        public DateTime Crtime { get; set; }
     }
 }

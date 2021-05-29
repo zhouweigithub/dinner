@@ -5,6 +5,7 @@ using BLL.Interface;
 using DAL;
 using Microsoft.Extensions.Logging;
 using Model;
+using Model.Database;
 using Model.Request;
 using Model.Response.Com;
 using Util;
@@ -71,7 +72,7 @@ namespace BLL
                             Companyid = company.Id,
                             Crtime = DateTime.Now,
                             Code = t.OpenId,
-                            HeadImg = t.HeadIng,
+                            Headimg = t.HeadIng,
                             Phone = t.Phone
                         };
 

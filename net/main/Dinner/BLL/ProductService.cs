@@ -7,7 +7,9 @@ using BLL.Interface;
 using DAL;
 using Microsoft.Extensions.Logging;
 using Model;
+using Model.Database;
 using Model.Response.Com;
+using Microsoft.EntityFrameworkCore;
 
 namespace BLL
 {
@@ -43,12 +45,12 @@ namespace BLL
             return result;
         }
 
-        public async Task<RespData<TProduct>> GetEntityAsync(Int32 productid)
+        public RespData<TProduct> GetEntityAsync(Int32 productid)
         {
             RespData<TProduct> result = new RespData<TProduct>();
             try
             {
-                result.data = await context.FindAsync<TProduct>(productid);
+                result.data = context.Set<TProduct>().Include(a => a.CategoryNavigation).FirstOrDefault(b => b.Id == productid);
             }
             catch (Exception e)
             {

@@ -7,6 +7,7 @@ using BLL.Interface;
 using DAL;
 using Microsoft.Extensions.Logging;
 using Model;
+using Model.Database;
 using Model.Response.Com;
 
 namespace BLL

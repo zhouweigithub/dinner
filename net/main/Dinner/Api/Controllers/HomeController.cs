@@ -9,6 +9,7 @@ using BLL.Interface;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.IdentityModel.Tokens;
 using Model;
+using Model.Database;
 using Model.Response.Com;
 
 namespace Api.Controllers

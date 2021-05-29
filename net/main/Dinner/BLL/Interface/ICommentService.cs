@@ -9,7 +9,7 @@ namespace BLL.Interface
     /// <summary>
     /// 评论信息
     /// </summary>
-    public interface ICommentService
+    public interface ICommentService : IBaseService
     {
     }
 }

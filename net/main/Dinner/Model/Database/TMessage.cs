@@ -7,26 +7,26 @@ using System.Collections.Generic;
 namespace Model.Database
 {
     /// <summary>
-    /// 用户的优惠卷
+    /// 消息中心
     /// </summary>
-    public partial class TUserCoupon
+    public partial class TMessage
     {
+        public uint Id { get; set; }
         /// <summary>
         /// 用户id
         /// </summary>
         public int Userid { get; set; }
         /// <summary>
-        /// 优惠卷id
+        /// 消息内容
         /// </summary>
-        public int Couponid { get; set; }
+        public string Message { get; set; }
         /// <summary>
-        /// 数量
+        /// 是否已读(0未读 1已读)
         /// </summary>
-        public int Count { get; set; }
-        public int CouponId1 { get; set; }
-        public int UserId1 { get; set; }
-
-        public virtual TCoupon Coupon { get; set; }
-        public virtual TUser User { get; set; }
+        public int Isread { get; set; }
+        /// <summary>
+        /// 创建时间
+        /// </summary>
+        public DateTime Crtime { get; set; }
     }
 }

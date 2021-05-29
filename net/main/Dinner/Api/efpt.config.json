@@ -1,0 +1,92 @@
+﻿{
+   "CodeGenerationMode": 0,
+   "ContextClassName": "DbService",
+   "ContextNamespace": "",
+   "DefaultDacpacSchema": null,
+   "FilterSchemas": false,
+   "IncludeConnectionString": false,
+   "ModelNamespace": "",
+   "OutputContextPath": "",
+   "OutputPath": "E:\\code\\dinner\\net\\main\\Dinner\\Model\\Database",
+   "ProceduresReturnList": false,
+   "ProjectRootNamespace": "Model.Database",
+   "Schemas": null,
+   "SelectedHandlebarsLanguage": 0,
+   "SelectedToBeGenerated": 2,
+   "Tables": [
+      {
+         "Name": "t_cart",
+         "ObjectType": 0
+      },
+      {
+         "Name": "t_category",
+         "ObjectType": 0
+      },
+      {
+         "Name": "t_comment",
+         "ObjectType": 0
+      },
+      {
+         "Name": "t_company",
+         "ObjectType": 0
+      },
+      {
+         "Name": "t_coupon",
+         "ObjectType": 0
+      },
+      {
+         "Name": "t_feedback",
+         "ObjectType": 0
+      },
+      {
+         "Name": "t_message",
+         "ObjectType": 0
+      },
+      {
+         "Name": "t_order",
+         "ObjectType": 0
+      },
+      {
+         "Name": "t_order_callback",
+         "ObjectType": 0
+      },
+      {
+         "Name": "t_order_coupon",
+         "ObjectType": 0
+      },
+      {
+         "Name": "t_order_product",
+         "ObjectType": 0
+      },
+      {
+         "Name": "t_pay",
+         "ObjectType": 0
+      },
+      {
+         "Name": "t_product",
+         "ObjectType": 0
+      },
+      {
+         "Name": "t_user",
+         "ObjectType": 0
+      },
+      {
+         "Name": "t_user_coupon",
+         "ObjectType": 0
+      }
+   ],
+   "UiHint": ".dinner",
+   "UseBoolPropertiesWithoutDefaultSql": false,
+   "UseDatabaseNames": false,
+   "UseDbContextSplitting": false,
+   "UseFluentApiOnly": true,
+   "UseHandleBars": false,
+   "UseInflector": false,
+   "UseLegacyPluralizer": false,
+   "UseNoConstructor": false,
+   "UseNoNavigations": false,
+   "UseNoObjectFilter": false,
+   "UseNodaTime": false,
+   "UseNullableReferences": false,
+   "UseSpatial": false
+}

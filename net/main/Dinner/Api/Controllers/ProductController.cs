@@ -7,6 +7,7 @@ using BLL.Interface;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using Model;
+using Model.Database;
 using Model.Response.Com;
 
 namespace Api.Controllers
@@ -26,16 +27,14 @@ namespace Api.Controllers
         [Route("[action]/{categoryid}/{pageSize}/{page}")]
         public RespDataList<TProduct> GetList(int categoryid, int pageSize, int page)
         {
-            var t = User;
             return _services.GetList(categoryid, pageSize, page);
         }
 
         [HttpGet]
         [AllowAnonymous]
         [Route("[action]/{productid}")]
-        public Task<RespData<TProduct>> GetEntity(int productid)
+        public RespData<TProduct> GetEntity(int productid)
         {
-            var t = User;
             return _services.GetEntityAsync(productid);
         }
     }

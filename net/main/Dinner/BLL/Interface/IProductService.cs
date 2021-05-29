@@ -4,6 +4,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using Model;
+using Model.Database;
 using Model.Response.Com;
 
 namespace BLL.Interface
@@ -15,6 +16,6 @@ namespace BLL.Interface
     {
         RespDataList<TProduct> GetList(int categoryid, int pageSize, int page);
 
-        Task<RespData<TProduct>> GetEntityAsync(int productid);
+        RespData<TProduct> GetEntityAsync(int productid);
     }
 }

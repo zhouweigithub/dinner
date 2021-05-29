@@ -5,6 +5,7 @@ using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Logging;
 using Microsoft.IdentityModel.Tokens;
 using Model;
+using Model.Database;
 using Model.Request;
 using Model.Response.Com;
 using System;
