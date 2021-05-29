@@ -43,19 +43,33 @@
             <param name="user"></param>
             <returns></returns>
         </member>
-        <member name="M:Api.Controllers.UserController.Show(System.Int32)">
+        <member name="M:Api.ConfigurationManager.GetSection``1(System.String)">
             <summary>
-            添加用户
+            读取节点数据
             </summary>
-            <param name="id"></param>
+            <typeparam name="T">节点数据模型</typeparam>
+            <param name="key">节点名称</param>
             <returns></returns>
+        </member>
+        <member name="M:Api.ConfigurationManager.GetSection(System.String)">
+            <summary>
+            读取节点数据
+            </summary>
+            <param name="key">节点名称</param>
+            <returns></returns>
+        </member>
+        <member name="M:Api.DataServiceExtention.AddDataServices(Microsoft.Extensions.DependencyInjection.IServiceCollection)">
+            <summary>
+            注册内部服务
+            </summary>
+            <param name="services"></param>
         </member>
         <member name="T:Api.JwtExtention">
             <summary>
             jwt服务相关
             </summary>
         </member>
-        <member name="M:Api.JwtExtention.AddJwt(Microsoft.Extensions.DependencyInjection.IServiceCollection)">
+        <member name="M:Api.JwtExtention.AddJwt(Microsoft.Extensions.DependencyInjection.IServiceCollection,Model.JwtSetting)">
             <summary>
             注册JWT服务
             </summary>

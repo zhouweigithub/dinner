@@ -5,11 +5,11 @@ using System.Text;
 using System.Threading.Tasks;
 using BLL.Interface;
 using DAL;
+using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Logging;
 using Model;
 using Model.Database;
 using Model.Response.Com;
-using Microsoft.EntityFrameworkCore;
 
 namespace BLL
 {
@@ -27,7 +27,7 @@ namespace BLL
             RespDataList<TProduct> result = new RespDataList<TProduct>();
             try
             {
-                var datas = context.Set<TProduct>().Where(a => true);
+                var datas = context.Set<TProduct>().Include(a => a.CategoryNavigation).Where(a => true);
                 if (categoryid != default)
                     datas = datas.Where(a => a.Category == categoryid);
 

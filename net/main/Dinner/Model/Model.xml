@@ -439,6 +439,26 @@
             数量
             </summary>
         </member>
+        <member name="T:Model.JwtSetting">
+            <summary>
+            JWT配置参数
+            </summary>
+        </member>
+        <member name="P:Model.JwtSetting.Issuer">
+            <summary>
+            颁发者
+            </summary>
+        </member>
+        <member name="P:Model.JwtSetting.Audience">
+            <summary>
+            可以给哪些客户端使用
+            </summary>
+        </member>
+        <member name="P:Model.JwtSetting.SecretKey">
+            <summary>
+            秘钥
+            </summary>
+        </member>
         <member name="T:Model.Request.CompanyAdd">
             <summary>
             公司信息

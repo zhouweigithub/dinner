@@ -10,6 +10,10 @@ namespace Api
 {
     public static class DataServiceExtention
     {
+        /// <summary>
+        /// 注册内部服务
+        /// </summary>
+        /// <param name="services"></param>
         public static void AddDataServices(this IServiceCollection services)
         {
             services.AddTransient<IBaseService, BaseService>();

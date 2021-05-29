@@ -37,15 +37,15 @@ namespace Api
                 });
                 opti.AddSecurityRequirement(
                     new OpenApiSecurityRequirement {
-                        { 
-                            new OpenApiSecurityScheme   
+                        {
+                            new OpenApiSecurityScheme
                             {
-                                Reference = new OpenApiReference()   
+                                Reference = new OpenApiReference()
                                 {
-                                    Id = "Bearer",      
-                                    Type = ReferenceType.SecurityScheme   
+                                    Id = "Bearer",
+                                    Type = ReferenceType.SecurityScheme
                                 }
-                            }, 
+                            },
                             Array.Empty<string>()
                         }
                 });

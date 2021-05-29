@@ -7,6 +7,7 @@ using System.Text;
 using System.Threading.Tasks;
 using BLL.Interface;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.Extensions.Options;
 using Microsoft.IdentityModel.Tokens;
 using Model;
 using Model.Database;
@@ -17,11 +18,13 @@ namespace Api.Controllers
     [Route("[controller]")]
     public class HomeController : ControllerBase
     {
-        public IUserService userService { get; }
+        private readonly IUserService userService;
+        private readonly JwtSetting jwt;
 
-        public HomeController(IUserService userService)
+        public HomeController(IUserService userService, IOptions<JwtSetting> option)
         {
             this.userService = userService;
+            this.jwt = option.Value;
         }
 
         /// <summary>
@@ -50,14 +53,16 @@ namespace Api.Controllers
             var claims = new Claim[]
             {
                 new Claim(ClaimTypes.Name, username),
+                new Claim(JwtRegisteredClaimNames.Iss, jwt.Issuer),
+                new Claim(JwtRegisteredClaimNames.Aud, jwt.Audience),
                 new Claim(JwtRegisteredClaimNames.Nbf, new DateTimeOffset(DateTime.Now).ToUnixTimeSeconds().ToString()),
-                new Claim(JwtRegisteredClaimNames.Exp, new DateTimeOffset(DateTime.Now.AddDays(1)).ToUnixTimeSeconds().ToString()),
+                new Claim(JwtRegisteredClaimNames.Exp, new DateTimeOffset(DateTime.Now.AddMinutes(1)).ToUnixTimeSeconds().ToString()),
             };
 
             var token = new JwtSecurityToken(
                 new JwtHeader(new SigningCredentials(
-                    new SymmetricSecurityKey(Encoding.UTF8.GetBytes("the secret that needs to be at least 16 characeters long for HmacSha256")),
-                                             SecurityAlgorithms.HmacSha256)),
+                    new SymmetricSecurityKey(Encoding.UTF8.GetBytes(jwt.SecretKey)),
+                    SecurityAlgorithms.HmacSha256)),
                 new JwtPayload(claims));
 
             return new JwtSecurityTokenHandler().WriteToken(token);
