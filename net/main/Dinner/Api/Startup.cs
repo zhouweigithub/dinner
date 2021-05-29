@@ -26,6 +26,7 @@ using Newtonsoft.Json;
 using Newtonsoft.Json.Serialization;
 using NLog.Extensions.Logging;
 using BLL.EasyCaching;
+using EasyCaching.Serialization.Json;
 
 namespace Api
 {
@@ -60,7 +61,7 @@ namespace Api
             services.Configure<JwtSetting>(Configuration.GetSection("JwtSetting"));
             services.AddCache(opt =>
             {
-                opt.UseCSRedis(Configuration, "mine_redis", "easycaching:csredis");
+                opt.UseCSRedis(Configuration, "mine_redis", "easycaching:csredis").WithJson(SetJsonPara, "mine_redis");
             });
             services.AddSwaggerService();
             services.AddJwt(jswSetting);
@@ -95,5 +96,15 @@ namespace Api
             });
         }
 
+
+
+        /// <summary>
+        /// 配置Cache序列化的JSON策略
+        /// </summary>
+        /// <param name="t"></param>
+        private void SetJsonPara(EasyCachingJsonSerializerOptions t)
+        {
+            t.ReferenceLoopHandling = ReferenceLoopHandling.Ignore;
+        }
     }
 }

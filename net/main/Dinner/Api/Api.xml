@@ -92,5 +92,11 @@
             </summary>
             <param name="app"></param>
         </member>
+        <member name="M:Api.Startup.SetJsonPara(EasyCaching.Serialization.Json.EasyCachingJsonSerializerOptions)">
+            <summary>
+            配置Cache序列化的JSON策略
+            </summary>
+            <param name="t"></param>
+        </member>
     </members>
 </doc>

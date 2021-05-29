@@ -57,7 +57,7 @@ namespace BLL
             {
                 result.data = context.Set<TProduct>().Include(a => a.CategoryNavigation).FirstOrDefault(b => b.Id == productid);
 
-                _cache.TryAdd("prod", "rrrr", new TimeSpan(0, 1, 0));
+                var yyy = _cache.TryAdd("prod", result.data, TimeSpan.FromMinutes(1));
             }
             catch (Exception e)
             {

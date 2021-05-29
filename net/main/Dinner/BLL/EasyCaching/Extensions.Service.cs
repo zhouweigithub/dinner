@@ -21,5 +21,6 @@ namespace BLL.EasyCaching
             services.AddSingleton<ICache, CacheManager>();
             services.AddEasyCaching(configAction);
         }
+
     }
 }
