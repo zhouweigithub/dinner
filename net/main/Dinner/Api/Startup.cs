@@ -41,6 +41,7 @@ namespace Api
             services.AddDbContext<DbService>(
                 options => options.UseMySql(Configuration.GetConnectionString("DefaultConnection"), MySqlServerVersion.LatestSupportedServerVersion)
             );
+
             services.AddSwaggerService();
             services.AddJwt();
             services.AddDataServices();
@@ -73,5 +74,6 @@ namespace Api
                 endpoints.MapControllers();
             });
         }
+
     }
 }

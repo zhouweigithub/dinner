@@ -14,6 +14,16 @@ namespace Api
         {
             services.AddTransient<IBaseService, BaseService>();
             services.AddTransient<ICompanyService, CompanyService>();
+            services.AddTransient<ICartService, CartService>();
+            services.AddTransient<ICommentService, CommentService>();
+            services.AddTransient<ICouponService, CouponService>();
+            services.AddTransient<IFeedBackService, FeedBackService>();
+            services.AddTransient<IMessageService, MessageService>();
+            services.AddTransient<IMyCenter, MyCenter>();
+            services.AddTransient<IOrderService, OrderService>();
+            services.AddTransient<IPayService, PayService>();
+            services.AddTransient<IProductService, ProductService>();
+            services.AddTransient<IUserService, UserService>();
         }
     }
 }

@@ -30,10 +30,11 @@ namespace Api.Controllers
         /// <returns></returns>
         [HttpGet]
         [Route("[action]/{openid}")]
-        public async Task<RespDataToken<TUser>> Login(string openid)
+        public RespDataToken<TUser> Login(string openid)
         {
-            var entity = await userService.GetEntity(openid);
-            entity.token = GenerateToken(openid);
+            var entity = userService.GetEntity(openid);
+            if (entity.code != -1)
+                entity.token = GenerateToken(openid);
             return entity;
         }
 

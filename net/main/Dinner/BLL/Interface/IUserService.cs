@@ -1,4 +1,5 @@
 ﻿using Model;
+using Model.Request;
 using Model.Response.Com;
 using System;
 using System.Collections.Generic;
@@ -12,6 +13,8 @@ namespace BLL.Interface
     /// </summary>
     public interface IUserService : IBaseService
     {
-        Task<RespDataToken<TUser>> GetEntity(String openid);
+        RespDataToken<TUser> GetEntity(String openid);
+
+        Task<RespData<TUser>> AddAsync(UserAdd t);
     }
 }

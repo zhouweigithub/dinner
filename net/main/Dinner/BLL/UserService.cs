@@ -1,5 +1,4 @@
-﻿
-using System;
+﻿using System;
 using System.Linq;
 using System.Threading.Tasks;
 using BLL.Interface;
@@ -23,19 +22,30 @@ namespace BLL
 
 
 
-        async Task<RespDataToken<TUser>> IUserService.GetEntity(String openid)
+        RespDataToken<TUser> IUserService.GetEntity(String openid)
         {
             RespDataToken<TUser> result = new RespDataToken<TUser>();
             try
             {
-                result.data = await context.Set<TUser>().FindAsync(openid);
+                var user = context.Set<TUser>().FirstOrDefault(a => a.Code == openid);
+                if (user != null)
+                {
+                    result.data = user;
+                }
+                else
+                {
+                    result.code = -1;
+                    result.msg = "登录失败";
+                }
             }
             catch (Exception e)
             {
+                result.code = -1;
+                result.msg = "服务内部错误";
                 _logger.LogError(e.ToString());
             }
 
-            return null;
+            return result;
         }
 
         public async Task<RespData<TUser>> AddAsync(UserAdd t)

@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 using BLL.Interface;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Logging;
 using Model;
@@ -13,7 +14,7 @@ namespace Api.Controllers
 {
     [ApiController]
     [Route("[controller]")]
-    public class CompanyController : ControllerBase
+    public class CompanyController : BaseAuthController
     {
         private readonly ICompanyService _services;
 
@@ -29,6 +30,7 @@ namespace Api.Controllers
         /// <returns></returns>
         [HttpPost]
         [Route("[action]")]
+        [AllowAnonymous]
         public Task<RespData<TCompany>> Add(CompanyAdd company)
         {
             return _services.AddAsync(company);

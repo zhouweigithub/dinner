@@ -4,6 +4,17 @@
         <name>Api</name>
     </assembly>
     <members>
+        <member name="T:Api.Controllers.BaseAuthController">
+            <summary>
+            带权限
+            </summary>
+        </member>
+        <member name="M:Api.Controllers.BaseAuthController.GetUserId">
+            <summary>
+            获取当前登录的用户ID
+            </summary>
+            <returns></returns>
+        </member>
         <member name="M:Api.Controllers.CompanyController.Add(Model.Request.CompanyAdd)">
             <summary>
             添加公司
@@ -25,7 +36,7 @@
             <param name="username">用户名</param>
             <returns></returns>
         </member>
-        <member name="M:Api.Controllers.UserController.Add(Model.TUser)">
+        <member name="M:Api.Controllers.UserController.Add(Model.Request.UserAdd)">
             <summary>
             添加用户
             </summary>

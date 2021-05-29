@@ -5,6 +5,8 @@ using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Logging;
 using Microsoft.IdentityModel.Tokens;
 using Model;
+using Model.Request;
+using Model.Response.Com;
 using System;
 using System.Collections.Generic;
 using System.IdentityModel.Tokens.Jwt;
@@ -17,12 +19,12 @@ namespace Api.Controllers
 {
     [ApiController]
     [Route("[controller]")]
-    public class UserController : ControllerBase
+    public class UserController : BaseAuthController
     {
-        private readonly IBaseService _services;
+        private readonly IUserService _services;
         private readonly ILogger<UserController> _logger;
 
-        public UserController(IBaseService service, ILogger<UserController> logger)
+        public UserController(IUserService service, ILogger<UserController> logger)
         {
             _services = service;
             _logger = logger;
@@ -35,11 +37,9 @@ namespace Api.Controllers
         /// <returns></returns>
         [HttpPost]
         [Route("[action]")]
-        [Authorize]
-        public async Task<TUser> Add(TUser user)
+        [AllowAnonymous]
+        public async Task<RespData<TUser>> Add(UserAdd user)
         {
-            Console.WriteLine(User.Identity.Name);
-            Console.WriteLine(User.Identity.AuthenticationType);
             return await _services.AddAsync(user);
         }
 
