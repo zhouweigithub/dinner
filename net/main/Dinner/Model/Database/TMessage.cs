@@ -11,7 +11,10 @@ namespace Model.Database
     /// </summary>
     public partial class TMessage
     {
-        public uint Id { get; set; }
+        /// <summary>
+        /// id
+        /// </summary>
+        public int Id { get; set; }
         /// <summary>
         /// 用户id
         /// </summary>

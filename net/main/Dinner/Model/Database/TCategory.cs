@@ -17,11 +17,11 @@ namespace Model.Database
         }
 
         /// <summary>
-        /// 自增id
+        /// 商品分类id
         /// </summary>
         public int Id { get; set; }
         /// <summary>
-        /// 名称
+        /// 商品分类名称
         /// </summary>
         public string Name { get; set; }
         /// <summary>
@@ -31,7 +31,7 @@ namespace Model.Database
         /// <summary>
         /// 创建时间
         /// </summary>
-        public DateTime? Crtime { get; set; }
+        public DateTime Crtime { get; set; }
 
         public virtual ICollection<TProduct> TProduct { get; set; }
     }

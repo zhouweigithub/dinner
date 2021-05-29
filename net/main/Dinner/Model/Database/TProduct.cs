@@ -12,7 +12,7 @@ namespace Model.Database
     public partial class TProduct
     {
         /// <summary>
-        /// 自增主键
+        /// 商品id
         /// </summary>
         public int Id { get; set; }
         /// <summary>
@@ -32,9 +32,13 @@ namespace Model.Database
         /// </summary>
         public int Sales { get; set; }
         /// <summary>
+        /// 商品图片
+        /// </summary>
+        public string Img { get; set; }
+        /// <summary>
         /// 创建时间
         /// </summary>
-        public DateTime? Crtime { get; set; }
+        public DateTime Crtime { get; set; }
 
         public virtual TCategory CategoryNavigation { get; set; }
     }

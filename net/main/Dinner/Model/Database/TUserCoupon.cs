@@ -23,8 +23,10 @@ namespace Model.Database
         /// 数量
         /// </summary>
         public int Count { get; set; }
-        public int CouponId1 { get; set; }
-        public int UserId1 { get; set; }
+        /// <summary>
+        /// 创建时间
+        /// </summary>
+        public DateTime Crtime { get; set; }
 
         public virtual TCoupon Coupon { get; set; }
         public virtual TUser User { get; set; }

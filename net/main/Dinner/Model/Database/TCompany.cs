@@ -17,7 +17,7 @@ namespace Model.Database
         }
 
         /// <summary>
-        /// 自增主键
+        /// 公司id
         /// </summary>
         public int Id { get; set; }
         /// <summary>

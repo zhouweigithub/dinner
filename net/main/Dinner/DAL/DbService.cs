@@ -46,10 +46,11 @@ namespace DAL
 
                 entity.HasComment("购物车");
 
-                entity.Property(e => e.Id).HasColumnName("id");
+                entity.Property(e => e.Id)
+                    .HasColumnName("id")
+                    .HasComment("id");
 
                 entity.Property(e => e.Count)
-                    .HasColumnType("int(10) unsigned zerofill")
                     .HasColumnName("count")
                     .HasComment("商品数量");
 
@@ -59,12 +60,10 @@ namespace DAL
                     .HasComment("创建时间");
 
                 entity.Property(e => e.Productid)
-                    .HasColumnType("int(10) unsigned zerofill")
                     .HasColumnName("productid")
                     .HasComment("商品id");
 
                 entity.Property(e => e.Userid)
-                    .HasColumnType("int(10) unsigned zerofill")
                     .HasColumnName("userid")
                     .HasComment("用户id");
             });
@@ -75,9 +74,12 @@ namespace DAL
 
                 entity.HasComment("商品分类");
 
+                entity.HasIndex(e => e.Name, "ix_name")
+                    .IsUnique();
+
                 entity.Property(e => e.Id)
                     .HasColumnName("id")
-                    .HasComment("自增id");
+                    .HasComment("商品分类id");
 
                 entity.Property(e => e.Crtime)
                     .HasColumnType("datetime")
@@ -85,13 +87,13 @@ namespace DAL
                     .HasComment("创建时间");
 
                 entity.Property(e => e.Name)
-                    .HasMaxLength(20)
+                    .IsRequired()
+                    .HasMaxLength(32)
                     .HasColumnName("name")
-                    .HasComment("名称");
+                    .HasComment("商品分类名称");
 
                 entity.Property(e => e.State)
                     .HasColumnName("state")
-                    .HasDefaultValueSql("'0'")
                     .HasComment("状态0正常 1禁用");
             });
 
@@ -103,7 +105,7 @@ namespace DAL
 
                 entity.Property(e => e.Id)
                     .HasColumnName("id")
-                    .HasComment("自增id");
+                    .HasComment("id");
 
                 entity.Property(e => e.Crtime)
                     .HasColumnType("datetime")
@@ -111,12 +113,14 @@ namespace DAL
                     .HasComment("创建时间");
 
                 entity.Property(e => e.Msg)
-                    .HasMaxLength(200)
+                    .IsRequired()
+                    .HasMaxLength(256)
                     .HasColumnName("msg")
                     .HasComment("内容");
 
                 entity.Property(e => e.Orderid)
-                    .HasMaxLength(30)
+                    .IsRequired()
+                    .HasMaxLength(32)
                     .HasColumnName("orderid")
                     .HasComment("订单编号");
             });
@@ -135,15 +139,15 @@ namespace DAL
 
                 entity.Property(e => e.Id)
                     .HasColumnName("id")
-                    .HasComment("自增主键");
+                    .HasComment("公司id");
 
                 entity.Property(e => e.Address)
-                    .HasMaxLength(100)
+                    .HasMaxLength(128)
                     .HasColumnName("address")
                     .HasComment("公司地址");
 
                 entity.Property(e => e.Code)
-                    .HasMaxLength(50)
+                    .HasMaxLength(64)
                     .HasColumnName("code")
                     .HasComment("唯一编码");
 
@@ -153,7 +157,7 @@ namespace DAL
                     .HasComment("创建时间");
 
                 entity.Property(e => e.Name)
-                    .HasMaxLength(50)
+                    .HasMaxLength(64)
                     .HasColumnName("name")
                     .HasComment("公司名字");
             });
@@ -164,9 +168,12 @@ namespace DAL
 
                 entity.HasComment("优惠卷信息");
 
+                entity.HasIndex(e => e.Name, "ix_name")
+                    .IsUnique();
+
                 entity.Property(e => e.Id)
                     .HasColumnName("id")
-                    .HasComment("主键");
+                    .HasComment("优惠券id");
 
                 entity.Property(e => e.Crtime)
                     .HasColumnType("timestamp")
@@ -180,13 +187,13 @@ namespace DAL
                     .HasComment("使用截止日期");
 
                 entity.Property(e => e.Money)
-                    .HasPrecision(10, 2)
+                    .HasPrecision(16, 2)
                     .HasColumnName("money")
                     .HasComment("优惠金额");
 
                 entity.Property(e => e.Name)
                     .IsRequired()
-                    .HasMaxLength(100)
+                    .HasMaxLength(128)
                     .HasColumnName("name")
                     .HasComment("优惠卷名称");
 
@@ -204,7 +211,7 @@ namespace DAL
 
                 entity.Property(e => e.Id)
                     .HasColumnName("id")
-                    .HasComment("自增id");
+                    .HasComment("id");
 
                 entity.Property(e => e.Crtime)
                     .HasColumnType("datetime")
@@ -213,7 +220,7 @@ namespace DAL
 
                 entity.Property(e => e.Msg)
                     .IsRequired()
-                    .HasMaxLength(300)
+                    .HasMaxLength(332)
                     .HasColumnName("msg")
                     .HasComment("内容");
 
@@ -229,8 +236,8 @@ namespace DAL
                 entity.HasComment("消息中心");
 
                 entity.Property(e => e.Id)
-                    .HasColumnType("int(10) unsigned zerofill")
-                    .HasColumnName("id");
+                    .HasColumnName("id")
+                    .HasComment("id");
 
                 entity.Property(e => e.Crtime)
                     .HasColumnType("datetime")
@@ -243,7 +250,7 @@ namespace DAL
 
                 entity.Property(e => e.Message)
                     .IsRequired()
-                    .HasMaxLength(500)
+                    .HasMaxLength(640)
                     .HasColumnName("message")
                     .HasComment("消息内容");
 
@@ -264,7 +271,7 @@ namespace DAL
                     .HasComment("订单编号");
 
                 entity.Property(e => e.CouponMoney)
-                    .HasPrecision(20, 2)
+                    .HasPrecision(32, 2)
                     .HasColumnName("coupon_money")
                     .HasComment("优惠金额");
 
@@ -274,12 +281,12 @@ namespace DAL
                     .HasComment("创建时间");
 
                 entity.Property(e => e.Money)
-                    .HasPrecision(20, 2)
+                    .HasPrecision(32, 2)
                     .HasColumnName("money")
                     .HasComment("订单金额");
 
                 entity.Property(e => e.PayMoney)
-                    .HasPrecision(20, 2)
+                    .HasPrecision(32, 2)
                     .HasColumnName("pay_money")
                     .HasComment("实际支付金额");
 
@@ -302,7 +309,7 @@ namespace DAL
                 entity.HasComment("微信支付回调");
 
                 entity.Property(e => e.Orderid)
-                    .HasMaxLength(30)
+                    .HasMaxLength(32)
                     .HasColumnName("orderid")
                     .HasComment("订单编号");
 
@@ -313,11 +320,10 @@ namespace DAL
 
                 entity.Property(e => e.State)
                     .HasColumnName("state")
-                    .HasDefaultValueSql("'0'")
                     .HasComment("状态");
 
                 entity.Property(e => e.WxOrderid)
-                    .HasMaxLength(30)
+                    .HasMaxLength(32)
                     .HasColumnName("wx_orderid")
                     .HasComment("微信支付订单号");
             });
@@ -333,7 +339,7 @@ namespace DAL
                 entity.HasComment("订单中使用的优惠卷");
 
                 entity.Property(e => e.Orderid)
-                    .HasMaxLength(30)
+                    .HasMaxLength(32)
                     .HasColumnName("orderid")
                     .HasComment("订单编号");
 
@@ -343,20 +349,12 @@ namespace DAL
 
                 entity.Property(e => e.Count)
                     .HasColumnName("count")
-                    .HasDefaultValueSql("'0'")
                     .HasComment("数量");
 
-                entity.Property(e => e.CouponId1).HasColumnName("coupon_id");
-
                 entity.Property(e => e.Money)
-                    .HasPrecision(10, 2)
+                    .HasPrecision(16, 2)
                     .HasColumnName("money")
-                    .HasDefaultValueSql("'0.00'")
                     .HasComment("总金额");
-
-                entity.Property(e => e.OrderId1)
-                    .HasMaxLength(191)
-                    .HasColumnName("order_id");
             });
 
             modelBuilder.Entity<TOrderProduct>(entity =>
@@ -370,7 +368,7 @@ namespace DAL
                 entity.HasComment("订单中的商品信息");
 
                 entity.Property(e => e.Orderid)
-                    .HasMaxLength(30)
+                    .HasMaxLength(32)
                     .HasColumnName("orderid")
                     .HasComment("订单编号");
 
@@ -380,7 +378,6 @@ namespace DAL
 
                 entity.Property(e => e.Count)
                     .HasColumnName("count")
-                    .HasDefaultValueSql("'0'")
                     .HasComment("数量");
 
                 entity.Property(e => e.Crtime)
@@ -389,15 +386,13 @@ namespace DAL
                     .HasComment("创建时间");
 
                 entity.Property(e => e.Money)
-                    .HasPrecision(10, 2)
+                    .HasPrecision(16, 2)
                     .HasColumnName("money")
-                    .HasDefaultValueSql("'0.00'")
                     .HasComment("金额");
 
                 entity.Property(e => e.Price)
-                    .HasPrecision(10, 2)
+                    .HasPrecision(16, 2)
                     .HasColumnName("price")
-                    .HasDefaultValueSql("'0.00'")
                     .HasComment("单价");
             });
 
@@ -407,7 +402,9 @@ namespace DAL
 
                 entity.HasComment("支付信息");
 
-                entity.Property(e => e.Id).HasColumnName("id");
+                entity.Property(e => e.Id)
+                    .HasColumnName("id")
+                    .HasComment("id");
 
                 entity.Property(e => e.Crtime)
                     .HasColumnType("datetime")
@@ -439,13 +436,15 @@ namespace DAL
 
                 entity.HasIndex(e => e.Category, "category");
 
+                entity.HasIndex(e => e.Name, "ix_name")
+                    .IsUnique();
+
                 entity.Property(e => e.Id)
                     .HasColumnName("id")
-                    .HasComment("自增主键");
+                    .HasComment("商品id");
 
                 entity.Property(e => e.Category)
                     .HasColumnName("category")
-                    .HasDefaultValueSql("'0'")
                     .HasComment("商品分类");
 
                 entity.Property(e => e.Crtime)
@@ -453,25 +452,30 @@ namespace DAL
                     .HasColumnName("crtime")
                     .HasComment("创建时间");
 
+                entity.Property(e => e.Img)
+                    .HasMaxLength(256)
+                    .HasColumnName("img")
+                    .HasComment("商品图片");
+
                 entity.Property(e => e.Name)
-                    .HasMaxLength(100)
+                    .IsRequired()
+                    .HasMaxLength(128)
                     .HasColumnName("name")
                     .HasComment("商品名称");
 
                 entity.Property(e => e.Price)
-                    .HasPrecision(10, 2)
+                    .HasPrecision(16, 2)
                     .HasColumnName("price")
-                    .HasDefaultValueSql("'0.00'")
                     .HasComment("价格");
 
                 entity.Property(e => e.Sales)
                     .HasColumnName("sales")
-                    .HasDefaultValueSql("'0'")
                     .HasComment("销量");
 
                 entity.HasOne(d => d.CategoryNavigation)
                     .WithMany(p => p.TProduct)
                     .HasForeignKey(d => d.Category)
+                    .OnDelete(DeleteBehavior.ClientSetNull)
                     .HasConstraintName("t_product_ibfk_1");
             });
 
@@ -483,18 +487,20 @@ namespace DAL
 
                 entity.HasIndex(e => e.Companyid, "fk_company_idx");
 
+                entity.HasIndex(e => e.Code, "ix_code")
+                    .IsUnique();
+
                 entity.Property(e => e.Id)
                     .HasColumnName("id")
-                    .HasComment("自增ID");
+                    .HasComment("用户id");
 
                 entity.Property(e => e.Code)
                     .IsRequired()
-                    .HasMaxLength(50)
+                    .HasMaxLength(64)
                     .HasColumnName("code")
                     .HasComment("唯一编码");
 
                 entity.Property(e => e.Companyid)
-                    .HasColumnType("int(10) unsigned zerofill")
                     .HasColumnName("companyid")
                     .HasComment("公司id");
 
@@ -505,21 +511,27 @@ namespace DAL
 
                 entity.Property(e => e.Headimg)
                     .IsRequired()
-                    .HasMaxLength(200)
+                    .HasMaxLength(256)
                     .HasColumnName("headimg")
                     .HasComment("头像图片");
 
                 entity.Property(e => e.Nick)
                     .IsRequired()
-                    .HasMaxLength(20)
+                    .HasMaxLength(32)
                     .HasColumnName("nick")
                     .HasComment("昵称");
 
                 entity.Property(e => e.Phone)
                     .IsRequired()
-                    .HasMaxLength(20)
+                    .HasMaxLength(32)
                     .HasColumnName("phone")
                     .HasComment("手机号");
+
+                entity.HasOne(d => d.Company)
+                    .WithMany(p => p.TUser)
+                    .HasForeignKey(d => d.Companyid)
+                    .OnDelete(DeleteBehavior.ClientSetNull)
+                    .HasConstraintName("fk_company");
             });
 
             modelBuilder.Entity<TUserCoupon>(entity =>
@@ -544,12 +556,12 @@ namespace DAL
 
                 entity.Property(e => e.Count)
                     .HasColumnName("count")
-                    .HasDefaultValueSql("'0'")
                     .HasComment("数量");
 
-                entity.Property(e => e.CouponId1).HasColumnName("coupon_id");
-
-                entity.Property(e => e.UserId1).HasColumnName("user_id");
+                entity.Property(e => e.Crtime)
+                    .HasColumnType("datetime")
+                    .HasColumnName("crtime")
+                    .HasComment("创建时间");
 
                 entity.HasOne(d => d.Coupon)
                     .WithMany(p => p.TUserCoupon)

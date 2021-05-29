@@ -17,7 +17,7 @@ namespace Model.Database
         }
 
         /// <summary>
-        /// 自增ID
+        /// 用户id
         /// </summary>
         public int Id { get; set; }
         /// <summary>

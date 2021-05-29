@@ -17,7 +17,7 @@ namespace Model.Database
         }
 
         /// <summary>
-        /// 主键
+        /// 优惠券id
         /// </summary>
         public int Id { get; set; }
         /// <summary>

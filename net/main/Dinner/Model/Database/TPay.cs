@@ -11,6 +11,9 @@ namespace Model.Database
     /// </summary>
     public partial class TPay
     {
+        /// <summary>
+        /// id
+        /// </summary>
         public int Id { get; set; }
         /// <summary>
         /// 订单编号

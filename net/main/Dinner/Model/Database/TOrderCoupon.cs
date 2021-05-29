@@ -27,7 +27,5 @@ namespace Model.Database
         /// 总金额
         /// </summary>
         public decimal Money { get; set; }
-        public string OrderId1 { get; set; }
-        public int CouponId1 { get; set; }
     }
 }

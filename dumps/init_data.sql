@@ -1,4 +1,4 @@
- SET FOREIGN_KEY_CHECKS = 0;  
+SET FOREIGN_KEY_CHECKS = 0;  
  
 truncate table t_cart;
 truncate table t_comment;
@@ -15,7 +15,8 @@ truncate table t_product;
 truncate table t_user;
 truncate table t_category;
 truncate table t_company;
- SET FOREIGN_KEY_CHECKS = 1;  
+
+SET FOREIGN_KEY_CHECKS = 1;  
  
 INSERT INTO `dinner`.`t_category`(`name`,`state`,`crtime`)VALUES ('套餐', 0, '2021-05-5');  
 INSERT INTO `dinner`.`t_category`(`name`,`state`,`crtime`)VALUES ('炒菜', 0, '2021-05-5');  

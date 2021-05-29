@@ -11,19 +11,22 @@ namespace Model.Database
     /// </summary>
     public partial class TCart
     {
+        /// <summary>
+        /// id
+        /// </summary>
         public int Id { get; set; }
         /// <summary>
         /// 用户id
         /// </summary>
-        public uint Userid { get; set; }
+        public int Userid { get; set; }
         /// <summary>
         /// 商品id
         /// </summary>
-        public uint Productid { get; set; }
+        public int Productid { get; set; }
         /// <summary>
         /// 商品数量
         /// </summary>
-        public uint Count { get; set; }
+        public int Count { get; set; }
         /// <summary>
         /// 创建时间
         /// </summary>

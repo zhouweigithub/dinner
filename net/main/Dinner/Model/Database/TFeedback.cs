@@ -12,7 +12,7 @@ namespace Model.Database
     public partial class TFeedback
     {
         /// <summary>
-        /// 自增id
+        /// id
         /// </summary>
         public int Id { get; set; }
         /// <summary>

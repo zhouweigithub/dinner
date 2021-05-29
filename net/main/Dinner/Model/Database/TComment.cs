@@ -12,7 +12,7 @@ namespace Model.Database
     public partial class TComment
     {
         /// <summary>
-        /// 自增id
+        /// id
         /// </summary>
         public int Id { get; set; }
         /// <summary>
@@ -26,6 +26,6 @@ namespace Model.Database
         /// <summary>
         /// 创建时间
         /// </summary>
-        public DateTime? Crtime { get; set; }
+        public DateTime Crtime { get; set; }
     }
 }

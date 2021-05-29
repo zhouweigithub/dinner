@@ -9,6 +9,11 @@
             购物车
             </summary>
         </member>
+        <member name="P:Model.Database.TCart.Id">
+            <summary>
+            id
+            </summary>
+        </member>
         <member name="P:Model.Database.TCart.Userid">
             <summary>
             用户id
@@ -36,12 +41,12 @@
         </member>
         <member name="P:Model.Database.TCategory.Id">
             <summary>
-            自增id
+            商品分类id
             </summary>
         </member>
         <member name="P:Model.Database.TCategory.Name">
             <summary>
-            名称
+            商品分类名称
             </summary>
         </member>
         <member name="P:Model.Database.TCategory.State">
@@ -61,7 +66,7 @@
         </member>
         <member name="P:Model.Database.TComment.Id">
             <summary>
-            自增id
+            id
             </summary>
         </member>
         <member name="P:Model.Database.TComment.Orderid">
@@ -86,7 +91,7 @@
         </member>
         <member name="P:Model.Database.TCompany.Id">
             <summary>
-            自增主键
+            公司id
             </summary>
         </member>
         <member name="P:Model.Database.TCompany.Name">
@@ -116,7 +121,7 @@
         </member>
         <member name="P:Model.Database.TCoupon.Id">
             <summary>
-            主键
+            优惠券id
             </summary>
         </member>
         <member name="P:Model.Database.TCoupon.Name">
@@ -151,7 +156,7 @@
         </member>
         <member name="P:Model.Database.TFeedback.Id">
             <summary>
-            自增id
+            id
             </summary>
         </member>
         <member name="P:Model.Database.TFeedback.Userid">
@@ -172,6 +177,11 @@
         <member name="T:Model.Database.TMessage">
             <summary>
             消息中心
+            </summary>
+        </member>
+        <member name="P:Model.Database.TMessage.Id">
+            <summary>
+            id
             </summary>
         </member>
         <member name="P:Model.Database.TMessage.Userid">
@@ -324,6 +334,11 @@
             支付信息
             </summary>
         </member>
+        <member name="P:Model.Database.TPay.Id">
+            <summary>
+            id
+            </summary>
+        </member>
         <member name="P:Model.Database.TPay.Orderid">
             <summary>
             订单编号
@@ -351,7 +366,7 @@
         </member>
         <member name="P:Model.Database.TProduct.Id">
             <summary>
-            自增主键
+            商品id
             </summary>
         </member>
         <member name="P:Model.Database.TProduct.Name">
@@ -374,6 +389,11 @@
             销量
             </summary>
         </member>
+        <member name="P:Model.Database.TProduct.Img">
+            <summary>
+            商品图片
+            </summary>
+        </member>
         <member name="P:Model.Database.TProduct.Crtime">
             <summary>
             创建时间
@@ -386,7 +406,7 @@
         </member>
         <member name="P:Model.Database.TUser.Id">
             <summary>
-            自增ID
+            用户id
             </summary>
         </member>
         <member name="P:Model.Database.TUser.Code">
@@ -437,6 +457,11 @@
         <member name="P:Model.Database.TUserCoupon.Count">
             <summary>
             数量
+            </summary>
+        </member>
+        <member name="P:Model.Database.TUserCoupon.Crtime">
+            <summary>
+            创建时间
             </summary>
         </member>
         <member name="T:Model.JwtSetting">
