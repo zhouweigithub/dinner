@@ -10,10 +10,12 @@ using BLL.Interface;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Logging;
+using Microsoft.Extensions.Options;
 using Microsoft.IdentityModel.Tokens;
 using Model;
 using Model.Database;
 using Model.Request;
+using Model.Request.Wx;
 using Model.Response.Com;
 
 namespace Api.Controllers
@@ -23,12 +25,14 @@ namespace Api.Controllers
     public class UserController : BaseAuthController
     {
         private readonly IUserService _services;
-        private readonly ILogger<UserController> _logger;
+        private readonly IWxService _wxservices;
+        private readonly IOptions<WxOpenidConfigModel> _wxconfig;
 
-        public UserController(IUserService service, ILogger<UserController> logger)
+        public UserController(IUserService service, IWxService wxService, IOptions<WxOpenidConfigModel> wxconfig)
         {
             _services = service;
-            _logger = logger;
+            _wxservices = wxService;
+            _wxconfig = wxconfig;
         }
 
         /// <summary>
@@ -42,6 +46,19 @@ namespace Api.Controllers
         public async Task<RespData<TUser>> Add(UserAdd user)
         {
             return await _services.AddAsync(user);
+        }
+
+        /// <summary>
+        /// 获取微信用户的openid
+        /// </summary>
+        /// <param name="loginCode">登录码</param>
+        /// <returns></returns>
+        [HttpGet]
+        [Route("[action]")]
+        [AllowAnonymous]
+        public RespData<string> GetOpenId(string loginCode)
+        {
+            return _wxservices.GetOpenId(loginCode, _wxconfig.Value);
         }
 
     }

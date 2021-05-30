@@ -27,6 +27,7 @@ using Newtonsoft.Json.Serialization;
 using NLog.Extensions.Logging;
 using BLL.EasyCaching;
 using EasyCaching.Serialization.Json;
+using Model.Request.Wx;
 
 namespace Api
 {
@@ -59,6 +60,8 @@ namespace Api
             JwtSetting jswSetting = Configuration.GetSection("JwtSetting").Get<JwtSetting>();
 
             services.Configure<JwtSetting>(Configuration.GetSection("JwtSetting"));
+            services.Configure<WxOpenidConfigModel>(Configuration.GetSection("wx:openid"));
+
             services.AddCache(opt =>
             {
                 opt.UseCSRedis(Configuration, "mine_redis", "easycaching:csredis").WithJson(SetJsonPara, "mine_redis");

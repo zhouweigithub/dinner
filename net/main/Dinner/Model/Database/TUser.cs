@@ -28,6 +28,12 @@ namespace Model.Database
         /// 公司id
         /// </summary>
         public int Companyid { get; set; }
+
+        /// <summary>
+        /// 性别
+        /// </summary>
+        public int Gender { get; set; }
+
         /// <summary>
         /// 昵称
         /// </summary>

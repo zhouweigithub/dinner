@@ -43,6 +43,13 @@
             <param name="user"></param>
             <returns></returns>
         </member>
+        <member name="M:Api.Controllers.UserController.GetOpenId(System.String)">
+            <summary>
+            获取微信用户的openid
+            </summary>
+            <param name="loginCode">登录码</param>
+            <returns></returns>
+        </member>
         <member name="M:Api.ConfigurationManager.GetSection``1(System.String)">
             <summary>
             读取节点数据

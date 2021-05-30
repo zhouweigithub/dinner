@@ -419,6 +419,11 @@
             公司id
             </summary>
         </member>
+        <member name="P:Model.Database.TUser.Gender">
+            <summary>
+            性别
+            </summary>
+        </member>
         <member name="P:Model.Database.TUser.Nick">
             <summary>
             昵称
@@ -542,6 +547,21 @@
         <member name="P:Model.Request.UserAdd.Phone">
             <summary>
             手机号
+            </summary>
+        </member>
+        <member name="T:Model.Request.Wx.WxOpenidConfigModel">
+            <summary>
+            微信小程序获取openid的参数
+            </summary>
+        </member>
+        <member name="P:Model.Request.Wx.WxOpenidConfigModel.AppId">
+            <summary>
+            AppId
+            </summary>
+        </member>
+        <member name="P:Model.Request.Wx.WxOpenidConfigModel.AppSecret">
+            <summary>
+            密钥
             </summary>
         </member>
         <member name="T:Model.Response.Com.RespData">

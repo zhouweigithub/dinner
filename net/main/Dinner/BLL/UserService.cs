@@ -36,7 +36,7 @@ namespace BLL
                 else
                 {
                     result.code = -1;
-                    result.msg = "登录失败";
+                    result.msg = "未找到相关用户信息";
                 }
             }
             catch (Exception e)
@@ -54,10 +54,11 @@ namespace BLL
             RespData<TUser> result = new();
             try
             {
-                //先检查是否已存在同名公司
+                //先检查是否已存在同名用户
                 var serverInfo = context.Set<TUser>().FirstOrDefault(a => a.Code == t.OpenId);
                 if (serverInfo == null)
                 {
+                    //检查公司信息是否正确
                     var company = context.Set<TCompany>().FirstOrDefault(a => a.Code == t.CompanyCode);
                     if (company == null)
                     {
@@ -82,7 +83,7 @@ namespace BLL
                 else
                 {
                     result.code = -1;
-                    result.msg = "该公司已存在";
+                    result.msg = "该用户已存在";
                 }
             }
             catch (Exception e)
