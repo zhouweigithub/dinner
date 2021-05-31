@@ -20,7 +20,7 @@ namespace BLL
     {
         private readonly ILogger<OrderService> _logger;
 
-        public OrderService(DbService context, ILogger<OrderService> logger) : base(context)
+        public OrderService(DbService context, ILogger<OrderService> logger) : base(context, logger)
         {
             _logger = logger;
         }

@@ -2,6 +2,8 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
+using BLL;
+using BLL.Interface;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 
@@ -15,13 +17,15 @@ namespace Api.Controllers
     [ApiController]
     public class BaseAuthController : ControllerBase
     {
+
         /// <summary>
-        /// 获取当前登录的用户ID
+        /// 获取当前登录的用户Code
         /// </summary>
         /// <returns></returns>
-        protected string GetUserId()
+        protected string GetUserCode()
         {
             return User.Identity.Name;
         }
+
     }
 }

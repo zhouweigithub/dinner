@@ -16,7 +16,7 @@ namespace BLL
     {
         private readonly ILogger<PayService> _logger;
 
-        public PayService(DbService context, ILogger<PayService> logger) : base(context)
+        public PayService(DbService context, ILogger<PayService> logger) : base(context, logger)
         {
             _logger = logger;
         }

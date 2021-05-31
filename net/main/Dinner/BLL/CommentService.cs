@@ -13,7 +13,7 @@ namespace BLL
     {
         private readonly ILogger<CommentService> _logger;
 
-        public CommentService(DbService context, ILogger<CommentService> logger) : base(context)
+        public CommentService(DbService context, ILogger<CommentService> logger) : base(context, logger)
         {
             _logger = logger;
         }

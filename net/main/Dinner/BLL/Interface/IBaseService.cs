@@ -2,6 +2,8 @@
 using System.Collections.Generic;
 using System.Text;
 using System.Threading.Tasks;
+using BLL.EasyCaching;
+using DAL;
 using Microsoft.EntityFrameworkCore.ChangeTracking;
 
 namespace BLL.Interface
@@ -22,10 +24,10 @@ namespace BLL.Interface
 
         //异步方法
 
-        Task<T> AddAsync<T>(T t) where T : class;
+        public Task<T> AddAsync<T>(T t) where T : class;
 
-        Task<int> UpdateAsync<T>(T t) where T : class;
+        public Task<int> UpdateAsync<T>(T t) where T : class;
 
-        Task<int> DeleteAsync<T>(T t) where T : class;
+        public Task<int> DeleteAsync<T>(T t) where T : class;
     }
 }

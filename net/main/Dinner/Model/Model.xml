@@ -509,11 +509,6 @@
             添加商品到购物车参数
             </summary>
         </member>
-        <member name="P:Model.Request.CartAdd.openid">
-            <summary>
-            openid
-            </summary>
-        </member>
         <member name="P:Model.Request.CartAdd.Productid">
             <summary>
             商品id
@@ -529,12 +524,7 @@
             从购物车删除商品
             </summary>
         </member>
-        <member name="P:Model.Request.CartDelete.openid">
-            <summary>
-            openid
-            </summary>
-        </member>
-        <member name="P:Model.Request.CartDelete.Productid">
+        <member name="P:Model.Request.CartDelete.Ids">
             <summary>
             商品id
             </summary>

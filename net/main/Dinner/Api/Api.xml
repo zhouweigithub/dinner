@@ -9,9 +9,9 @@
             带权限功能
             </summary>
         </member>
-        <member name="M:Api.Controllers.BaseAuthController.GetUserId">
+        <member name="M:Api.Controllers.BaseAuthController.GetUserCode">
             <summary>
-            获取当前登录的用户ID
+            获取当前登录的用户Code
             </summary>
             <returns></returns>
         </member>

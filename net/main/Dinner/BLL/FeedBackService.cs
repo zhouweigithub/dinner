@@ -17,7 +17,7 @@ namespace BLL
     {
         private readonly ILogger<FeedBackService> _logger;
 
-        public FeedBackService(DbService context, ILogger<FeedBackService> logger) : base(context)
+        public FeedBackService(DbService context, ILogger<FeedBackService> logger) : base(context, logger)
         {
             _logger = logger;
         }

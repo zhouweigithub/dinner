@@ -21,7 +21,7 @@ namespace BLL
         private readonly ICache _cache;
 
 
-        public ProductService(DbService context, ILogger<ProductService> logger, ICache cache) : base(context)
+        public ProductService(DbService context, ILogger<ProductService> logger, ICache cache) : base(context, logger)
         {
             _logger = logger;
             _cache = cache;

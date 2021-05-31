@@ -16,7 +16,7 @@ namespace BLL
     {
         private readonly ILogger<CouponService> _logger;
 
-        public CouponService(DbService context, ILogger<CouponService> logger) : base(context)
+        public CouponService(DbService context, ILogger<CouponService> logger) : base(context, logger)
         {
             _logger = logger;
         }

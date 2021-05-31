@@ -13,7 +13,7 @@ namespace BLL
     {
         private readonly ILogger<MyCenter> _logger;
 
-        public MyCenter(DbService context, ILogger<MyCenter> logger) : base(context)
+        public MyCenter(DbService context, ILogger<MyCenter> logger) : base(context, logger)
         {
             _logger = logger;
         }

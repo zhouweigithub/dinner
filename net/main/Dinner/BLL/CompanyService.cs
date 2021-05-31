@@ -18,7 +18,7 @@ namespace BLL
     {
         private readonly ILogger<CompanyService> _logger;
 
-        public CompanyService(DbService context, ILogger<CompanyService> logger) : base(context)
+        public CompanyService(DbService context, ILogger<CompanyService> logger) : base(context, logger)
         {
             _logger = logger;
         }

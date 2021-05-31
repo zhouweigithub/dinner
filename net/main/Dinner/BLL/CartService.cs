@@ -16,24 +16,63 @@ namespace BLL
     {
         private readonly ILogger<CartService> _logger;
 
-        public CartService(DbService context, ILogger<CartService> logger) : base(context)
+        public CartService(DbService context, ILogger<CartService> logger) : base(context, logger)
         {
             _logger = logger;
         }
 
-        public Task<RespData> AddAsync(Int32 openid, CartAdd t)
+        public async Task<RespData> AddAsync(String openid, CartAdd data)
         {
-            throw new NotImplementedException();
+            RespData result = new RespData();
+
+            try
+            {
+                int userid = GetUserIdByCode(openid);
+                await AddAsync(new TCart()
+                {
+                    Productid = data.Productid,
+                    Count = data.Count,
+                    Userid = userid,
+                    Crtime = DateTime.Now,
+                });
+            }
+            catch (Exception e)
+            {
+                result.code = -1;
+                result.msg = "服务内部错误";
+                logger.LogError(e.ToString());
+            }
+
+            return result;
         }
 
-        public Task<RespData> AddAsync(CartAdd data)
+        public async Task<RespData> DeleteAsync(String openid, CartDelete data)
         {
-            throw new NotImplementedException();
-        }
+            RespData result = new RespData();
 
-        public Task<RespData> DeleteAsync(CartDelete data)
-        {
-            throw new NotImplementedException();
+            try
+            {
+                int userid = GetUserIdByCode(openid);
+
+                List<TCart> models = new List<TCart>();
+                foreach (var item in data.Ids)
+                {
+                    models.Add(new TCart()
+                    {
+                        Id = item
+                    });
+                }
+
+                await DeleteMultipleAsync(models);
+            }
+            catch (Exception e)
+            {
+                result.code = -1;
+                result.msg = "服务内部错误";
+                logger.LogError(e.ToString());
+            }
+
+            return result;
         }
 
         public Task<RespData<List<TCart>>> GetListAsync(String openid)

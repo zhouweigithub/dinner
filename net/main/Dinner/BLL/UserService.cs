@@ -17,7 +17,7 @@ namespace BLL
     {
         private readonly ILogger<UserService> _logger;
 
-        public UserService(DbService context, ILogger<UserService> logger) : base(context)
+        public UserService(DbService context, ILogger<UserService> logger) : base(context, logger)
         {
             _logger = logger;
         }
