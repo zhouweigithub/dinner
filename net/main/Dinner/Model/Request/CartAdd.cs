@@ -12,6 +12,10 @@ namespace Model.Request
     public class CartAdd
     {
         /// <summary>
+        /// openid
+        /// </summary>
+        public string openid { get; set; }
+        /// <summary>
         /// 商品id
         /// </summary>
         public int Productid { get; set; }
@@ -19,5 +23,21 @@ namespace Model.Request
         /// 商品数量
         /// </summary>
         public int Count { get; set; }
+    }
+
+
+    /// <summary>
+    /// 从购物车删除商品
+    /// </summary>
+    public class CartDelete
+    {
+        /// <summary>
+        /// openid
+        /// </summary>
+        public string openid { get; set; }
+        /// <summary>
+        /// 商品id
+        /// </summary>
+        public List<int> Productid { get; set; }
     }
 }

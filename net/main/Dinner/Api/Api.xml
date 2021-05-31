@@ -6,7 +6,7 @@
     <members>
         <member name="T:Api.Controllers.BaseAuthController">
             <summary>
-            带权限
+            带权限功能
             </summary>
         </member>
         <member name="M:Api.Controllers.BaseAuthController.GetUserId">
@@ -15,6 +15,11 @@
             </summary>
             <returns></returns>
         </member>
+        <member name="T:Api.Controllers.CompanyController">
+            <summary>
+            公司信息
+            </summary>
+        </member>
         <member name="M:Api.Controllers.CompanyController.Add(Model.Request.CompanyAdd)">
             <summary>
             添加公司
@@ -22,11 +27,23 @@
             <param name="company">公司基本信息</param>
             <returns></returns>
         </member>
-        <member name="M:Api.Controllers.HomeController.Login(System.String)">
+        <member name="T:Api.Controllers.HomeController">
             <summary>
-            登录
+            登录相关
             </summary>
-            <param name="openid">微信openid</param>
+        </member>
+        <member name="M:Api.Controllers.HomeController.Login(Model.Request.UserAdd)">
+            <summary>
+            登录，若该用户无未注册，则进行注册
+            </summary>
+            <param name="user">用户信息</param>
+            <returns></returns>
+        </member>
+        <member name="M:Api.Controllers.HomeController.GetOpenId(System.String)">
+            <summary>
+            获取微信用户的openid
+            </summary>
+            <param name="loginCode">登录码</param>
             <returns></returns>
         </member>
         <member name="M:Api.Controllers.HomeController.GenerateToken(System.String)">
@@ -36,18 +53,25 @@
             <param name="username">用户名</param>
             <returns></returns>
         </member>
-        <member name="M:Api.Controllers.UserController.Add(Model.Request.UserAdd)">
+        <member name="T:Api.Controllers.ProductController">
             <summary>
-            添加用户
+            商品信息
             </summary>
-            <param name="user"></param>
+        </member>
+        <member name="M:Api.Controllers.ProductController.GetList(System.Int32,System.Int32,System.Int32)">
+            <summary>
+            获取商品列表
+            </summary>
+            <param name="categoryid">商品分类id</param>
+            <param name="pageSize">每页数据量</param>
+            <param name="page">页码</param>
             <returns></returns>
         </member>
-        <member name="M:Api.Controllers.UserController.GetOpenId(System.String)">
+        <member name="M:Api.Controllers.ProductController.GetEntity(System.Int32)">
             <summary>
-            获取微信用户的openid
+            获取商品详情
             </summary>
-            <param name="loginCode">登录码</param>
+            <param name="productid">商品id</param>
             <returns></returns>
         </member>
         <member name="M:Api.ConfigurationManager.GetSection``1(System.String)">

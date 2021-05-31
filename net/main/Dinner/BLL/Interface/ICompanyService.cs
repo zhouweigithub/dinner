@@ -14,8 +14,8 @@ namespace BLL.Interface
     /// </summary>
     public interface ICompanyService : IBaseService
     {
-        Task<RespData<TCompany>> AddAsync(CompanyAdd company);
+        public Task<RespData<TCompany>> AddAsync(CompanyAdd company);
 
-        Task<RespData<TCompany>> GetEntity(string companyId);
+        public Task<RespData<TCompany>> GetEntity(string companyId);
     }
 }

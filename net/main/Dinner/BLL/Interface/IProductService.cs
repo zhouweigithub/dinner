@@ -14,8 +14,8 @@ namespace BLL.Interface
     /// </summary>
     public interface IProductService : IBaseService
     {
-        RespDataList<TProduct> GetList(int categoryid, int pageSize, int page);
+        public RespDataList<TProduct> GetList(int categoryid, int pageSize, int page);
 
-        RespData<TProduct> GetEntityAsync(int productid);
+        public RespData<TProduct> GetEntityAsync(int productid);
     }
 }

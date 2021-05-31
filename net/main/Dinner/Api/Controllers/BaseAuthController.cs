@@ -9,7 +9,7 @@ namespace Api.Controllers
 {
 
     /// <summary>
-    /// 带权限
+    /// 带权限功能
     /// </summary>
     [Authorize]
     [ApiController]

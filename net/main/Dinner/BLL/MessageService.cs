@@ -6,6 +6,8 @@ using System.Threading.Tasks;
 using BLL.Interface;
 using DAL;
 using Microsoft.Extensions.Logging;
+using Model.Database;
+using Model.Response.Com;
 
 namespace BLL
 {
@@ -16,6 +18,11 @@ namespace BLL
         public MessageService(DbService context, ILogger<MessageService> logger) : base(context)
         {
             _logger = logger;
+        }
+
+        public Task<RespDataList<TMessage>> GetListAsync(String openid)
+        {
+            throw new NotImplementedException();
         }
     }
 }

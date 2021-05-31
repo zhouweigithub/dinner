@@ -5,6 +5,8 @@ using System.Text;
 using System.Threading.Tasks;
 using Model;
 using Model.Database;
+using Model.Request;
+using Model.Response;
 using Model.Response.Com;
 
 namespace BLL.Interface
@@ -14,11 +16,13 @@ namespace BLL.Interface
     /// </summary>
     public interface IOrderService : IBaseService
     {
-        RespDataList<TOrder> GetList(string userCode);
+        public Task<RespDataList<TOrder>> GetListAsync(string productName, int pageSize, int page);
 
-        Task<RespData<TOrder>> SaveAsync(TOrder data);
+        //Task<RespData<TOrder>> GetEntityAsync();
 
-        Task<RespData<TOrder>> GetEntityAsync(string orderid);
+        public Task<RespData<TOrder>> AddAsync(OrderAdd data, int userid);
+
+        public Task<RespData<bool>> CancelAsync(string orderid, int userid);
 
     }
 }

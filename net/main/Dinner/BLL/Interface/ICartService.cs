@@ -14,8 +14,10 @@ namespace BLL.Interface
     /// </summary>
     public interface ICartService : IBaseService
     {
-        RespData<List<TCart>> GetList(String openid);
+        public Task<RespData<List<TCart>>> GetListAsync(String openid);
 
-        Task<RespData> AddAsync(int openid, CartAdd t);
+        public Task<RespData> AddAsync(CartAdd data);
+
+        public Task<RespData> DeleteAsync(CartDelete data);
     }
 }

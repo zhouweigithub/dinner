@@ -1,11 +1,13 @@
 ﻿using System;
 using EasyCaching.Core;
 
-namespace BLL.EasyCaching {
+namespace BLL.EasyCaching
+{
     /// <summary>
     /// EasyCaching缓存服务
     /// </summary>
-    public class CacheManager : ICache {
+    public class CacheManager : ICache
+    {
         /// <summary>
         /// 缓存提供器
         /// </summary>
@@ -15,7 +17,8 @@ namespace BLL.EasyCaching {
         /// 初始化缓存
         /// </summary>
         /// <param name="provider">EasyCaching缓存提供器</param>
-        public CacheManager( IEasyCachingProvider provider ) {
+        public CacheManager(IEasyCachingProvider provider)
+        {
             _provider = provider;
         }
 
@@ -23,8 +26,9 @@ namespace BLL.EasyCaching {
         /// 是否存在指定键的缓存
         /// </summary>
         /// <param name="key">缓存键</param>
-        public bool Exists( string key ) {
-            return _provider.Exists( key );
+        public bool Exists(string key)
+        {
+            return _provider.Exists(key);
         }
 
         /// <summary>
@@ -34,16 +38,18 @@ namespace BLL.EasyCaching {
         /// <param name="key">缓存键</param>
         /// <param name="func">获取数据操作</param>
         /// <param name="expiration">过期时间间隔</param>
-        public T Get<T>( string key, Func<T> func, TimeSpan? expiration = null ) {
-            var result = _provider.Get( key, func, GetExpiration( expiration ) );
+        public T Get<T>(string key, Func<T> func, TimeSpan? expiration = null)
+        {
+            var result = _provider.Get(key, func, GetExpiration(expiration));
             return result.Value;
         }
 
         /// <summary>
         /// 获取过期时间间隔
         /// </summary>
-        private TimeSpan GetExpiration( TimeSpan? expiration ) {
-            expiration = expiration ?? TimeSpan.FromHours( 12 );
+        private TimeSpan GetExpiration(TimeSpan? expiration)
+        {
+            expiration = expiration ?? TimeSpan.FromHours(12);
             return expiration ?? default;
         }
 
@@ -54,22 +60,25 @@ namespace BLL.EasyCaching {
         /// <param name="key">缓存键</param>
         /// <param name="value">值</param>
         /// <param name="expiration">过期时间间隔</param>
-        public bool TryAdd<T>( string key, T value, TimeSpan? expiration = null ) {
-            return _provider.TrySet( key, value, GetExpiration( expiration ) );
+        public bool TryAdd<T>(string key, T value, TimeSpan? expiration = null)
+        {
+            return _provider.TrySet(key, value, GetExpiration(expiration));
         }
 
         /// <summary>
         /// 移除缓存
         /// </summary>
         /// <param name="key">缓存键</param>
-        public void Remove( string key ) {
-            _provider.Remove( key );
+        public void Remove(string key)
+        {
+            _provider.Remove(key);
         }
 
         /// <summary>
         /// 清空缓存
         /// </summary>
-        public void Clear() {
+        public void Clear()
+        {
             _provider.Flush();
         }
     }

@@ -13,6 +13,9 @@ using Model.Response.Com;
 
 namespace Api.Controllers
 {
+    /// <summary>
+    /// 公司信息
+    /// </summary>
     [ApiController]
     [Route("[controller]")]
     public class CompanyController : BaseAuthController
@@ -31,7 +34,6 @@ namespace Api.Controllers
         /// <returns></returns>
         [HttpPost]
         [Route("[action]")]
-        [AllowAnonymous]
         public Task<RespData<TCompany>> Add(CompanyAdd company)
         {
             return _services.AddAsync(company);

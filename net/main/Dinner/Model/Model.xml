@@ -236,7 +236,7 @@
         </member>
         <member name="P:Model.Database.TOrder.State">
             <summary>
-            状态
+            状态（0待支付，1已支付，2已完成，9已取消）
             </summary>
         </member>
         <member name="P:Model.Database.TOrder.Crtime">
@@ -284,6 +284,16 @@
             优惠卷id
             </summary>
         </member>
+        <member name="P:Model.Database.TOrderCoupon.CouponName">
+            <summary>
+            优惠券名称
+            </summary>
+        </member>
+        <member name="P:Model.Database.TOrderCoupon.Price">
+            <summary>
+            优惠券面额
+            </summary>
+        </member>
         <member name="P:Model.Database.TOrderCoupon.Count">
             <summary>
             数量
@@ -309,6 +319,11 @@
             商品id
             </summary>
         </member>
+        <member name="P:Model.Database.TOrderProduct.ProductName">
+            <summary>
+            商品名称
+            </summary>
+        </member>
         <member name="P:Model.Database.TOrderProduct.Price">
             <summary>
             单价
@@ -324,9 +339,9 @@
             金额
             </summary>
         </member>
-        <member name="P:Model.Database.TOrderProduct.Crtime">
+        <member name="P:Model.Database.TOrderProduct.Img">
             <summary>
-            创建时间
+            商品图片
             </summary>
         </member>
         <member name="T:Model.Database.TPay">
@@ -419,11 +434,6 @@
             公司id
             </summary>
         </member>
-        <member name="P:Model.Database.TUser.Gender">
-            <summary>
-            性别
-            </summary>
-        </member>
         <member name="P:Model.Database.TUser.Nick">
             <summary>
             昵称
@@ -442,6 +452,11 @@
         <member name="P:Model.Database.TUser.Crtime">
             <summary>
             创建时间
+            </summary>
+        </member>
+        <member name="P:Model.Database.TUser.Gender">
+            <summary>
+            性别
             </summary>
         </member>
         <member name="T:Model.Database.TUserCoupon">
@@ -494,6 +509,11 @@
             添加商品到购物车参数
             </summary>
         </member>
+        <member name="P:Model.Request.CartAdd.openid">
+            <summary>
+            openid
+            </summary>
+        </member>
         <member name="P:Model.Request.CartAdd.Productid">
             <summary>
             商品id
@@ -502,6 +522,21 @@
         <member name="P:Model.Request.CartAdd.Count">
             <summary>
             商品数量
+            </summary>
+        </member>
+        <member name="T:Model.Request.CartDelete">
+            <summary>
+            从购物车删除商品
+            </summary>
+        </member>
+        <member name="P:Model.Request.CartDelete.openid">
+            <summary>
+            openid
+            </summary>
+        </member>
+        <member name="P:Model.Request.CartDelete.Productid">
+            <summary>
+            商品id
             </summary>
         </member>
         <member name="T:Model.Request.CompanyAdd">
@@ -517,6 +552,101 @@
         <member name="P:Model.Request.CompanyAdd.Address">
             <summary>
             公司地址
+            </summary>
+        </member>
+        <member name="T:Model.Request.FeedbackAdd">
+            <summary>
+            用户反馈信息
+            </summary>
+        </member>
+        <member name="P:Model.Request.FeedbackAdd.openid">
+            <summary>
+            openid
+            </summary>
+        </member>
+        <member name="P:Model.Request.FeedbackAdd.content">
+            <summary>
+            反馈内容
+            </summary>
+        </member>
+        <member name="T:Model.Request.OrderAdd">
+            <summary>
+            提交订单的参数
+            </summary>
+        </member>
+        <member name="P:Model.Request.OrderAdd.Money">
+            <summary>
+            订单金额
+            </summary>
+        </member>
+        <member name="P:Model.Request.OrderAdd.CouponMoney">
+            <summary>
+            优惠金额
+            </summary>
+        </member>
+        <member name="P:Model.Request.OrderAdd.PayMoney">
+            <summary>
+            实际支付金额
+            </summary>
+        </member>
+        <member name="P:Model.Request.OrderAdd.Products">
+            <summary>
+            商品信息
+            </summary>
+        </member>
+        <member name="P:Model.Request.OrderAdd.Coupons">
+            <summary>
+            优惠券信息
+            </summary>
+        </member>
+        <member name="T:Model.Request.ProductInfo">
+            <summary>
+            商品信息
+            </summary>
+        </member>
+        <member name="P:Model.Request.ProductInfo.Productid">
+            <summary>
+            商品id
+            </summary>
+        </member>
+        <member name="P:Model.Request.ProductInfo.Price">
+            <summary>
+            单价
+            </summary>
+        </member>
+        <member name="P:Model.Request.ProductInfo.Count">
+            <summary>
+            数量
+            </summary>
+        </member>
+        <member name="P:Model.Request.ProductInfo.Money">
+            <summary>
+            总金额
+            </summary>
+        </member>
+        <member name="T:Model.Request.CouponInfo">
+            <summary>
+            优惠券信息
+            </summary>
+        </member>
+        <member name="P:Model.Request.CouponInfo.Couponid">
+            <summary>
+            优惠券id
+            </summary>
+        </member>
+        <member name="P:Model.Request.CouponInfo.Count">
+            <summary>
+            数量
+            </summary>
+        </member>
+        <member name="P:Model.Request.CouponInfo.Price">
+            <summary>
+            优惠券面额
+            </summary>
+        </member>
+        <member name="P:Model.Request.CouponInfo.Money">
+            <summary>
+            优惠券总金额
             </summary>
         </member>
         <member name="T:Model.Request.UserAdd">
@@ -610,6 +740,76 @@
         <member name="P:Model.Response.Com.RespDataToken`1.token">
             <summary>
             登录token
+            </summary>
+        </member>
+        <member name="T:Model.Response.OrderResp">
+            <summary>
+            订单信息
+            </summary>
+        </member>
+        <member name="P:Model.Response.OrderResp.Orderid">
+            <summary>
+            订单id
+            </summary>
+        </member>
+        <member name="P:Model.Response.OrderResp.Money">
+            <summary>
+            订单金总额
+            </summary>
+        </member>
+        <member name="P:Model.Response.OrderResp.CouponMoney">
+            <summary>
+            优惠金额
+            </summary>
+        </member>
+        <member name="P:Model.Response.OrderResp.PayMoney">
+            <summary>
+            实际支付金额
+            </summary>
+        </member>
+        <member name="P:Model.Response.OrderResp.State">
+            <summary>
+            状态
+            </summary>
+        </member>
+        <member name="P:Model.Response.OrderResp.Crtime">
+            <summary>
+            创建时间
+            </summary>
+        </member>
+        <member name="P:Model.Response.OrderResp.Products">
+            <summary>
+            商品信息
+            </summary>
+        </member>
+        <member name="T:Model.Response.OrderProductResp">
+            <summary>
+            订单中的商品信息
+            </summary>
+        </member>
+        <member name="P:Model.Response.OrderProductResp.ProductId">
+            <summary>
+            商品id
+            </summary>
+        </member>
+        <member name="P:Model.Response.OrderProductResp.Name">
+            <summary>
+            商品名称
+            </summary>
+        </member>
+        <member name="P:Model.Response.OrderProductResp.Price">
+            <summary>
+            价格
+            </summary>
+        </member>
+        <member name="P:Model.Response.OrderProductResp.Count">
+            <summary>
+            商品数量
+            </summary>
+        </member>
+        <member name="P:Model.Response.OrderProductResp.Money">
+            <summary>
+            总金额
             </summary>
         </member>
     </members>

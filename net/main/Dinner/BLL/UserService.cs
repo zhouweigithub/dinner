@@ -3,6 +3,7 @@ using System.Linq;
 using System.Threading.Tasks;
 using BLL.Interface;
 using DAL;
+using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Logging;
 using Model;
 using Model.Database;
@@ -23,19 +24,19 @@ namespace BLL
 
 
 
-        RespDataToken<TUser> IUserService.GetEntity(String openid)
+        public async Task<RespDataToken<TUser>> GetEntity(String openid)
         {
             RespDataToken<TUser> result = new RespDataToken<TUser>();
             try
             {
-                var user = context.Set<TUser>().FirstOrDefault(a => a.Code == openid);
+                var user = await context.Set<TUser>().FirstOrDefaultAsync(a => a.Code == openid);
                 if (user != null)
                 {
                     result.data = user;
                 }
                 else
                 {
-                    result.code = -1;
+                    result.code = -2;
                     result.msg = "未找到相关用户信息";
                 }
             }
@@ -82,7 +83,7 @@ namespace BLL
                 }
                 else
                 {
-                    result.code = -1;
+                    result.code = -2;
                     result.msg = "该用户已存在";
                 }
             }

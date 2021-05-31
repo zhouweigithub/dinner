@@ -14,8 +14,8 @@ namespace BLL.Interface
     /// </summary>
     public interface IUserService : IBaseService
     {
-        RespDataToken<TUser> GetEntity(String openid);
+        public Task<RespDataToken<TUser>> GetEntity(String openid);
 
-        Task<RespData<TUser>> AddAsync(UserAdd t);
+        public Task<RespData<TUser>> AddAsync(UserAdd t);
     }
 }

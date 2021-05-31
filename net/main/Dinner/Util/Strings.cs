@@ -27,14 +27,17 @@ namespace Util
         {
             string sources = GetSourceChars(stringType, letterType);
 
-            StringBuilder sb = new(length);
-            Random rnd = new();
-            for (int i = 0; i < length; i++)
-            {
-                int index = rnd.Next(0, sources.Length);
-                sb.Append(sources[index]);
-            }
-            return sb.ToString();
+            return GetRandomString(length, sources);
+        }
+
+        /// <summary>
+        /// 获取随机长度纯数字
+        /// </summary>
+        /// <param name="length">长度</param>
+        /// <returns></returns>
+        public static string GetRandomNumberString(int length)
+        {
+            return GetRandomString(length, RandStringType.NumberOnly, LetterType.LowerOnly);
         }
 
         /// <summary>
@@ -71,6 +74,21 @@ namespace Util
             {
                 return "";
             }
+        }
+
+        public static string GetRandomString(int length, string sourcesChars)
+        {
+            if (length == 0 || string.IsNullOrWhiteSpace(sourcesChars))
+                return null;
+
+            StringBuilder sb = new(length);
+            Random rnd = new();
+            for (int i = 0; i < length; i++)
+            {
+                int index = rnd.Next(0, sourcesChars.Length);
+                sb.Append(sourcesChars[index]);
+            }
+            return sb.ToString();
         }
 
 

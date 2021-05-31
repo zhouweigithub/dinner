@@ -26,7 +26,17 @@ namespace BLL
             throw new NotImplementedException();
         }
 
-        public RespData<List<TCart>> GetList(String openid)
+        public Task<RespData> AddAsync(CartAdd data)
+        {
+            throw new NotImplementedException();
+        }
+
+        public Task<RespData> DeleteAsync(CartDelete data)
+        {
+            throw new NotImplementedException();
+        }
+
+        public Task<RespData<List<TCart>>> GetListAsync(String openid)
         {
             throw new NotImplementedException();
         }

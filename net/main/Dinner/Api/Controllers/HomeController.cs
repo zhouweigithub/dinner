@@ -11,37 +11,73 @@ using Microsoft.Extensions.Options;
 using Microsoft.IdentityModel.Tokens;
 using Model;
 using Model.Database;
+using Model.Request;
+using Model.Request.Wx;
 using Model.Response.Com;
 
 namespace Api.Controllers
 {
+    /// <summary>
+    /// 登录相关
+    /// </summary>
     [Route("[controller]")]
     public class HomeController : ControllerBase
     {
+        private readonly IWxService _wxservices;
+        private readonly IOptions<WxOpenidConfigModel> _wxconfig;
         private readonly IUserService userService;
         private readonly JwtSetting jwt;
 
-        public HomeController(IUserService userService, IOptions<JwtSetting> option)
+
+        public HomeController(IUserService userService, IWxService wxService, IOptions<WxOpenidConfigModel> wxconfig, IOptions<JwtSetting> option)
         {
             this.userService = userService;
-            this.jwt = option.Value;
+            _wxservices = wxService;
+            _wxconfig = wxconfig;
+            jwt = option.Value;
         }
 
         /// <summary>
-        /// 登录
+        /// 登录，若该用户无未注册，则进行注册
         /// </summary>
-        /// <param name="openid">微信openid</param>
+        /// <param name="user">用户信息</param>
         /// <returns></returns>
-        [HttpGet]
-        [Route("[action]/{openid}")]
-        public RespDataToken<TUser> Login(string openid)
+        [HttpPost]
+        [Route("[action]")]
+        public async Task<RespDataToken<TUser>> Login(UserAdd user)
         {
-            var entity = userService.GetEntity(openid);
+            var entity = await userService.GetEntity(user.OpenId);
+
+            //如果没有该用户，则为其注册
+            if (entity.code == -2)
+            {
+                var addResult = await userService.AddAsync(user);
+                if (addResult.code == 0)
+                {
+                    entity.data = addResult.data;
+                }
+            }
+
+            //如果没抛异常，则获则生成token
             if (entity.code != -1)
-                entity.token = GenerateToken(openid);
+            {
+                entity.token = GenerateToken(user.OpenId);
+            }
+
             return entity;
         }
 
+        /// <summary>
+        /// 获取微信用户的openid
+        /// </summary>
+        /// <param name="loginCode">登录码</param>
+        /// <returns></returns>
+        [HttpGet]
+        [Route("[action]/{loginCode")]
+        public RespData<string> GetOpenId(string loginCode)
+        {
+            return _wxservices.GetOpenId(loginCode, _wxconfig.Value);
+        }
 
         /// <summary>
         /// 生成token

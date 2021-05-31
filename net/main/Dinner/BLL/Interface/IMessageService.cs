@@ -5,6 +5,7 @@ using System.Text;
 using System.Threading.Tasks;
 using Model;
 using Model.Response.Com;
+using Model.Database;
 
 namespace BLL.Interface
 {
@@ -13,6 +14,6 @@ namespace BLL.Interface
     /// </summary>
     public interface IMessageService : IBaseService
     {
-        // RespDataList<> GetList(string userCode);
+        public Task<RespDataList<TMessage>> GetListAsync(string openid);
     }
 }

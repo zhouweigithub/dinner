@@ -42,261 +42,162 @@ namespace DAL
 
             modelBuilder.Entity<TCart>(entity =>
             {
-                entity.ToTable("t_cart");
-
                 entity.HasComment("购物车");
 
-                entity.Property(e => e.Id)
-                    .HasColumnName("id")
-                    .HasComment("id");
+                entity.Property(e => e.Id).HasComment("id");
 
-                entity.Property(e => e.Count)
-                    .HasColumnName("count")
-                    .HasComment("商品数量");
+                entity.Property(e => e.Count).HasComment("商品数量");
 
-                entity.Property(e => e.Crtime)
-                    .HasColumnType("datetime")
-                    .HasColumnName("crtime")
-                    .HasComment("创建时间");
+                entity.Property(e => e.Crtime).HasComment("创建时间");
 
-                entity.Property(e => e.Productid)
-                    .HasColumnName("productid")
-                    .HasComment("商品id");
+                entity.Property(e => e.Productid).HasComment("商品id");
 
-                entity.Property(e => e.Userid)
-                    .HasColumnName("userid")
-                    .HasComment("用户id");
+                entity.Property(e => e.Userid).HasComment("用户id");
+
+                entity.HasOne(d => d.Product)
+                    .WithMany(p => p.TCart)
+                    .HasForeignKey(d => d.Productid)
+                    .OnDelete(DeleteBehavior.ClientSetNull)
+                    .HasConstraintName("fkproductid");
+
+                entity.HasOne(d => d.User)
+                    .WithMany(p => p.TCart)
+                    .HasForeignKey(d => d.Userid)
+                    .OnDelete(DeleteBehavior.ClientSetNull)
+                    .HasConstraintName("fkuseridtt");
             });
 
             modelBuilder.Entity<TCategory>(entity =>
             {
-                entity.ToTable("t_category");
-
                 entity.HasComment("商品分类");
 
-                entity.HasIndex(e => e.Name, "ix_name")
-                    .IsUnique();
+                entity.Property(e => e.Id).HasComment("商品分类id");
 
-                entity.Property(e => e.Id)
-                    .HasColumnName("id")
-                    .HasComment("商品分类id");
+                entity.Property(e => e.Crtime).HasComment("创建时间");
 
-                entity.Property(e => e.Crtime)
-                    .HasColumnType("datetime")
-                    .HasColumnName("crtime")
-                    .HasComment("创建时间");
+                entity.Property(e => e.Name).HasComment("商品分类名称");
 
-                entity.Property(e => e.Name)
-                    .IsRequired()
-                    .HasMaxLength(32)
-                    .HasColumnName("name")
-                    .HasComment("商品分类名称");
-
-                entity.Property(e => e.State)
-                    .HasColumnName("state")
-                    .HasComment("状态0正常 1禁用");
+                entity.Property(e => e.State).HasComment("状态0正常 1禁用");
             });
 
             modelBuilder.Entity<TComment>(entity =>
             {
-                entity.ToTable("t_comment");
-
                 entity.HasComment("评论");
 
-                entity.Property(e => e.Id)
-                    .HasColumnName("id")
-                    .HasComment("id");
+                entity.Property(e => e.Id).HasComment("id");
 
-                entity.Property(e => e.Crtime)
-                    .HasColumnType("datetime")
-                    .HasColumnName("crtime")
-                    .HasComment("创建时间");
+                entity.Property(e => e.Crtime).HasComment("创建时间");
 
-                entity.Property(e => e.Msg)
-                    .IsRequired()
-                    .HasMaxLength(256)
-                    .HasColumnName("msg")
-                    .HasComment("内容");
+                entity.Property(e => e.Msg).HasComment("内容");
 
-                entity.Property(e => e.Orderid)
-                    .IsRequired()
-                    .HasMaxLength(32)
-                    .HasColumnName("orderid")
-                    .HasComment("订单编号");
+                entity.Property(e => e.Orderid).HasComment("订单编号");
+
+                entity.HasOne(d => d.Order)
+                    .WithMany(p => p.TComment)
+                    .HasForeignKey(d => d.Orderid)
+                    .OnDelete(DeleteBehavior.ClientSetNull)
+                    .HasConstraintName("fk_orderid");
             });
 
             modelBuilder.Entity<TCompany>(entity =>
             {
-                entity.ToTable("t_company");
-
                 entity.HasComment("公司");
 
-                entity.HasIndex(e => e.Code, "IX_CODE")
-                    .IsUnique();
+                entity.Property(e => e.Id).HasComment("公司id");
 
-                entity.HasIndex(e => e.Name, "IX_NAME")
-                    .IsUnique();
+                entity.Property(e => e.Address).HasComment("公司地址");
 
-                entity.Property(e => e.Id)
-                    .HasColumnName("id")
-                    .HasComment("公司id");
+                entity.Property(e => e.Code).HasComment("唯一编码");
 
-                entity.Property(e => e.Address)
-                    .HasMaxLength(128)
-                    .HasColumnName("address")
-                    .HasComment("公司地址");
+                entity.Property(e => e.Crtime).HasComment("创建时间");
 
-                entity.Property(e => e.Code)
-                    .HasMaxLength(64)
-                    .HasColumnName("code")
-                    .HasComment("唯一编码");
-
-                entity.Property(e => e.Crtime)
-                    .HasColumnType("datetime")
-                    .HasColumnName("crtime")
-                    .HasComment("创建时间");
-
-                entity.Property(e => e.Name)
-                    .HasMaxLength(64)
-                    .HasColumnName("name")
-                    .HasComment("公司名字");
+                entity.Property(e => e.Name).HasComment("公司名字");
             });
 
             modelBuilder.Entity<TCoupon>(entity =>
             {
-                entity.ToTable("t_coupon");
-
                 entity.HasComment("优惠卷信息");
 
-                entity.HasIndex(e => e.Name, "ix_name")
-                    .IsUnique();
-
-                entity.Property(e => e.Id)
-                    .HasColumnName("id")
-                    .HasComment("优惠券id");
+                entity.Property(e => e.Id).HasComment("优惠券id");
 
                 entity.Property(e => e.Crtime)
-                    .HasColumnType("timestamp")
-                    .HasColumnName("crtime")
                     .HasDefaultValueSql("CURRENT_TIMESTAMP")
                     .HasComment("优惠卷创建时间");
 
-                entity.Property(e => e.EndTime)
-                    .HasColumnType("datetime")
-                    .HasColumnName("end_time")
-                    .HasComment("使用截止日期");
+                entity.Property(e => e.EndTime).HasComment("使用截止日期");
 
                 entity.Property(e => e.Money)
                     .HasPrecision(16, 2)
-                    .HasColumnName("money")
                     .HasComment("优惠金额");
 
-                entity.Property(e => e.Name)
-                    .IsRequired()
-                    .HasMaxLength(128)
-                    .HasColumnName("name")
-                    .HasComment("优惠卷名称");
+                entity.Property(e => e.Name).HasComment("优惠卷名称");
 
-                entity.Property(e => e.StartTime)
-                    .HasColumnType("datetime")
-                    .HasColumnName("start_time")
-                    .HasComment("使用开始日期");
+                entity.Property(e => e.StartTime).HasComment("使用开始日期");
             });
 
             modelBuilder.Entity<TFeedback>(entity =>
             {
-                entity.ToTable("t_feedback");
-
                 entity.HasComment("用户反馈");
 
-                entity.Property(e => e.Id)
-                    .HasColumnName("id")
-                    .HasComment("id");
+                entity.Property(e => e.Id).HasComment("id");
 
-                entity.Property(e => e.Crtime)
-                    .HasColumnType("datetime")
-                    .HasColumnName("crtime")
-                    .HasComment("创建时间");
+                entity.Property(e => e.Crtime).HasComment("创建时间");
 
-                entity.Property(e => e.Msg)
-                    .IsRequired()
-                    .HasMaxLength(332)
-                    .HasColumnName("msg")
-                    .HasComment("内容");
+                entity.Property(e => e.Msg).HasComment("内容");
 
-                entity.Property(e => e.Userid)
-                    .HasColumnName("userid")
-                    .HasComment("用户id");
+                entity.Property(e => e.Userid).HasComment("用户id");
+
+                entity.HasOne(d => d.User)
+                    .WithMany(p => p.TFeedback)
+                    .HasForeignKey(d => d.Userid)
+                    .OnDelete(DeleteBehavior.ClientSetNull)
+                    .HasConstraintName("fk_userid");
             });
 
             modelBuilder.Entity<TMessage>(entity =>
             {
-                entity.ToTable("t_message");
-
                 entity.HasComment("消息中心");
 
-                entity.Property(e => e.Id)
-                    .HasColumnName("id")
-                    .HasComment("id");
+                entity.Property(e => e.Id).HasComment("id");
 
-                entity.Property(e => e.Crtime)
-                    .HasColumnType("datetime")
-                    .HasColumnName("crtime")
-                    .HasComment("创建时间");
+                entity.Property(e => e.Crtime).HasComment("创建时间");
 
-                entity.Property(e => e.Isread)
-                    .HasColumnName("isread")
-                    .HasComment("是否已读(0未读 1已读)");
+                entity.Property(e => e.Isread).HasComment("是否已读(0未读 1已读)");
 
-                entity.Property(e => e.Message)
-                    .IsRequired()
-                    .HasMaxLength(640)
-                    .HasColumnName("message")
-                    .HasComment("消息内容");
+                entity.Property(e => e.Message).HasComment("消息内容");
 
-                entity.Property(e => e.Userid)
-                    .HasColumnName("userid")
-                    .HasComment("用户id");
+                entity.Property(e => e.Userid).HasComment("用户id");
+
+                entity.HasOne(d => d.User)
+                    .WithMany(p => p.TMessage)
+                    .HasForeignKey(d => d.Userid)
+                    .OnDelete(DeleteBehavior.ClientSetNull)
+                    .HasConstraintName("fkuserid");
             });
 
             modelBuilder.Entity<TOrder>(entity =>
             {
-                entity.ToTable("t_order");
-
                 entity.HasComment("订单信息");
 
-                entity.Property(e => e.Id)
-                    .HasMaxLength(32)
-                    .HasColumnName("id")
-                    .HasComment("订单编号");
+                entity.Property(e => e.Id).HasComment("订单编号");
 
                 entity.Property(e => e.CouponMoney)
                     .HasPrecision(32, 2)
-                    .HasColumnName("coupon_money")
                     .HasComment("优惠金额");
 
-                entity.Property(e => e.Crtime)
-                    .HasColumnType("datetime")
-                    .HasColumnName("crtime")
-                    .HasComment("创建时间");
+                entity.Property(e => e.Crtime).HasComment("创建时间");
 
                 entity.Property(e => e.Money)
                     .HasPrecision(32, 2)
-                    .HasColumnName("money")
                     .HasComment("订单金额");
 
                 entity.Property(e => e.PayMoney)
                     .HasPrecision(32, 2)
-                    .HasColumnName("pay_money")
                     .HasComment("实际支付金额");
 
-                entity.Property(e => e.State)
-                    .HasColumnName("state")
-                    .HasComment("状态");
+                entity.Property(e => e.State).HasComment("状态（0待支付，1已支付，2已完成，9已取消）");
 
-                entity.Property(e => e.Userid)
-                    .HasColumnName("userid")
-                    .HasComment("用户id");
+                entity.Property(e => e.Userid).HasComment("用户id");
             });
 
             modelBuilder.Entity<TOrderCallback>(entity =>
@@ -304,28 +205,21 @@ namespace DAL
                 entity.HasKey(e => e.Orderid)
                     .HasName("PRIMARY");
 
-                entity.ToTable("t_order_callback");
-
                 entity.HasComment("微信支付回调");
 
-                entity.Property(e => e.Orderid)
-                    .HasMaxLength(32)
-                    .HasColumnName("orderid")
-                    .HasComment("订单编号");
+                entity.Property(e => e.Orderid).HasComment("订单编号");
 
-                entity.Property(e => e.Crtime)
-                    .HasColumnType("datetime")
-                    .HasColumnName("crtime")
-                    .HasComment("创建时间");
+                entity.Property(e => e.Crtime).HasComment("创建时间");
 
-                entity.Property(e => e.State)
-                    .HasColumnName("state")
-                    .HasComment("状态");
+                entity.Property(e => e.State).HasComment("状态");
 
-                entity.Property(e => e.WxOrderid)
-                    .HasMaxLength(32)
-                    .HasColumnName("wx_orderid")
-                    .HasComment("微信支付订单号");
+                entity.Property(e => e.WxOrderid).HasComment("微信支付订单号");
+
+                entity.HasOne(d => d.Order)
+                    .WithOne(p => p.TOrderCallback)
+                    .HasForeignKey<TOrderCallback>(d => d.Orderid)
+                    .OnDelete(DeleteBehavior.ClientSetNull)
+                    .HasConstraintName("fkorderid");
             });
 
             modelBuilder.Entity<TOrderCoupon>(entity =>
@@ -334,27 +228,29 @@ namespace DAL
                     .HasName("PRIMARY")
                     .HasAnnotation("MySql:IndexPrefixLength", new[] { 0, 0 });
 
-                entity.ToTable("t_order_coupon");
-
                 entity.HasComment("订单中使用的优惠卷");
 
-                entity.Property(e => e.Orderid)
-                    .HasMaxLength(32)
-                    .HasColumnName("orderid")
-                    .HasComment("订单编号");
+                entity.Property(e => e.Orderid).HasComment("订单编号");
 
-                entity.Property(e => e.Couponid)
-                    .HasColumnName("couponid")
-                    .HasComment("优惠卷id");
+                entity.Property(e => e.Couponid).HasComment("优惠卷id");
 
-                entity.Property(e => e.Count)
-                    .HasColumnName("count")
-                    .HasComment("数量");
+                entity.Property(e => e.Count).HasComment("数量");
+
+                entity.Property(e => e.CouponName).HasComment("优惠券名称");
 
                 entity.Property(e => e.Money)
                     .HasPrecision(16, 2)
-                    .HasColumnName("money")
                     .HasComment("总金额");
+
+                entity.Property(e => e.Price)
+                    .HasPrecision(10)
+                    .HasComment("优惠券面额");
+
+                entity.HasOne(d => d.Order)
+                    .WithMany(p => p.TOrderCoupon)
+                    .HasForeignKey(d => d.Orderid)
+                    .OnDelete(DeleteBehavior.ClientSetNull)
+                    .HasConstraintName("fkorder");
             });
 
             modelBuilder.Entity<TOrderProduct>(entity =>
@@ -363,114 +259,67 @@ namespace DAL
                     .HasName("PRIMARY")
                     .HasAnnotation("MySql:IndexPrefixLength", new[] { 0, 0 });
 
-                entity.ToTable("t_order_product");
-
                 entity.HasComment("订单中的商品信息");
 
-                entity.Property(e => e.Orderid)
-                    .HasMaxLength(32)
-                    .HasColumnName("orderid")
-                    .HasComment("订单编号");
+                entity.Property(e => e.Orderid).HasComment("订单编号");
 
-                entity.Property(e => e.Productid)
-                    .HasColumnName("productid")
-                    .HasComment("商品id");
+                entity.Property(e => e.Productid).HasComment("商品id");
 
-                entity.Property(e => e.Count)
-                    .HasColumnName("count")
-                    .HasComment("数量");
+                entity.Property(e => e.Count).HasComment("数量");
 
-                entity.Property(e => e.Crtime)
-                    .HasColumnType("datetime")
-                    .HasColumnName("crtime")
-                    .HasComment("创建时间");
+                entity.Property(e => e.Img).HasComment("商品图片");
 
                 entity.Property(e => e.Money)
                     .HasPrecision(16, 2)
-                    .HasColumnName("money")
                     .HasComment("金额");
 
                 entity.Property(e => e.Price)
                     .HasPrecision(16, 2)
-                    .HasColumnName("price")
                     .HasComment("单价");
+
+                entity.Property(e => e.ProductName).HasComment("商品名称");
+
+                entity.HasOne(d => d.Order)
+                    .WithMany(p => p.TOrderProduct)
+                    .HasForeignKey(d => d.Orderid)
+                    .OnDelete(DeleteBehavior.ClientSetNull)
+                    .HasConstraintName("fkorders");
             });
 
             modelBuilder.Entity<TPay>(entity =>
             {
-                entity.ToTable("t_pay");
-
                 entity.HasComment("支付信息");
 
-                entity.Property(e => e.Id)
-                    .HasColumnName("id")
-                    .HasComment("id");
+                entity.Property(e => e.Id).HasComment("id");
 
-                entity.Property(e => e.Crtime)
-                    .HasColumnType("datetime")
-                    .HasColumnName("crtime")
-                    .HasComment("创建时间");
+                entity.Property(e => e.Crtime).HasComment("创建时间");
 
-                entity.Property(e => e.Orderid)
-                    .IsRequired()
-                    .HasMaxLength(32)
-                    .HasColumnName("orderid")
-                    .HasComment("订单编号");
+                entity.Property(e => e.Orderid).HasComment("订单编号");
 
-                entity.Property(e => e.Status)
-                    .HasColumnName("status")
-                    .HasComment("状态");
+                entity.Property(e => e.Status).HasComment("状态");
 
-                entity.Property(e => e.WxOrderid)
-                    .IsRequired()
-                    .HasMaxLength(64)
-                    .HasColumnName("wx_orderid")
-                    .HasComment("微信订单号");
+                entity.Property(e => e.WxOrderid).HasComment("微信订单号");
             });
 
             modelBuilder.Entity<TProduct>(entity =>
             {
-                entity.ToTable("t_product");
-
                 entity.HasComment("商品");
 
-                entity.HasIndex(e => e.Category, "category");
+                entity.Property(e => e.Id).HasComment("商品id");
 
-                entity.HasIndex(e => e.Name, "ix_name")
-                    .IsUnique();
+                entity.Property(e => e.Category).HasComment("商品分类");
 
-                entity.Property(e => e.Id)
-                    .HasColumnName("id")
-                    .HasComment("商品id");
+                entity.Property(e => e.Crtime).HasComment("创建时间");
 
-                entity.Property(e => e.Category)
-                    .HasColumnName("category")
-                    .HasComment("商品分类");
+                entity.Property(e => e.Img).HasComment("商品图片");
 
-                entity.Property(e => e.Crtime)
-                    .HasColumnType("datetime")
-                    .HasColumnName("crtime")
-                    .HasComment("创建时间");
-
-                entity.Property(e => e.Img)
-                    .HasMaxLength(256)
-                    .HasColumnName("img")
-                    .HasComment("商品图片");
-
-                entity.Property(e => e.Name)
-                    .IsRequired()
-                    .HasMaxLength(128)
-                    .HasColumnName("name")
-                    .HasComment("商品名称");
+                entity.Property(e => e.Name).HasComment("商品名称");
 
                 entity.Property(e => e.Price)
                     .HasPrecision(16, 2)
-                    .HasColumnName("price")
                     .HasComment("价格");
 
-                entity.Property(e => e.Sales)
-                    .HasColumnName("sales")
-                    .HasComment("销量");
+                entity.Property(e => e.Sales).HasComment("销量");
 
                 entity.HasOne(d => d.CategoryNavigation)
                     .WithMany(p => p.TProduct)
@@ -481,51 +330,23 @@ namespace DAL
 
             modelBuilder.Entity<TUser>(entity =>
             {
-                entity.ToTable("t_user");
-
                 entity.HasComment("用户");
 
-                entity.HasIndex(e => e.Companyid, "fk_company_idx");
+                entity.Property(e => e.Id).HasComment("用户id");
 
-                entity.HasIndex(e => e.Code, "ix_code")
-                    .IsUnique();
+                entity.Property(e => e.Code).HasComment("唯一编码");
 
-                entity.Property(e => e.Id)
-                    .HasColumnName("id")
-                    .HasComment("用户id");
+                entity.Property(e => e.Companyid).HasComment("公司id");
 
-                entity.Property(e => e.Code)
-                    .IsRequired()
-                    .HasMaxLength(64)
-                    .HasColumnName("code")
-                    .HasComment("唯一编码");
+                entity.Property(e => e.Crtime).HasComment("创建时间");
 
-                entity.Property(e => e.Companyid)
-                    .HasColumnName("companyid")
-                    .HasComment("公司id");
+                entity.Property(e => e.Gender).HasComment("性别");
 
-                entity.Property(e => e.Crtime)
-                    .HasColumnType("datetime")
-                    .HasColumnName("crtime")
-                    .HasComment("创建时间");
+                entity.Property(e => e.Headimg).HasComment("头像图片");
 
-                entity.Property(e => e.Headimg)
-                    .IsRequired()
-                    .HasMaxLength(256)
-                    .HasColumnName("headimg")
-                    .HasComment("头像图片");
+                entity.Property(e => e.Nick).HasComment("昵称");
 
-                entity.Property(e => e.Nick)
-                    .IsRequired()
-                    .HasMaxLength(32)
-                    .HasColumnName("nick")
-                    .HasComment("昵称");
-
-                entity.Property(e => e.Phone)
-                    .IsRequired()
-                    .HasMaxLength(32)
-                    .HasColumnName("phone")
-                    .HasComment("手机号");
+                entity.Property(e => e.Phone).HasComment("手机号");
 
                 entity.HasOne(d => d.Company)
                     .WithMany(p => p.TUser)
@@ -540,28 +361,15 @@ namespace DAL
                     .HasName("PRIMARY")
                     .HasAnnotation("MySql:IndexPrefixLength", new[] { 0, 0 });
 
-                entity.ToTable("t_user_coupon");
-
                 entity.HasComment("用户的优惠卷");
 
-                entity.HasIndex(e => e.Couponid, "fk_coupon_idx");
+                entity.Property(e => e.Userid).HasComment("用户id");
 
-                entity.Property(e => e.Userid)
-                    .HasColumnName("userid")
-                    .HasComment("用户id");
+                entity.Property(e => e.Couponid).HasComment("优惠卷id");
 
-                entity.Property(e => e.Couponid)
-                    .HasColumnName("couponid")
-                    .HasComment("优惠卷id");
+                entity.Property(e => e.Count).HasComment("数量");
 
-                entity.Property(e => e.Count)
-                    .HasColumnName("count")
-                    .HasComment("数量");
-
-                entity.Property(e => e.Crtime)
-                    .HasColumnType("datetime")
-                    .HasColumnName("crtime")
-                    .HasComment("创建时间");
+                entity.Property(e => e.Crtime).HasComment("创建时间");
 
                 entity.HasOne(d => d.Coupon)
                     .WithMany(p => p.TUserCoupon)

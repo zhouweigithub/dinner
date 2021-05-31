@@ -8,6 +8,7 @@ using DAL;
 using Microsoft.Extensions.Logging;
 using Model;
 using Model.Database;
+using Model.Request;
 using Model.Response.Com;
 
 namespace BLL
@@ -21,7 +22,13 @@ namespace BLL
             _logger = logger;
         }
 
-        public RespDataList<TFeedback> GetList(String userCode)
+        public Task<RespData> AddAsync(FeedbackAdd data)
+        {
+            throw new NotImplementedException();
+        }
+
+
+        public Task<RespDataList<TFeedback>> GetListAsync(String openid)
         {
             throw new NotImplementedException();
         }

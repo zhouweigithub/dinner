@@ -10,6 +10,6 @@ namespace BLL.Interface
 {
     public interface IWxService
     {
-        RespData<string> GetOpenId(string loginCode, WxOpenidConfigModel config);
+        public RespData<string> GetOpenId(string loginCode, WxOpenidConfigModel config);
     }
 }

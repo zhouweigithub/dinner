@@ -4,6 +4,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using Model;
+using Model.Database;
 using Model.Response.Com;
 
 namespace BLL.Interface
@@ -13,6 +14,6 @@ namespace BLL.Interface
     /// </summary>
     public interface IMyCenter : IBaseService
     {
-        //  RespData<TFeedback> GetList(string userCode);
+        //Task<RespDataList<>> GetListAsync(string openid);
     }
 }

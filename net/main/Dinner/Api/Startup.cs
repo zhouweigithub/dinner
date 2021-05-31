@@ -6,9 +6,11 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using BLL;
+using BLL.EasyCaching;
 using BLL.Interface;
 using BLL.MiddleWare;
 using DAL;
+using EasyCaching.Serialization.Json;
 using Microsoft.AspNetCore.Authentication.JwtBearer;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
@@ -22,12 +24,10 @@ using Microsoft.Extensions.Logging;
 using Microsoft.IdentityModel.Tokens;
 using Microsoft.OpenApi.Models;
 using Model;
+using Model.Request.Wx;
 using Newtonsoft.Json;
 using Newtonsoft.Json.Serialization;
 using NLog.Extensions.Logging;
-using BLL.EasyCaching;
-using EasyCaching.Serialization.Json;
-using Model.Request.Wx;
 
 namespace Api
 {

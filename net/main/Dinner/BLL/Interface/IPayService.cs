@@ -14,7 +14,7 @@ namespace BLL.Interface
     /// </summary>
     public interface IPayService : IBaseService
     {
-        Task<RespDataList<TOrder>> PayAsync(string userCode);
+        public Task<RespDataList<TOrder>> PayAsync(string userCode);
 
     }
 }

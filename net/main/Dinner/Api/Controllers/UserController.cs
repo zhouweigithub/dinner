@@ -35,31 +35,19 @@ namespace Api.Controllers
             _wxconfig = wxconfig;
         }
 
-        /// <summary>
-        /// 添加用户
-        /// </summary>
-        /// <param name="user"></param>
-        /// <returns></returns>
-        [HttpPost]
-        [Route("[action]")]
-        [AllowAnonymous]
-        public async Task<RespData<TUser>> Add(UserAdd user)
-        {
-            return await _services.AddAsync(user);
-        }
+        ///// <summary>
+        ///// 添加用户
+        ///// </summary>
+        ///// <param name="user"></param>
+        ///// <returns></returns>
+        //[HttpPost]
+        //[Route("[action]")]
+        //[AllowAnonymous]
+        //public async Task<RespData<TUser>> Add(UserAdd user)
+        //{
+        //    return await _services.AddAsync(user);
+        //}
 
-        /// <summary>
-        /// 获取微信用户的openid
-        /// </summary>
-        /// <param name="loginCode">登录码</param>
-        /// <returns></returns>
-        [HttpGet]
-        [Route("[action]")]
-        [AllowAnonymous]
-        public RespData<string> GetOpenId(string loginCode)
-        {
-            return _wxservices.GetOpenId(loginCode, _wxconfig.Value);
-        }
 
     }
 }
