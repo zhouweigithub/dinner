@@ -17,6 +17,6 @@ namespace BLL.Interface
     {
         public Task<RespDataList<TFeedback>> GetListAsync(string openid);
 
-        public Task<RespData> AddAsync(FeedbackAdd data);
+        public Task<RespData> AddAsync(string openid, FeedbackAdd data);
     }
 }

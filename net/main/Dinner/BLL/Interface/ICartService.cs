@@ -14,7 +14,7 @@ namespace BLL.Interface
     /// </summary>
     public interface ICartService : IBaseService
     {
-        public Task<RespData<List<TCart>>> GetListAsync(String openid);
+        public Task<RespDataList<TCart>> GetListAsync(String openid);
 
         public Task<RespData> AddAsync(string openid, CartAdd data);
 

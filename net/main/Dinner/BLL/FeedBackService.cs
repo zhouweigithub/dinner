@@ -5,6 +5,7 @@ using System.Text;
 using System.Threading.Tasks;
 using BLL.Interface;
 using DAL;
+using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Logging;
 using Model;
 using Model.Database;
@@ -22,15 +23,49 @@ namespace BLL
             _logger = logger;
         }
 
-        public Task<RespData> AddAsync(FeedbackAdd data)
+        public async Task<RespData> AddAsync(string openid, FeedbackAdd data)
         {
-            throw new NotImplementedException();
+            RespData result = new RespData();
+            try
+            {
+                int userid = GetUserIdByCode(openid);
+                var user = new TFeedback()
+                {
+                    Msg = data.content,
+                    Userid = userid,
+                    Crtime = DateTime.Now,
+                };
+
+                await AddAsync(user);
+            }
+            catch (Exception e)
+            {
+                result.code = -1;
+                result.msg = "服务内部错误";
+                _logger.LogError(e.ToString());
+            }
+
+            return result;
         }
 
 
-        public Task<RespDataList<TFeedback>> GetListAsync(String openid)
+        public async Task<RespDataList<TFeedback>> GetListAsync(String openid)
         {
-            throw new NotImplementedException();
+            RespDataList<TFeedback> result = new RespDataList<TFeedback>();
+            try
+            {
+                int userid = GetUserIdByCode(openid);
+                var datas = await context.Set<TFeedback>().AsNoTracking().Where(a => a.Userid == userid).ToListAsync();
+                result.datas = datas;
+            }
+            catch (Exception e)
+            {
+                result.code = -1;
+                result.msg = "服务内部错误";
+                _logger.LogError(e.ToString());
+            }
+
+            return result;
         }
     }
 }

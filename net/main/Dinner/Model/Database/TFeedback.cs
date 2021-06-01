@@ -32,13 +32,24 @@ namespace Model.Database
         /// </summary>
         [Required]
         [Column("msg")]
-        [StringLength(332)]
+        [StringLength(512)]
         public string Msg { get; set; }
         /// <summary>
         /// 创建时间
         /// </summary>
         [Column("crtime", TypeName = "datetime")]
         public DateTime Crtime { get; set; }
+        /// <summary>
+        /// 回复内容
+        /// </summary>
+        [Column("replay")]
+        [StringLength(512)]
+        public string Replay { get; set; }
+        /// <summary>
+        /// 回复时间
+        /// </summary>
+        [Column("replay_time", TypeName = "datetime")]
+        public DateTime? ReplayTime { get; set; }
 
         [ForeignKey(nameof(Userid))]
         [InverseProperty(nameof(TUser.TFeedback))]

@@ -14,6 +14,6 @@ namespace BLL.Interface
     /// </summary>
     public interface ICouponService : IBaseService
     {
-        public RespDataList<TCoupon> GetList(string openid);
+        public Task<RespDataList<TUserCoupon>> GetListAsync(string openid);
     }
 }

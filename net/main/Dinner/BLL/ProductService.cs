@@ -27,18 +27,18 @@ namespace BLL
             _cache = cache;
         }
 
-        public RespDataList<TProduct> GetList(Int32 categoryid, int pageSize, int page)
+        public async Task<RespDataList<TProduct>> GetListAsync(Int32 categoryid, int pageSize, int page)
         {
             RespDataList<TProduct> result = new RespDataList<TProduct>();
             try
             {
-                var datas = context.Set<TProduct>().Where(a => true);
+                var datas = context.Set<TProduct>().AsNoTracking().Where(a => true);
                 if (categoryid != default)
                     datas = datas.Where(a => a.Category == categoryid);
 
                 datas = datas.Skip(pageSize * (page - 1)).Take(pageSize);
 
-                result.datas = datas.ToList();
+                result.datas = await datas.ToListAsync();
             }
             catch (Exception e)
             {
@@ -50,14 +50,14 @@ namespace BLL
             return result;
         }
 
-        public RespData<TProduct> GetEntityAsync(Int32 productid)
+        public async Task<RespData<TProduct>> GetEntityAsync(Int32 productid)
         {
             RespData<TProduct> result = new RespData<TProduct>();
             try
             {
-                result.data = context.Set<TProduct>().Include(a => a.CategoryNavigation).FirstOrDefault(b => b.Id == productid);
+                result.data = await context.Set<TProduct>().AsNoTracking().Include(a => a.CategoryNavigation).FirstOrDefaultAsync(b => b.Id == productid);
 
-                var yyy = _cache.TryAdd("prod", result.data, TimeSpan.FromMinutes(1));
+                var yyy = _cache.TryAdd("prod", result.data, TimeSpan.FromMinutes(10));
             }
             catch (Exception e)
             {

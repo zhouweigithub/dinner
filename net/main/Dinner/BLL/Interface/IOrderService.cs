@@ -16,13 +16,13 @@ namespace BLL.Interface
     /// </summary>
     public interface IOrderService : IBaseService
     {
-        public Task<RespDataList<TOrder>> GetListAsync(string productName, int pageSize, int page);
+        public Task<RespDataList<TOrder>> GetListAsync(string openid, string productName, int pageSize, int page);
 
         //Task<RespData<TOrder>> GetEntityAsync();
 
-        public Task<RespData<TOrder>> AddAsync(OrderAdd data, int userid);
+        public Task<RespData<TOrder>> AddAsync(OrderAdd data, string openid);
 
-        public Task<RespData<bool>> CancelAsync(string orderid, int userid);
+        public Task<RespData<bool>> CancelAsync(string orderid, string openid);
 
     }
 }

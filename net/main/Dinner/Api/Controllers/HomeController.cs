@@ -46,7 +46,7 @@ namespace Api.Controllers
         [Route("[action]")]
         public async Task<RespDataToken<TUser>> Login(UserAdd user)
         {
-            var entity = await userService.GetEntity(user.OpenId);
+            var entity = await userService.GetEntityAsync(user.OpenId);
 
             //如果没有该用户，则为其注册
             if (entity.code == -2)

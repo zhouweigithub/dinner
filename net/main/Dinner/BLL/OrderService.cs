@@ -31,7 +31,7 @@ namespace BLL
         /// <param name="data">订单信息</param>
         /// <param name="userid">用户id</param>
         /// <returns></returns>
-        public async Task<RespData<TOrder>> AddAsync(OrderAdd data, int userid)
+        public async Task<RespData<TOrder>> AddAsync(OrderAdd data, string openid)
         {
             RespData<TOrder> result = new RespData<TOrder>();
 
@@ -40,6 +40,7 @@ namespace BLL
                 //订单号
                 string orderid = CreateOrderId();
 
+                int userid = GetUserIdByCode(openid);
 
                 //商品信息
                 var productids = data.Products.Select(a => a.Productid);
@@ -67,19 +68,31 @@ namespace BLL
                     };
 
                     await context.Set<TOrderProduct>().AddAsync(t);
+
+
+                    //商品销量
+                    productData.Sales++;
+                    context.Update(productData);
                 }
 
 
                 //优惠券信息
                 var couponids = data.Coupons.Select(a => a.Couponid);
+
                 //服务器上存储的优惠券信息
                 var couponDatas = context.Set<TCoupon>().Where(a => couponids.Contains(a.Id)).ToList();
+
+                //用户的优惠券信息
+                var userCoupons = context.Set<TUserCoupon>().Where(a => a.Userid == userid).ToList();
+
 
                 foreach (CouponInfo item in data.Coupons)
                 {
                     //验证提交的优惠券信息与服务器上的是否一致
                     TCoupon couponData = couponDatas.FirstOrDefault(a => a.Id == item.Couponid);
-                    if (couponData == null || couponData.Money != couponData.Money)
+                    TUserCoupon userCoupon = userCoupons.FirstOrDefault(a => a.Userid == userid && a.Couponid == item.Couponid && a.Count > 0);
+
+                    if (couponData == null || userCoupon == null || couponData.Money != couponData.Money)
                     {
                         result.code = -2;
                         result.msg = "优惠券信息异常，请重新下单";
@@ -102,6 +115,11 @@ namespace BLL
                     };
 
                     await context.Set<TOrderCoupon>().AddAsync(t);
+
+
+                    //优惠券数量
+                    userCoupon.Count--;
+                    context.Update(userCoupon);
                 }
 
 
@@ -143,12 +161,14 @@ namespace BLL
             return result;
         }
 
-        public async Task<RespData<Boolean>> CancelAsync(String orderid, int userid)
+        public async Task<RespData<Boolean>> CancelAsync(String orderid, string openid)
         {
             RespData<Boolean> result = new RespData<Boolean>();
 
             try
             {
+                int userid = GetUserIdByCode(openid);
+
                 TOrder serverOrderInfo = await context.Set<TOrder>().FindAsync(orderid);
 
                 //订单不存在或者订单用户不正确
@@ -175,13 +195,14 @@ namespace BLL
             return result;
         }
 
-        public async Task<RespDataList<TOrder>> GetListAsync(String productName, Int32 pageSize, Int32 page)
+        public async Task<RespDataList<TOrder>> GetListAsync(string openid, String productName, Int32 pageSize, Int32 page)
         {
             RespDataList<TOrder> result = new RespDataList<TOrder>();
 
             try
             {
-                var datas = context.Set<TOrder>().AsNoTracking().Include(a => a.TOrderProduct).Include(b => b.TOrderCoupon).Where(a => true);
+                int userid = GetUserIdByCode(openid);
+                var datas = context.Set<TOrder>().AsNoTracking().Include(a => a.TOrderProduct).Include(b => b.TOrderCoupon).Where(a => a.Userid == userid);
                 if (!string.IsNullOrWhiteSpace(productName))
                     datas = datas.Where(a => a.TOrderProduct.Any(b => b.ProductName.Contains(productName)));
 

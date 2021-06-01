@@ -13,11 +13,6 @@ namespace Model.Request
     public class FeedbackAdd
     {
         /// <summary>
-        /// openid
-        /// </summary>
-        public string openid { get; set; }
-
-        /// <summary>
         /// 反馈内容
         /// </summary>
         public string content { get; set; }

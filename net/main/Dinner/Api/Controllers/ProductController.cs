@@ -35,9 +35,9 @@ namespace Api.Controllers
         /// <returns></returns>
         [HttpGet]
         [Route("[action]/{categoryid}/{pageSize}/{page}")]
-        public RespDataList<TProduct> GetList(int categoryid, int pageSize, int page)
+        public async Task<RespDataList<TProduct>> GetList(int categoryid, int pageSize, int page)
         {
-            return _services.GetList(categoryid, pageSize, page);
+            return await _services.GetListAsync(categoryid, pageSize, page);
         }
 
 
@@ -49,9 +49,9 @@ namespace Api.Controllers
         [HttpGet]
         [AllowAnonymous]
         [Route("[action]/{productid}")]
-        public RespData<TProduct> GetEntity(int productid)
+        public async Task<RespData<TProduct>> GetEntity(int productid)
         {
-            return _services.GetEntityAsync(productid);
+            return await _services.GetEntityAsync(productid);
         }
     }
 }

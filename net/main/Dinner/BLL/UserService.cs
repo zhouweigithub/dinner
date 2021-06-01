@@ -24,12 +24,12 @@ namespace BLL
 
 
 
-        public async Task<RespDataToken<TUser>> GetEntity(String openid)
+        public async Task<RespDataToken<TUser>> GetEntityAsync(String openid)
         {
             RespDataToken<TUser> result = new RespDataToken<TUser>();
             try
             {
-                var user = await context.Set<TUser>().FirstOrDefaultAsync(a => a.Code == openid);
+                var user = await context.Set<TUser>().AsNoTracking().FirstOrDefaultAsync(a => a.Code == openid);
                 if (user != null)
                 {
                     result.data = user;

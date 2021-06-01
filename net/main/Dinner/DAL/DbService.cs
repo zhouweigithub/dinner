@@ -145,6 +145,10 @@ namespace DAL
 
                 entity.Property(e => e.Msg).HasComment("内容");
 
+                entity.Property(e => e.Replay).HasComment("回复内容");
+
+                entity.Property(e => e.ReplayTime).HasComment("回复时间");
+
                 entity.Property(e => e.Userid).HasComment("用户id");
 
                 entity.HasOne(d => d.User)

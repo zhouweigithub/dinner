@@ -5,6 +5,7 @@ using System.Text;
 using System.Threading.Tasks;
 using BLL.Interface;
 using DAL;
+using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Logging;
 using Model;
 using Model.Database;
@@ -21,9 +22,25 @@ namespace BLL
             _logger = logger;
         }
 
-        public RespDataList<TCoupon> GetList(String userCode)
+        public async Task<RespDataList<TUserCoupon>> GetListAsync(String userCode)
         {
-            throw new NotImplementedException();
+            RespDataList<TUserCoupon> result = new RespDataList<TUserCoupon>();
+
+            try
+            {
+                int userid = GetUserIdByCode(userCode);
+                var datas = context.Set<TUserCoupon>().AsNoTracking().Include(a => a.Coupon).Where(a => a.Userid == userid);
+                result.datas = await datas.ToListAsync();
+            }
+
+            catch (Exception e)
+            {
+                _logger.LogError(e.ToString());
+                result.code = -1;
+                result.msg = "服务内部错误";
+            }
+
+            return result;
         }
     }
 }

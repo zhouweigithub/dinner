@@ -9,6 +9,7 @@ using Microsoft.Extensions.Logging;
 using Model.Database;
 using Model.Request;
 using Model.Response.Com;
+using Microsoft.EntityFrameworkCore;
 
 namespace BLL
 {
@@ -75,9 +76,23 @@ namespace BLL
             return result;
         }
 
-        public Task<RespData<List<TCart>>> GetListAsync(String openid)
+        public async Task<RespDataList<TCart>> GetListAsync(String openid)
         {
-            throw new NotImplementedException();
+            RespDataList<TCart> result = new RespDataList<TCart>();
+            try
+            {
+                int userid = GetUserIdByCode(openid);
+                var datas = await context.Set<TCart>().AsNoTracking().Where(a => a.Userid == userid).ToListAsync();
+                result.datas = datas;
+            }
+            catch (Exception e)
+            {
+                result.code = -1;
+                result.msg = "服务内部错误";
+                _logger.LogError(e.ToString());
+            }
+
+            return result;
         }
     }
 }
