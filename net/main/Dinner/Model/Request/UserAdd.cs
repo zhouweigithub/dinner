@@ -24,6 +24,10 @@ namespace Model.Request
         /// </summary>
         public string Nick { get; set; }
         /// <summary>
+        /// 性别 0女 1男
+        /// </summary>
+        public int Gender { get; set; }
+        /// <summary>
         /// 用户头像
         /// </summary>
         public string HeadIng { get; set; }

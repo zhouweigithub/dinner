@@ -16,7 +16,6 @@ namespace Api.Controllers
     /// <summary>
     /// 公司信息
     /// </summary>
-    [ApiController]
     [Route("[controller]")]
     public class CompanyController : BaseAuthController
     {

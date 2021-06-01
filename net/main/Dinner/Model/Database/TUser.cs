@@ -65,12 +65,16 @@ namespace Model.Database
         [StringLength(32)]
         public string Phone { get; set; }
         /// <summary>
+        /// 状态 0正常 1禁用
+        /// </summary>
+        public int State { get; set; }
+        /// <summary>
         /// 创建时间
         /// </summary>
         [Column("crtime", TypeName = "datetime")]
         public DateTime Crtime { get; set; }
         /// <summary>
-        /// 性别
+        /// 性别 0女 1男
         /// </summary>
         [Column("gender")]
         public int Gender { get; set; }

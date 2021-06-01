@@ -459,6 +459,11 @@
             手机号
             </summary>
         </member>
+        <member name="P:Model.Database.TUser.State">
+            <summary>
+            状态 0正常 1禁用
+            </summary>
+        </member>
         <member name="P:Model.Database.TUser.Crtime">
             <summary>
             创建时间
@@ -466,7 +471,7 @@
         </member>
         <member name="P:Model.Database.TUser.Gender">
             <summary>
-            性别
+            性别 0女 1男
             </summary>
         </member>
         <member name="T:Model.Database.TUserCoupon">
@@ -662,6 +667,11 @@
         <member name="P:Model.Request.UserAdd.Nick">
             <summary>
             用户昵称
+            </summary>
+        </member>
+        <member name="P:Model.Request.UserAdd.Gender">
+            <summary>
+            性别 0女 1男
             </summary>
         </member>
         <member name="P:Model.Request.UserAdd.HeadIng">

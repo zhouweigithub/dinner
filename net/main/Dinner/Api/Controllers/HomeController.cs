@@ -21,6 +21,7 @@ namespace Api.Controllers
     /// 登录相关
     /// </summary>
     [Route("[controller]")]
+    [ApiController]
     public class HomeController : ControllerBase
     {
         private readonly IWxService _wxservices;
@@ -73,7 +74,7 @@ namespace Api.Controllers
         /// <param name="loginCode">登录码</param>
         /// <returns></returns>
         [HttpGet]
-        [Route("[action]/{loginCode")]
+        [Route("[action]/{loginCode}")]
         public RespData<string> GetOpenId(string loginCode)
         {
             return _wxservices.GetOpenId(loginCode, _wxconfig.Value);
@@ -92,7 +93,7 @@ namespace Api.Controllers
                 new Claim(JwtRegisteredClaimNames.Iss, jwt.Issuer),
                 new Claim(JwtRegisteredClaimNames.Aud, jwt.Audience),
                 new Claim(JwtRegisteredClaimNames.Nbf, new DateTimeOffset(DateTime.Now).ToUnixTimeSeconds().ToString()),
-                new Claim(JwtRegisteredClaimNames.Exp, new DateTimeOffset(DateTime.Now.AddMinutes(1)).ToUnixTimeSeconds().ToString()),
+                new Claim(JwtRegisteredClaimNames.Exp, new DateTimeOffset(DateTime.Now.AddMonths(1)).ToUnixTimeSeconds().ToString()),
             };
 
             var token = new JwtSecurityToken(

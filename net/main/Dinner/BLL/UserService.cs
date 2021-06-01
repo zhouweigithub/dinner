@@ -55,7 +55,7 @@ namespace BLL
             RespData<TUser> result = new();
             try
             {
-                //先检查是否已存在同名用户
+                //先检查用户是否已存在
                 var serverInfo = context.Set<TUser>().FirstOrDefault(a => a.Code == t.OpenId);
                 if (serverInfo == null)
                 {
@@ -75,7 +75,9 @@ namespace BLL
                             Crtime = DateTime.Now,
                             Code = t.OpenId,
                             Headimg = t.HeadIng,
-                            Phone = t.Phone
+                            Phone = t.Phone,
+                            State = 0,
+                            Gender = t.Gender,
                         };
 
                         result.data = await AddAsync(user);

@@ -6,6 +6,7 @@ using System.Net.Http;
 using System.Text;
 using System.Threading.Tasks;
 using Microsoft.AspNetCore.Http;
+using Model.Response.Com;
 using Newtonsoft.Json;
 
 namespace BLL.MiddleWare
@@ -13,11 +14,11 @@ namespace BLL.MiddleWare
     /// <summary>
     /// 自定义错误处理
     /// </summary>
-    public class CustomExceptionMiddleware
+    public class CustomExceptionMiddleWare
     {
         private readonly RequestDelegate _next;
 
-        public CustomExceptionMiddleware(RequestDelegate next)
+        public CustomExceptionMiddleWare(RequestDelegate next)
         {
             _next = next;
         }
@@ -38,10 +39,10 @@ namespace BLL.MiddleWare
         {
             context.Response.ContentType = "application/json";
             int statusCode = (int)HttpStatusCode.InternalServerError;
-            var result = JsonConvert.SerializeObject(new
+            var result = JsonConvert.SerializeObject(new RespData
             {
-                StatusCode = statusCode,
-                ErrorMessage = exception.Message
+                code = statusCode,
+                msg = exception.Message
             });
             context.Response.ContentType = "application/json";
             context.Response.StatusCode = statusCode;

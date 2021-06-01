@@ -10,6 +10,7 @@ using Model.Response.Com;
 
 namespace Api.Controllers
 {
+    [Route("[controller]")]
     public class OrderController : BaseAuthController
     {
         private readonly IOrderService _services;

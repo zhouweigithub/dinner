@@ -20,7 +20,6 @@ using Model.Response.Com;
 
 namespace Api.Controllers
 {
-    [ApiController]
     [Route("[controller]")]
     public class UserController : BaseAuthController
     {

@@ -10,6 +10,7 @@ using Model.Response.Com;
 
 namespace Api.Controllers
 {
+    [Route("[controller]")]
     public class CartController : BaseAuthController
     {
         private readonly ICartService _services;

@@ -91,7 +91,9 @@ namespace Api
 
             app.UseAuthorization();
 
-            app.UseMiddleware<CustomExceptionMiddleware>();
+            app.UseMiddleware<CustomExceptionMiddleWare>();
+
+            app.UseMiddleware<ValidUserMiddleWare>();
 
             app.UseEndpoints(endpoints =>
             {
