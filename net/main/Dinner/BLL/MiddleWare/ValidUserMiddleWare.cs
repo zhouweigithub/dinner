@@ -11,6 +11,7 @@ using Model.Database;
 using Model.Response.Com;
 using Newtonsoft.Json;
 using Microsoft.EntityFrameworkCore;
+using BLL.Interface;
 
 namespace BLL.MiddleWare
 {
@@ -19,7 +20,7 @@ namespace BLL.MiddleWare
     /// </summary>
     public class ValidUserMiddleWare
     {
-        protected readonly DbService _context;
+        protected readonly IUserService _userService;
         private readonly RequestDelegate _next;
 
         /// <summary>
@@ -27,10 +28,10 @@ namespace BLL.MiddleWare
         /// </summary>
         /// <param name="next"></param>
         /// <param name="context"></param>
-        public ValidUserMiddleWare(RequestDelegate next, DbService context)
+        public ValidUserMiddleWare(RequestDelegate next, IUserService userService)
         {
             _next = next;
-            _context = context;
+            _userService = userService;
         }
 
         public async Task Invoke(HttpContext context)
@@ -39,20 +40,20 @@ namespace BLL.MiddleWare
 
             if (string.IsNullOrWhiteSpace(openid))
             {
-                _next.Invoke(context);
+                await _next.Invoke(context);
             }
             else
             {
-                var user = await _context.Set<TUser>().FirstOrDefaultAsync(a => a.Code == openid);
+                var user = await _userService.GetEntityAsync(openid);
 
                 bool isOk = true;
                 string msg = string.Empty;
-                if (user == null)
+                if (user.code != 0)
                 {
                     isOk = false;
                     msg = "无效用户信息";
                 }
-                else if (user.State == 1)
+                else if (user.data.State == 1)
                 {
                     isOk = false;
                     msg = "用户状态异常，请联系管理员";
@@ -60,11 +61,11 @@ namespace BLL.MiddleWare
 
                 if (isOk)
                 {
-                    _next.Invoke(context);
+                    await _next.Invoke(context);
                 }
                 else
                 {
-                    HandleErrorAsync(context, msg);
+                    await HandleErrorAsync(context, msg);
                 }
             }
         }

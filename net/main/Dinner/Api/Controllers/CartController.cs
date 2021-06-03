@@ -20,6 +20,10 @@ namespace Api.Controllers
             _services = service;
         }
 
+        /// <summary>
+        /// 获取购物车商品
+        /// </summary>
+        /// <returns></returns>
         [HttpGet]
         [Route("[action]")]
         public async Task<RespDataList<TCart>> GetList()
@@ -28,6 +32,11 @@ namespace Api.Controllers
             return await _services.GetListAsync(openid);
         }
 
+        /// <summary>
+        /// 删除购物车商品
+        /// </summary>
+        /// <param name="data">商品信息</param>
+        /// <returns></returns>
         [HttpPost]
         [Route("[action]")]
         public async Task<RespData> Delete(CartDelete data)
@@ -36,6 +45,11 @@ namespace Api.Controllers
             return await _services.DeleteAsync(openid, data);
         }
 
+        /// <summary>
+        /// 添加商品到购物车
+        /// </summary>
+        /// <param name="data">商品信息</param>
+        /// <returns></returns>
         [HttpPost]
         [Route("[action]")]
         public async Task<RespData> Add(CartAdd data)
