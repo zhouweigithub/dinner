@@ -23,13 +23,31 @@ namespace Model.Request
 
 
     /// <summary>
-    /// 从购物车删除商品
+    /// 从购物车修改商品数量模型
+    /// </summary>
+    public class CartUpdate
+    {
+        /// <summary>
+        /// 商品id
+        /// </summary>
+        public int Productid { get; set; }
+
+        /// <summary>
+        /// 商品数量
+        /// </summary>
+        public int Count { get; set; }
+    }
+
+
+    /// <summary>
+    /// 购物车删除商品模型
     /// </summary>
     public class CartDelete
     {
         /// <summary>
         /// 商品id
         /// </summary>
-        public List<int> Ids { get; set; }
+        public List<int> Productids { get; set; }
     }
+
 }

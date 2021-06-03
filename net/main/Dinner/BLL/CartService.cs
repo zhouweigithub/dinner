@@ -29,13 +29,28 @@ namespace BLL
             try
             {
                 int userid = GetUserIdByCode(openid);
-                await AddAsync(new TCart()
+
+                var serverModel = context.Set<TCart>().FirstOrDefault(a => a.Userid == userid && a.Productid == data.Productid);
+
+                if (serverModel == null)
                 {
-                    Productid = data.Productid,
-                    Count = data.Count,
-                    Userid = userid,
-                    Crtime = DateTime.Now,
-                });
+                    //添加新商品
+
+                    await AddAsync(new TCart()
+                    {
+                        Productid = data.Productid,
+                        Count = data.Count,
+                        Userid = userid,
+                        Crtime = DateTime.Now,
+                    });
+                }
+                else
+                {
+                    //修改商品数量
+                    serverModel.Count += data.Count;
+                    context.SaveChanges();
+                }
+
             }
             catch (Exception e)
             {
@@ -47,7 +62,7 @@ namespace BLL
             return result;
         }
 
-        public async Task<RespData> DeleteAsync(String openid, CartDelete data)
+        public async Task<RespData> UpdateCountAsync(String openid, CartUpdate data)
         {
             RespData result = new RespData();
 
@@ -55,16 +70,26 @@ namespace BLL
             {
                 int userid = GetUserIdByCode(openid);
 
-                List<TCart> models = new List<TCart>();
-                foreach (var item in data.Ids)
+                var model = new TCart()
                 {
-                    models.Add(new TCart()
-                    {
-                        Id = item
-                    });
+                    Userid = userid,
+                    Productid = data.Productid,
+                    Count = data.Count,
+                };
+
+                if (data.Count == 0)
+                {
+                    //如果数量为零，则直接删除
+                    context.Set<TCart>().Remove(model);
+                }
+                else
+                {
+                    //以下两行代码更新实体时，只会更新实体中有的属性
+                    context.Attach(model);
+                    context.Entry(model).Property(a => a.Count).IsModified = true;
                 }
 
-                await DeleteMultipleAsync(models);
+                await context.SaveChangesAsync();
             }
             catch (Exception e)
             {
@@ -94,5 +119,37 @@ namespace BLL
 
             return result;
         }
+
+        public async Task<RespData> DelteProductsAsync(String openid, CartDelete data)
+        {
+            RespData result = new RespData();
+
+            try
+            {
+                int userid = GetUserIdByCode(openid);
+
+                List<TCart> carts = new List<TCart>();
+                foreach (int item in data.Productids)
+                {
+                    carts.Add(new TCart()
+                    {
+                        Userid = userid,
+                        Productid = item,
+                    });
+                }
+
+                await DeleteMultipleAsync(carts);
+            }
+            catch (Exception e)
+            {
+                result.code = -1;
+                result.msg = "服务内部错误";
+                logger.LogError(e.ToString());
+            }
+
+            return result;
+        }
+
+
     }
 }

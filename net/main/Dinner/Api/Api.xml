@@ -15,15 +15,33 @@
             </summary>
             <returns></returns>
         </member>
+        <member name="T:Api.Controllers.CartController">
+            <summary>
+            购物车
+            </summary>
+        </member>
+        <member name="M:Api.Controllers.CartController.#ctor(BLL.Interface.ICartService)">
+            <summary>
+            购物车
+            </summary>
+            <param name="service"></param>
+        </member>
         <member name="M:Api.Controllers.CartController.GetList">
             <summary>
             获取购物车商品
             </summary>
             <returns></returns>
         </member>
+        <member name="M:Api.Controllers.CartController.Update(Model.Request.CartUpdate)">
+            <summary>
+            修改购物车商品的数量
+            </summary>
+            <param name="data">商品信息</param>
+            <returns></returns>
+        </member>
         <member name="M:Api.Controllers.CartController.Delete(Model.Request.CartDelete)">
             <summary>
-            删除购物车商品
+            删除购物车里的商品
             </summary>
             <param name="data">商品信息</param>
             <returns></returns>

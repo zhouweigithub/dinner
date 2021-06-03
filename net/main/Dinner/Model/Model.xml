@@ -9,11 +9,6 @@
             购物车
             </summary>
         </member>
-        <member name="P:Model.Database.TCart.Id">
-            <summary>
-            id
-            </summary>
-        </member>
         <member name="P:Model.Database.TCart.Userid">
             <summary>
             用户id
@@ -459,6 +454,11 @@
             手机号
             </summary>
         </member>
+        <member name="P:Model.Database.TUser.Gender">
+            <summary>
+            性别 0女 1男
+            </summary>
+        </member>
         <member name="P:Model.Database.TUser.State">
             <summary>
             状态 0正常 1禁用
@@ -467,11 +467,6 @@
         <member name="P:Model.Database.TUser.Crtime">
             <summary>
             创建时间
-            </summary>
-        </member>
-        <member name="P:Model.Database.TUser.Gender">
-            <summary>
-            性别 0女 1男
             </summary>
         </member>
         <member name="T:Model.Database.TUserCoupon">
@@ -534,12 +529,27 @@
             商品数量
             </summary>
         </member>
-        <member name="T:Model.Request.CartDelete">
+        <member name="T:Model.Request.CartUpdate">
             <summary>
-            从购物车删除商品
+            从购物车修改商品数量模型
             </summary>
         </member>
-        <member name="P:Model.Request.CartDelete.Ids">
+        <member name="P:Model.Request.CartUpdate.Productid">
+            <summary>
+            商品id
+            </summary>
+        </member>
+        <member name="P:Model.Request.CartUpdate.Count">
+            <summary>
+            商品数量
+            </summary>
+        </member>
+        <member name="T:Model.Request.CartDelete">
+            <summary>
+            购物车删除商品模型
+            </summary>
+        </member>
+        <member name="P:Model.Request.CartDelete.Productids">
             <summary>
             商品id
             </summary>

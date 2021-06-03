@@ -18,6 +18,8 @@ namespace BLL.Interface
 
         public Task<RespData> AddAsync(string openid, CartAdd data);
 
-        public Task<RespData> DeleteAsync(string openid, CartDelete data);
+        public Task<RespData> UpdateCountAsync(string openid, CartUpdate data);
+
+        public Task<RespData> DelteProductsAsync(string openid, CartDelete data);
     }
 }

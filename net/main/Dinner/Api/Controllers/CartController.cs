@@ -10,11 +10,18 @@ using Model.Response.Com;
 
 namespace Api.Controllers
 {
+    /// <summary>
+    /// 购物车
+    /// </summary>
     [Route("[controller]")]
     public class CartController : BaseAuthController
     {
         private readonly ICartService _services;
 
+        /// <summary>
+        /// 购物车
+        /// </summary>
+        /// <param name="service"></param>
         public CartController(ICartService service)
         {
             _services = service;
@@ -33,7 +40,20 @@ namespace Api.Controllers
         }
 
         /// <summary>
-        /// 删除购物车商品
+        /// 修改购物车商品的数量
+        /// </summary>
+        /// <param name="data">商品信息</param>
+        /// <returns></returns>
+        [HttpPost]
+        [Route("[action]")]
+        public async Task<RespData> Update(CartUpdate data)
+        {
+            string openid = GetUserCode();
+            return await _services.UpdateCountAsync(openid, data);
+        }
+
+        /// <summary>
+        /// 删除购物车里的商品
         /// </summary>
         /// <param name="data">商品信息</param>
         /// <returns></returns>
@@ -42,8 +62,9 @@ namespace Api.Controllers
         public async Task<RespData> Delete(CartDelete data)
         {
             string openid = GetUserCode();
-            return await _services.DeleteAsync(openid, data);
+            return await _services.DelteProductsAsync(openid, data);
         }
+
 
         /// <summary>
         /// 添加商品到购物车
@@ -55,6 +76,7 @@ namespace Api.Controllers
         public async Task<RespData> Add(CartAdd data)
         {
             string openid = GetUserCode();
+
             return await _services.AddAsync(openid, data);
         }
     }

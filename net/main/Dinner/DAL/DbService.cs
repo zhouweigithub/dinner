@@ -42,17 +42,19 @@ namespace DAL
 
             modelBuilder.Entity<TCart>(entity =>
             {
+                entity.HasKey(e => new { e.Userid, e.Productid })
+                    .HasName("PRIMARY")
+                    .HasAnnotation("MySql:IndexPrefixLength", new[] { 0, 0 });
+
                 entity.HasComment("购物车");
 
-                entity.Property(e => e.Id).HasComment("id");
+                entity.Property(e => e.Userid).HasComment("用户id");
+
+                entity.Property(e => e.Productid).HasComment("商品id");
 
                 entity.Property(e => e.Count).HasComment("商品数量");
 
                 entity.Property(e => e.Crtime).HasComment("创建时间");
-
-                entity.Property(e => e.Productid).HasComment("商品id");
-
-                entity.Property(e => e.Userid).HasComment("用户id");
 
                 entity.HasOne(d => d.Product)
                     .WithMany(p => p.TCart)
@@ -344,13 +346,15 @@ namespace DAL
 
                 entity.Property(e => e.Crtime).HasComment("创建时间");
 
-                entity.Property(e => e.Gender).HasComment("性别");
+                entity.Property(e => e.Gender).HasComment("性别 0女 1男");
 
                 entity.Property(e => e.Headimg).HasComment("头像图片");
 
                 entity.Property(e => e.Nick).HasComment("昵称");
 
                 entity.Property(e => e.Phone).HasComment("手机号");
+
+                entity.Property(e => e.State).HasComment("状态 0正常 1禁用");
 
                 entity.HasOne(d => d.Company)
                     .WithMany(p => p.TUser)

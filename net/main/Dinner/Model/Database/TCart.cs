@@ -18,19 +18,15 @@ namespace Model.Database
     public partial class TCart
     {
         /// <summary>
-        /// id
-        /// </summary>
-        [Key]
-        [Column("id")]
-        public int Id { get; set; }
-        /// <summary>
         /// 用户id
         /// </summary>
+        [Key]
         [Column("userid")]
         public int Userid { get; set; }
         /// <summary>
         /// 商品id
         /// </summary>
+        [Key]
         [Column("productid")]
         public int Productid { get; set; }
         /// <summary>

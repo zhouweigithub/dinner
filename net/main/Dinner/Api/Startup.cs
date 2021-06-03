@@ -41,6 +41,11 @@ namespace Api
         public IConfiguration Configuration { get; }
 
 
+        public static readonly ILoggerFactory efLogger = LoggerFactory.Create(builder =>
+        {
+            builder.AddFilter((category, level) => category == DbLoggerCategory.Database.Command.Name && level == LogLevel.Information).AddConsole();
+        });
+
         // This method gets called by the runtime. Use this method to add services to the container.
         public void ConfigureServices(IServiceCollection services)
         {
@@ -54,8 +59,8 @@ namespace Api
                 opt.SerializerSettings.DateFormatString = "yyyy-MM-dd";
             });
             services.AddDbContext<DbService>(
-                options => options.UseMySql(Configuration.GetConnectionString("DefaultConnection"), MySqlServerVersion.LatestSupportedServerVersion)
-            );
+                options => options.UseMySql(Configuration.GetConnectionString("DefaultConnection"), MySqlServerVersion.LatestSupportedServerVersion).UseLoggerFactory(efLogger)
+            ); ;
 
             JwtSetting jswSetting = Configuration.GetSection("JwtSetting").Get<JwtSetting>();
 
