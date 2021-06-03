@@ -20,6 +20,13 @@ namespace Api.Controllers
             _services = service;
         }
 
+        /// <summary>
+        /// 获取订单列表
+        /// </summary>
+        /// <param name="productName">商品名称</param>
+        /// <param name="pageSize">页数据量</param>
+        /// <param name="page">页码</param>
+        /// <returns></returns>
         [HttpGet]
         [Route("[action]/{productName}/{pageSize}/{page}")]
         public async Task<RespDataList<TOrder>> GetList(string productName, int pageSize, int page)
@@ -28,6 +35,11 @@ namespace Api.Controllers
             return await _services.GetListAsync(openid, productName, pageSize, page);
         }
 
+        /// <summary>
+        /// 提交订单
+        /// </summary>
+        /// <param name="data">订单信息</param>
+        /// <returns></returns>
         [HttpPost]
         [Route("[action]")]
         public async Task<RespData> Add(OrderAdd data)
@@ -36,9 +48,14 @@ namespace Api.Controllers
             return await _services.AddAsync(data, openid);
         }
 
+        /// <summary>
+        /// 取消订单
+        /// </summary>
+        /// <param name="orderid">订单id</param>
+        /// <returns></returns>
         [HttpGet]
         [Route("[action]/{orderid}")]
-        public async Task<RespData> Add(string orderid)
+        public async Task<RespData> Cancel(string orderid)
         {
             string openid = GetUserCode();
             return await _services.CancelAsync(orderid, openid);

@@ -91,6 +91,29 @@
             <param name="username">用户名</param>
             <returns></returns>
         </member>
+        <member name="M:Api.Controllers.OrderController.GetList(System.String,System.Int32,System.Int32)">
+            <summary>
+            获取订单列表
+            </summary>
+            <param name="productName">商品名称</param>
+            <param name="pageSize">页数据量</param>
+            <param name="page">页码</param>
+            <returns></returns>
+        </member>
+        <member name="M:Api.Controllers.OrderController.Add(Model.Request.OrderAdd)">
+            <summary>
+            提交订单
+            </summary>
+            <param name="data">订单信息</param>
+            <returns></returns>
+        </member>
+        <member name="M:Api.Controllers.OrderController.Cancel(System.String)">
+            <summary>
+            取消订单
+            </summary>
+            <param name="orderid">订单id</param>
+            <returns></returns>
+        </member>
         <member name="T:Api.Controllers.ProductController">
             <summary>
             商品信息

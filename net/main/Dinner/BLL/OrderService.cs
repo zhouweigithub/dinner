@@ -65,6 +65,8 @@ namespace BLL
                         Count = item.Count,
                         Money = item.Money,
                         Price = item.Price,
+                        ProductName = productData.Name,
+                        Img = productData.Img
                     };
 
                     await context.Set<TOrderProduct>().AddAsync(t);
@@ -112,6 +114,7 @@ namespace BLL
                         Count = item.Count,
                         Price = item.Price,
                         Money = item.Money,
+                        CouponName = couponData.Name
                     };
 
                     await context.Set<TOrderCoupon>().AddAsync(t);
@@ -161,9 +164,9 @@ namespace BLL
             return result;
         }
 
-        public async Task<RespData<Boolean>> CancelAsync(String orderid, string openid)
+        public async Task<RespData> CancelAsync(String orderid, string openid)
         {
-            RespData<Boolean> result = new RespData<Boolean>();
+            RespData result = new RespData();
 
             try
             {

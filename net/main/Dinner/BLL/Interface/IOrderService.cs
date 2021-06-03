@@ -22,7 +22,7 @@ namespace BLL.Interface
 
         public Task<RespData<TOrder>> AddAsync(OrderAdd data, string openid);
 
-        public Task<RespData<bool>> CancelAsync(string orderid, string openid);
+        public Task<RespData> CancelAsync(string orderid, string openid);
 
     }
 }
