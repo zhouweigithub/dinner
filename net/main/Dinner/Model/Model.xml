@@ -244,6 +244,11 @@
             状态（0待支付，1已支付，2已完成，9已取消，10已删除）
             </summary>
         </member>
+        <member name="P:Model.Database.TOrder.Phone">
+            <summary>
+            手机号
+            </summary>
+        </member>
         <member name="P:Model.Database.TOrder.Crtime">
             <summary>
             创建时间
@@ -624,6 +629,11 @@
             实际支付金额
             </summary>
         </member>
+        <member name="P:Model.Request.OrderAdd.Phone">
+            <summary>
+            手机号
+            </summary>
+        </member>
         <member name="P:Model.Request.OrderAdd.Products">
             <summary>
             商品信息
@@ -745,6 +755,26 @@
             </summary>
         </member>
         <member name="P:Model.Request.UserAdd.Phone">
+            <summary>
+            手机号
+            </summary>
+        </member>
+        <member name="T:Model.Request.UserUpdate">
+            <summary>
+            用户更新参数
+            </summary>
+        </member>
+        <member name="P:Model.Request.UserUpdate.Nick">
+            <summary>
+            用户昵称
+            </summary>
+        </member>
+        <member name="P:Model.Request.UserUpdate.HeadIng">
+            <summary>
+            用户头像
+            </summary>
+        </member>
+        <member name="P:Model.Request.UserUpdate.Phone">
             <summary>
             手机号
             </summary>

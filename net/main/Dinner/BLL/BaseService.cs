@@ -9,6 +9,7 @@ using Microsoft.EntityFrameworkCore.ChangeTracking;
 using Model.Database;
 using System.Linq;
 using Microsoft.Extensions.Logging;
+using Microsoft.EntityFrameworkCore;
 
 namespace BLL
 {
@@ -63,7 +64,7 @@ namespace BLL
         {
             try
             {
-                var user = context.Set<TUser>().FirstOrDefault(a => a.Code == userCode);
+                var user = context.Set<TUser>().AsNoTracking().FirstOrDefault(a => a.Code == userCode);
                 if (user != null)
                 {
                     return user.Id;

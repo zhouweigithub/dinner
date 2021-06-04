@@ -29,7 +29,7 @@ namespace BLL
             RespDataToken<TUser> result = new RespDataToken<TUser>();
             try
             {
-                var user = await context.Set<TUser>().AsNoTracking().FirstOrDefaultAsync(a => a.Code == openid);
+                var user = await context.Set<TUser>().Include(a => a.Company).AsNoTracking().FirstOrDefaultAsync(a => a.Code == openid);
                 if (user != null)
                 {
                     result.data = user;
@@ -99,14 +99,20 @@ namespace BLL
             return result;
         }
 
-        public async Task<RespData<TUser>> UpdateAsync(TUser data)
+        public async Task<RespData<TUser>> UpdateAsync(UserUpdate data, string openid)
         {
             RespData<TUser> result = new();
             try
             {
-                context.Update(data);
+                int userid = GetUserIdByCode(openid);
+                var server = context.Set<TUser>().Find(userid);
+
+                server.Nick = data.Nick;
+                server.Phone = data.Phone;
+                server.Headimg = data.HeadIng;
+
                 await context.SaveChangesAsync();
-                result.data = data;
+                result.data = server;
             }
             catch (Exception e)
             {

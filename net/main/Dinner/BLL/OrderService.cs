@@ -146,6 +146,7 @@ namespace BLL
                     CouponMoney = data.CouponMoney,
                     PayMoney = data.PayMoney,
                     State = 0,
+                    Phone = data.Phone,
                     Crtime = DateTime.Now,
                 };
 

@@ -55,9 +55,10 @@ namespace Api.Controllers
         /// <returns></returns>
         [HttpPost]
         [Route("[action]")]
-        public async Task<RespData<TUser>> Update(TUser user)
+        public async Task<RespData<TUser>> Update(UserUpdate user)
         {
-            return await _services.UpdateAsync(user);
+            string openid = User.Identity.Name;
+            return await _services.UpdateAsync(user, openid);
         }
 
         /// <summary>

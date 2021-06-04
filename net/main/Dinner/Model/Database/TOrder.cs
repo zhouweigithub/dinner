@@ -54,6 +54,11 @@ namespace Model.Database
         /// </summary>
         [Column("state")]
         public int State { get; set; }
+
+        /// <summary>
+        /// 手机号
+        /// </summary>
+        public string Phone { get; set; }
         /// <summary>
         /// 创建时间
         /// </summary>

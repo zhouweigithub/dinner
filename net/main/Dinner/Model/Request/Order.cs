@@ -26,6 +26,11 @@ namespace Model.Request
         public decimal PayMoney { get; set; }
 
         /// <summary>
+        /// 手机号
+        /// </summary>
+        public string Phone { get; set; }
+
+        /// <summary>
         /// 商品信息
         /// </summary>
         public List<ProductInfo> Products { get; set; }

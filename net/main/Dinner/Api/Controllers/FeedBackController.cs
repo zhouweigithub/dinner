@@ -23,6 +23,10 @@ namespace Api.Controllers
             _services = service;
         }
 
+        /// <summary>
+        /// 获取反馈信息
+        /// </summary>
+        /// <returns></returns>
         [HttpGet]
         [Route("[action]")]
         public async Task<RespDataList<TFeedback>> GetList()
@@ -32,6 +36,11 @@ namespace Api.Controllers
         }
 
 
+        /// <summary>
+        /// 提交反馈信息
+        /// </summary>
+        /// <param name="data">反馈内容</param>
+        /// <returns></returns>
         [HttpPost]
         [Route("[action]")]
         public async Task<RespData> Add(FeedbackAdd data)

@@ -125,6 +125,19 @@
             用户反馈信息
             </summary>
         </member>
+        <member name="M:Api.Controllers.FeedBackController.GetList">
+            <summary>
+            获取反馈信息
+            </summary>
+            <returns></returns>
+        </member>
+        <member name="M:Api.Controllers.FeedBackController.Add(Model.Request.FeedbackAdd)">
+            <summary>
+            提交反馈信息
+            </summary>
+            <param name="data">反馈内容</param>
+            <returns></returns>
+        </member>
         <member name="T:Api.Controllers.HomeController">
             <summary>
             登录相关
@@ -225,7 +238,7 @@
             <param name="user"></param>
             <returns></returns>
         </member>
-        <member name="M:Api.Controllers.UserController.Update(Model.Database.TUser)">
+        <member name="M:Api.Controllers.UserController.Update(Model.Request.UserUpdate)">
             <summary>
             更新用户信息
             </summary>

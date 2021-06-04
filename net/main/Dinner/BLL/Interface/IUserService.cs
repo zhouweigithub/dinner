@@ -18,7 +18,7 @@ namespace BLL.Interface
 
         public Task<RespData<TUser>> AddAsync(UserAdd t);
 
-        public Task<RespData<TUser>> UpdateAsync(TUser data);
+        public Task<RespData<TUser>> UpdateAsync(UserUpdate data, string openid);
 
         public Task<RespData> DeleteAsync(string openid);
     }
