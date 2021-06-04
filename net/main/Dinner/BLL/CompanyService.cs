@@ -25,7 +25,7 @@ namespace BLL
 
 
 
-        public async Task<RespData<TCompany>> GetEntity(String companyId)
+        public async Task<RespData<TCompany>> GetEntity(int companyId)
         {
             RespData<TCompany> result = new RespData<TCompany>();
             try
@@ -66,6 +66,43 @@ namespace BLL
                     result.code = -1;
                     result.msg = "该公司已存在";
                 }
+            }
+            catch (Exception e)
+            {
+                result.code = -1;
+                result.msg = "服务内部错误";
+                _logger.LogError(e.ToString());
+            }
+
+            return result;
+        }
+
+        public async Task<RespData<TCompany>> UpdateAsync(TCompany data)
+        {
+            RespData<TCompany> result = new();
+            try
+            {
+                context.Update(data);
+                await context.SaveChangesAsync();
+                result.data = data;
+            }
+            catch (Exception e)
+            {
+                result.code = -1;
+                result.msg = "服务内部错误";
+                _logger.LogError(e.ToString());
+            }
+
+            return result;
+        }
+
+        public async Task<RespData> DeleteAsync(Int32 companyid)
+        {
+            RespData result = new();
+            try
+            {
+                context.Remove(new TCompany() { Id = companyid });
+                await context.SaveChangesAsync();
             }
             catch (Exception e)
             {

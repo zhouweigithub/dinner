@@ -27,14 +27,16 @@ namespace Api.Controllers
         private readonly IWxService _wxservices;
         private readonly IOptions<WxOpenidConfigModel> _wxconfig;
         private readonly IUserService userService;
+        private readonly IDbInitService _dbservice;
         private readonly JwtSetting jwt;
 
 
-        public HomeController(IUserService userService, IWxService wxService, IOptions<WxOpenidConfigModel> wxconfig, IOptions<JwtSetting> option)
+        public HomeController(IUserService userService, IWxService wxService, IOptions<WxOpenidConfigModel> wxconfig, IOptions<JwtSetting> option, IDbInitService dbservice)
         {
             this.userService = userService;
             _wxservices = wxService;
             _wxconfig = wxconfig;
+            _dbservice = dbservice;
             jwt = option.Value;
         }
 
@@ -80,6 +82,31 @@ namespace Api.Controllers
             return _wxservices.GetOpenId(loginCode, _wxconfig.Value);
         }
 
+
+        /// <summary>
+        /// 重置并生成初始数据
+        /// </summary>
+        /// <returns></returns>
+        [HttpPost]
+        [Route("[action]")]
+        public async Task<RespData> ResetDatas()
+        {
+            var v1 = await _dbservice.ClearDatas();
+
+            var v2 = await _dbservice.CreateInitDatas();
+
+            RespData result = new RespData();
+
+            if (v1.code != 0 || v2.code != 0)
+            {
+                result.code = -1;
+                result.msg = "操作失败";
+            }
+
+            return result;
+        }
+
+
         /// <summary>
         /// 生成token
         /// </summary>
@@ -104,6 +131,7 @@ namespace Api.Controllers
 
             return new JwtSecurityTokenHandler().WriteToken(token);
         }
+
 
     }
 }

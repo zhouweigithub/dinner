@@ -10,6 +10,9 @@ using Model.Response.Com;
 
 namespace Api.Controllers
 {
+    /// <summary>
+    /// 订单信息
+    /// </summary>
     [Route("[controller]")]
     public class OrderController : BaseAuthController
     {
@@ -60,5 +63,19 @@ namespace Api.Controllers
             string openid = GetUserCode();
             return await _services.CancelAsync(orderid, openid);
         }
+
+        /// <summary>
+        /// 删除订单
+        /// </summary>
+        /// <param name="orderid">订单id</param>
+        /// <returns></returns>
+        [HttpGet]
+        [Route("[action]/{orderid}")]
+        public async Task<RespData> Delete(string orderid)
+        {
+            string openid = GetUserCode();
+            return await _services.DeleteAsync(orderid, openid);
+        }
+
     }
 }

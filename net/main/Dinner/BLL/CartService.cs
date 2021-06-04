@@ -120,7 +120,7 @@ namespace BLL
             return result;
         }
 
-        public async Task<RespData> DelteProductsAsync(String openid, CartDelete data)
+        public async Task<RespData> DeleteProductsAsync(String openid, CartDelete data)
         {
             RespData result = new RespData();
 

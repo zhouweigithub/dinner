@@ -29,6 +29,7 @@ namespace Api
             services.AddTransient<IProductService, ProductService>();
             services.AddTransient<IUserService, UserService>();
             services.AddTransient<IWxService, WxService>();
+            services.AddTransient<IDbInitService, DbInitService>();
         }
     }
 }

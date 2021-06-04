@@ -11,7 +11,7 @@ using Model.Response.Com;
 namespace Api.Controllers
 {
     /// <summary>
-    /// 购物车
+    /// 购物车信息
     /// </summary>
     [Route("[controller]")]
     public class CartController : BaseAuthController
@@ -62,7 +62,7 @@ namespace Api.Controllers
         public async Task<RespData> Delete(CartDelete data)
         {
             string openid = GetUserCode();
-            return await _services.DelteProductsAsync(openid, data);
+            return await _services.DeleteProductsAsync(openid, data);
         }
 
 

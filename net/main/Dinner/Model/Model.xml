@@ -241,7 +241,7 @@
         </member>
         <member name="P:Model.Database.TOrder.State">
             <summary>
-            状态（0待支付，1已支付，2已完成，9已取消）
+            状态（0待支付，1已支付，2已完成，9已取消，10已删除）
             </summary>
         </member>
         <member name="P:Model.Database.TOrder.Crtime">
@@ -569,6 +569,31 @@
             公司地址
             </summary>
         </member>
+        <member name="T:Model.Request.CouponAdd">
+            <summary>
+            优惠券新增参数
+            </summary>
+        </member>
+        <member name="P:Model.Request.CouponAdd.Name">
+            <summary>
+            优惠卷名称
+            </summary>
+        </member>
+        <member name="P:Model.Request.CouponAdd.Money">
+            <summary>
+            优惠金额
+            </summary>
+        </member>
+        <member name="P:Model.Request.CouponAdd.StartTime">
+            <summary>
+            使用开始日期
+            </summary>
+        </member>
+        <member name="P:Model.Request.CouponAdd.EndTime">
+            <summary>
+            使用截止日期
+            </summary>
+        </member>
         <member name="T:Model.Request.FeedbackAdd">
             <summary>
             用户反馈信息
@@ -657,6 +682,36 @@
         <member name="P:Model.Request.CouponInfo.Money">
             <summary>
             优惠券总金额
+            </summary>
+        </member>
+        <member name="T:Model.Request.ProductAdd">
+            <summary>
+            添加商品参数
+            </summary>
+        </member>
+        <member name="P:Model.Request.ProductAdd.Name">
+            <summary>
+            商品名称
+            </summary>
+        </member>
+        <member name="P:Model.Request.ProductAdd.Category">
+            <summary>
+            商品分类
+            </summary>
+        </member>
+        <member name="P:Model.Request.ProductAdd.Price">
+            <summary>
+            价格
+            </summary>
+        </member>
+        <member name="P:Model.Request.ProductAdd.Sales">
+            <summary>
+            销量
+            </summary>
+        </member>
+        <member name="P:Model.Request.ProductAdd.Img">
+            <summary>
+            商品图片
             </summary>
         </member>
         <member name="T:Model.Request.UserAdd">

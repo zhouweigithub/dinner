@@ -99,5 +99,42 @@ namespace BLL
             return result;
         }
 
+        public async Task<RespData<TUser>> UpdateAsync(TUser data)
+        {
+            RespData<TUser> result = new();
+            try
+            {
+                context.Update(data);
+                await context.SaveChangesAsync();
+                result.data = data;
+            }
+            catch (Exception e)
+            {
+                result.code = -1;
+                result.msg = "服务内部错误";
+                _logger.LogError(e.ToString());
+            }
+
+            return result;
+        }
+
+        public async Task<RespData> DeleteAsync(String openid)
+        {
+            RespData result = new();
+            try
+            {
+                int userid = GetUserIdByCode(openid);
+                context.Remove(new TUser() { Id = userid });
+                await context.SaveChangesAsync();
+            }
+            catch (Exception e)
+            {
+                result.code = -1;
+                result.msg = "服务内部错误";
+                _logger.LogError(e.ToString());
+            }
+
+            return result;
+        }
     }
 }

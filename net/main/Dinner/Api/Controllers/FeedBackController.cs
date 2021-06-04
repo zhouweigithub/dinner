@@ -10,6 +10,9 @@ using Model.Response.Com;
 
 namespace Api.Controllers
 {
+    /// <summary>
+    /// 用户反馈信息
+    /// </summary>
     [Route("[controller]")]
     public class FeedBackController : BaseAuthController
     {

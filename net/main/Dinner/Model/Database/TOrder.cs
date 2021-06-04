@@ -50,7 +50,7 @@ namespace Model.Database
         [Column("pay_money")]
         public decimal PayMoney { get; set; }
         /// <summary>
-        /// 状态（0待支付，1已支付，2已完成，9已取消）
+        /// 状态（0待支付，1已支付，2已完成，9已取消，10已删除）
         /// </summary>
         [Column("state")]
         public int State { get; set; }

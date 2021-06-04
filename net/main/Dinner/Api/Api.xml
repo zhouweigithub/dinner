@@ -17,7 +17,7 @@
         </member>
         <member name="T:Api.Controllers.CartController">
             <summary>
-            购物车
+            购物车信息
             </summary>
         </member>
         <member name="M:Api.Controllers.CartController.#ctor(BLL.Interface.ICartService)">
@@ -62,8 +62,68 @@
             <summary>
             添加公司
             </summary>
-            <param name="company">公司基本信息</param>
+            <param name="company">公司信息</param>
             <returns></returns>
+        </member>
+        <member name="M:Api.Controllers.CompanyController.Update(Model.Database.TCompany)">
+            <summary>
+            更新公司信息
+            </summary>
+            <param name="data">公司信息</param>
+            <returns></returns>
+        </member>
+        <member name="M:Api.Controllers.CompanyController.Delete(System.Int32)">
+            <summary>
+            删除公司信息
+            </summary>
+            <param name="companyid">公司id</param>
+            <returns></returns>
+        </member>
+        <member name="M:Api.Controllers.CompanyController.GetEntity(System.Int32)">
+            <summary>
+            获取公司信息
+            </summary>
+            <param name="companyid">公司id</param>
+            <returns></returns>
+        </member>
+        <member name="T:Api.Controllers.CouponController">
+            <summary>
+            优惠券信息
+            </summary>
+        </member>
+        <member name="M:Api.Controllers.CouponController.Add(Model.Request.CouponAdd)">
+            <summary>
+            添加优惠券
+            </summary>
+            <param name="data">优惠券信息</param>
+            <returns></returns>
+        </member>
+        <member name="M:Api.Controllers.CouponController.GrantToUser(System.Int32,System.String,System.Int32)">
+            <summary>
+            给用户分配优惠券
+            </summary>
+            <param name="couponid">优惠券id</param>
+            <param name="openid">用户码</param>
+            <param name="count">优惠券数量</param>
+            <returns></returns>
+        </member>
+        <member name="M:Api.Controllers.CouponController.Delete(System.Int32)">
+            <summary>
+            删除优惠券信息
+            </summary>
+            <param name="couponid">优惠券id</param>
+            <returns></returns>
+        </member>
+        <member name="M:Api.Controllers.CouponController.GetList">
+            <summary>
+            获取当前用户的优惠券信息
+            </summary>
+            <returns></returns>
+        </member>
+        <member name="T:Api.Controllers.FeedBackController">
+            <summary>
+            用户反馈信息
+            </summary>
         </member>
         <member name="T:Api.Controllers.HomeController">
             <summary>
@@ -84,12 +144,23 @@
             <param name="loginCode">登录码</param>
             <returns></returns>
         </member>
+        <member name="M:Api.Controllers.HomeController.ResetDatas">
+            <summary>
+            重置并生成初始数据
+            </summary>
+            <returns></returns>
+        </member>
         <member name="M:Api.Controllers.HomeController.GenerateToken(System.String)">
             <summary>
             生成token
             </summary>
             <param name="username">用户名</param>
             <returns></returns>
+        </member>
+        <member name="T:Api.Controllers.OrderController">
+            <summary>
+            订单信息
+            </summary>
         </member>
         <member name="M:Api.Controllers.OrderController.GetList(System.String,System.Int32,System.Int32)">
             <summary>
@@ -114,6 +185,13 @@
             <param name="orderid">订单id</param>
             <returns></returns>
         </member>
+        <member name="M:Api.Controllers.OrderController.Delete(System.String)">
+            <summary>
+            删除订单
+            </summary>
+            <param name="orderid">订单id</param>
+            <returns></returns>
+        </member>
         <member name="T:Api.Controllers.ProductController">
             <summary>
             商品信息
@@ -133,6 +211,39 @@
             获取商品详情
             </summary>
             <param name="productid">商品id</param>
+            <returns></returns>
+        </member>
+        <member name="T:Api.Controllers.UserController">
+            <summary>
+            用户信息
+            </summary>
+        </member>
+        <member name="M:Api.Controllers.UserController.Add(Model.Request.UserAdd)">
+            <summary>
+            添加用户
+            </summary>
+            <param name="user"></param>
+            <returns></returns>
+        </member>
+        <member name="M:Api.Controllers.UserController.Update(Model.Database.TUser)">
+            <summary>
+            更新用户信息
+            </summary>
+            <param name="user"></param>
+            <returns></returns>
+        </member>
+        <member name="M:Api.Controllers.UserController.Delete(System.String)">
+            <summary>
+            删除用户
+            </summary>
+            <param name="openid">用户代码</param>
+            <returns></returns>
+        </member>
+        <member name="M:Api.Controllers.UserController.GetEntity(System.String)">
+            <summary>
+            获取用户信息
+            </summary>
+            <param name="openid">用户代码</param>
             <returns></returns>
         </member>
         <member name="M:Api.ConfigurationManager.GetSection``1(System.String)">

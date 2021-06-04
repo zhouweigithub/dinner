@@ -10,6 +10,7 @@ using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Logging;
 using Model;
 using Model.Database;
+using Model.Request;
 using Model.Response.Com;
 
 namespace BLL
@@ -69,5 +70,68 @@ namespace BLL
             return result;
         }
 
+        public async Task<RespData<TProduct>> AddAsync(ProductAdd data)
+        {
+            RespData<TProduct> result = new();
+            try
+            {
+                var t = new TProduct()
+                {
+                    Name = data.Name,
+                    Category = data.Category,
+                    Crtime = DateTime.Now,
+                    Price = data.Price,
+                    Sales = 0,
+                    Img = data.Img,
+                };
+
+                result.data = await AddAsync(t);
+            }
+            catch (Exception e)
+            {
+                result.code = -1;
+                result.msg = "服务内部错误";
+                _logger.LogError(e.ToString());
+            }
+
+            return result;
+        }
+
+        public async Task<RespData<TProduct>> UpdateAsync(TProduct data)
+        {
+            RespData<TProduct> result = new();
+            try
+            {
+                context.Update(data);
+                await context.SaveChangesAsync();
+                result.data = data;
+            }
+            catch (Exception e)
+            {
+                result.code = -1;
+                result.msg = "服务内部错误";
+                _logger.LogError(e.ToString());
+            }
+
+            return result;
+        }
+
+        public async Task<RespData> DeleteAsync(Int32 productid)
+        {
+            RespData result = new();
+            try
+            {
+                context.Remove(new TProduct() { Id = productid });
+                await context.SaveChangesAsync();
+            }
+            catch (Exception e)
+            {
+                result.code = -1;
+                result.msg = "服务内部错误";
+                _logger.LogError(e.ToString());
+            }
+
+            return result;
+        }
     }
 }

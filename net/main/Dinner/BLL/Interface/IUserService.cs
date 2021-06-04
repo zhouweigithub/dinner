@@ -17,5 +17,9 @@ namespace BLL.Interface
         public Task<RespDataToken<TUser>> GetEntityAsync(String openid);
 
         public Task<RespData<TUser>> AddAsync(UserAdd t);
+
+        public Task<RespData<TUser>> UpdateAsync(TUser data);
+
+        public Task<RespData> DeleteAsync(string openid);
     }
 }

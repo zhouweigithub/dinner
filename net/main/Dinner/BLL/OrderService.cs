@@ -178,7 +178,7 @@ namespace BLL
                 if (serverOrderInfo == null || serverOrderInfo.Userid != userid)
                 {
                     result.code = -2;
-                    result.msg = "订单异常，请重试";
+                    result.msg = "订单信息异常，请重试";
                 }
                 else
                 {
@@ -197,6 +197,54 @@ namespace BLL
 
             return result;
         }
+
+        /// <summary>
+        /// 删除订单
+        /// </summary>
+        /// <param name="orderid"></param>
+        /// <param name="openid"></param>
+        /// <returns></returns>
+        public async Task<RespData> DeleteAsync(string orderid, string openid)
+        {
+            RespData result = new();
+            try
+            {
+                int userid = GetUserIdByCode(openid);
+                var order = context.Set<TOrder>().Find(orderid);
+                if (order.Userid != userid)
+                {
+                    result.code = -1;
+                    result.msg = "订单信息异常，请重试";
+                }
+                else
+                {
+                    if (order.State == 0)
+                    {
+                        //未支付的订单直接删除
+                        context.Remove(new TOrderProduct() { Orderid = orderid });
+                        context.Remove(new TOrderCoupon() { Orderid = orderid });
+                        context.Remove(new TOrder() { Id = orderid });
+                    }
+                    else
+                    {
+                        //已支付过的订单只能修改其状态
+                        order.State = 10;
+                        context.Update(order);
+                    }
+
+                    await context.SaveChangesAsync();
+                }
+            }
+            catch (Exception e)
+            {
+                result.code = -1;
+                result.msg = "服务内部错误";
+                _logger.LogError(e.ToString());
+            }
+
+            return result;
+        }
+
 
         public async Task<RespDataList<TOrder>> GetListAsync(string openid, String productName, Int32 pageSize, Int32 page)
         {
