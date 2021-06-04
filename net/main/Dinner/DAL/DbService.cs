@@ -201,7 +201,7 @@ namespace DAL
                     .HasPrecision(32, 2)
                     .HasComment("实际支付金额");
 
-                entity.Property(e => e.State).HasComment("状态（0待支付，1已支付，2已完成，9已取消）");
+                entity.Property(e => e.State).HasComment("状态（0待支付，1已支付，2已完成，9已取消，10已删除）");
 
                 entity.Property(e => e.Userid).HasComment("用户id");
             });
