@@ -9,11 +9,13 @@
   </PropertyGroup>
 
   <ItemGroup>
-    <None Remove="Model.xml" />
+    <PackageReference Include="Microsoft.EntityFrameworkCore" Version="5.0.6" />
   </ItemGroup>
 
   <ItemGroup>
-    <PackageReference Include="Microsoft.EntityFrameworkCore" Version="5.0.6" />
+    <None Update="Model.xml">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
   </ItemGroup>
 
 </Project>

@@ -53,6 +53,44 @@
             <param name="data">商品信息</param>
             <returns></returns>
         </member>
+        <member name="T:Api.Controllers.CategoryController">
+            <summary>
+            商品分类信息
+            </summary>
+        </member>
+        <member name="M:Api.Controllers.CategoryController.#ctor(BLL.Interface.ICategoryService)">
+            <summary>
+            商品分类
+            </summary>
+            <param name="service"></param>
+        </member>
+        <member name="M:Api.Controllers.CategoryController.GetList">
+            <summary>
+            获取商品分类信息
+            </summary>
+            <returns></returns>
+        </member>
+        <member name="M:Api.Controllers.CategoryController.Update(Model.Request.CategoryUpdate)">
+            <summary>
+            修改商品分类信息
+            </summary>
+            <param name="data">商品分类信息</param>
+            <returns></returns>
+        </member>
+        <member name="M:Api.Controllers.CategoryController.Delete(System.Int32)">
+            <summary>
+            删除商品分类
+            </summary>
+            <param name="id">商品分类id</param>
+            <returns></returns>
+        </member>
+        <member name="M:Api.Controllers.CategoryController.Add(Model.Request.CategoryAdd)">
+            <summary>
+            添加商品分类
+            </summary>
+            <param name="data">商品分类信息</param>
+            <returns></returns>
+        </member>
         <member name="T:Api.Controllers.CompanyController">
             <summary>
             公司信息
@@ -203,6 +241,19 @@
             删除订单
             </summary>
             <param name="orderid">订单id</param>
+            <returns></returns>
+        </member>
+        <member name="M:Api.Controllers.OrderController.GetTodayOrder">
+            <summary>
+            用户获取自己现在需要取货的商品信息
+            </summary>
+            <returns></returns>
+        </member>
+        <member name="M:Api.Controllers.OrderController.GetTodayOrderByUserCode(System.String)">
+            <summary>
+            获取目标用户现在需要取的餐品信息
+            </summary>
+            <param name="userCode">目标用户代码(openid)</param>
             <returns></returns>
         </member>
         <member name="T:Api.Controllers.ProductController">

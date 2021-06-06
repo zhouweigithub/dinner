@@ -50,15 +50,21 @@ namespace Model.Database
         [Column("pay_money")]
         public decimal PayMoney { get; set; }
         /// <summary>
+        /// 手机号
+        /// </summary>
+        [Column("phone")]
+        [StringLength(20)]
+        public string Phone { get; set; }
+        /// <summary>
         /// 状态（0待支付，1已支付，2已完成，9已取消，10已删除）
         /// </summary>
         [Column("state")]
         public int State { get; set; }
-
         /// <summary>
-        /// 手机号
+        /// 创建日期
         /// </summary>
-        public string Phone { get; set; }
+        [Column("crdate", TypeName = "date")]
+        public DateTime Crdate { get; set; }
         /// <summary>
         /// 创建时间
         /// </summary>

@@ -4,7 +4,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace Util
+namespace ZwUtil
 {
     /// <summary>
     /// 字符操作

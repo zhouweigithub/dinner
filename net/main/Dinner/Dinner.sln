@@ -13,9 +13,9 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "DAL", "DAL\DAL.csproj", "{2
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Model", "Model\Model.csproj", "{BA373748-EA1D-4DF1-8472-0D7EB98EE73A}"
 EndProject
-Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Util", "Util\Util.csproj", "{C40D6D83-EF41-4728-B35D-00C42FEB70B6}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "ZwUtil", "Util\ZwUtil.csproj", "{C40D6D83-EF41-4728-B35D-00C42FEB70B6}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Data", "Data\Data.csproj", "{709ACACA-DF03-4B97-967A-60CE53F1EB5F}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Data", "Data\Data.csproj", "{709ACACA-DF03-4B97-967A-60CE53F1EB5F}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution

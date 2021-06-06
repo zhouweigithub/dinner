@@ -11,8 +11,8 @@ using Model.Database;
 using Model.Request;
 using Model.Response;
 using Model.Response.Com;
-using Util;
 using Microsoft.EntityFrameworkCore;
+using ZwUtil;
 
 namespace BLL
 {
@@ -66,6 +66,7 @@ namespace BLL
                         Money = item.Money,
                         Price = item.Price,
                         ProductName = productData.Name,
+                        Type = item.Type,
                         Img = productData.Img
                     };
 
@@ -271,6 +272,61 @@ namespace BLL
             return result;
         }
 
+        /// <summary>
+        /// 根据用户的openid获取当前需要取的餐品信息
+        /// </summary>
+        /// <param name="openid">openid</param>
+        /// <returns></returns>
+        public async Task<RespDataList<TOrderProduct>> GetTodayOrderAsync(String openid)
+        {
+            RespDataList<TOrderProduct> result = new RespDataList<TOrderProduct>();
+
+            try
+            {
+                DateTime now = DateTime.Now;
+
+                //11点前为早餐 16点前为午餐 其他为晚餐
+                int type = now.Hour < 11 ? 1 : now.Hour < 16 ? 2 : 3;
+                int userid = GetUserIdByCode(openid);
+
+                //该用户当天的所有订单
+                //todo:应该限制一下商品类型，仅为餐品
+                var orders = await context.Set<TOrder>().AsNoTracking().Include(a => a.TOrderProduct).Where(a => a.Userid == userid && a.Crdate == DateTime.Today).ToListAsync();
+
+                List<TOrderProduct> orderProducts = new List<TOrderProduct>();
+                foreach (var item in orders)
+                {
+                    var lst = item.TOrderProduct.Where(a => a.Type == type);
+
+                    //对同名商品进行合并（数量叠加）
+                    foreach (var iitem in lst)
+                    {
+                        var tmpProduct = orderProducts.FirstOrDefault(a => a.ProductName == iitem.ProductName);
+                        if (tmpProduct != null)
+                        {
+                            //如果已存在该商品，就对数量进行累加
+                            tmpProduct.Count += iitem.Count;
+                        }
+                        else
+                        {
+                            //如果不存在该商品，就添加进去
+                            orderProducts.Add(iitem);
+                        }
+                    }
+                }
+
+                result.datas = orderProducts;
+            }
+            catch (Exception e)
+            {
+                _logger.LogError(e.ToString());
+                result.code = -1;
+                result.msg = "服务内部错误";
+            }
+
+            return result;
+        }
+
 
         /// <summary>
         /// 生成订单号
@@ -278,7 +334,7 @@ namespace BLL
         /// <returns></returns>
         private string CreateOrderId()
         {
-            return DateTime.Now.ToString("yyMMddHH") + Strings.GetRandomNumberString(24);
+            return DateTime.Now.ToString("yyMMddHH") + Strings.GetRandomNumberString(8);
         }
     }
 }

@@ -19,6 +19,17 @@ namespace DAL
         {
         }
 
+        public virtual DbSet<DlvDeliverDetail> DlvDeliverDetail { get; set; }
+        public virtual DbSet<DlvDeliverTrack> DlvDeliverTrack { get; set; }
+        public virtual DbSet<DlvDeliverTrackDetail> DlvDeliverTrackDetail { get; set; }
+        public virtual DbSet<DlvException> DlvException { get; set; }
+        public virtual DbSet<DlvOrderProductDeliver> DlvOrderProductDeliver { get; set; }
+        public virtual DbSet<DlvUser> DlvUser { get; set; }
+        public virtual DbSet<SpCompanySupplier> SpCompanySupplier { get; set; }
+        public virtual DbSet<SpException> SpException { get; set; }
+        public virtual DbSet<SpOrderProductSupplier> SpOrderProductSupplier { get; set; }
+        public virtual DbSet<SpProductSupplier> SpProductSupplier { get; set; }
+        public virtual DbSet<SpUser> SpUser { get; set; }
         public virtual DbSet<TCart> TCart { get; set; }
         public virtual DbSet<TCategory> TCategory { get; set; }
         public virtual DbSet<TComment> TComment { get; set; }
@@ -32,6 +43,7 @@ namespace DAL
         public virtual DbSet<TOrderProduct> TOrderProduct { get; set; }
         public virtual DbSet<TPay> TPay { get; set; }
         public virtual DbSet<TProduct> TProduct { get; set; }
+        public virtual DbSet<TProductCompany> TProductCompany { get; set; }
         public virtual DbSet<TUser> TUser { get; set; }
         public virtual DbSet<TUserCoupon> TUserCoupon { get; set; }
 
@@ -39,6 +51,202 @@ namespace DAL
         {
             modelBuilder.HasCharSet("utf8mb4")
                 .UseCollation("utf8mb4_0900_ai_ci");
+
+            modelBuilder.Entity<DlvDeliverDetail>(entity =>
+            {
+                entity.HasKey(e => new { e.Crdate, e.Deliverid, e.Supplierid, e.Productid })
+                    .HasName("PRIMARY")
+                    .HasAnnotation("MySql:IndexPrefixLength", new[] { 0, 0, 0, 0 });
+
+                entity.Property(e => e.Crdate).HasComment("日期");
+
+                entity.Property(e => e.Deliverid).HasComment("送货人id");
+
+                entity.Property(e => e.Supplierid).HasComment("供货商id");
+
+                entity.Property(e => e.Productid).HasComment("商品id");
+
+                entity.Property(e => e.ProductCount).HasComment("商品数量");
+            });
+
+            modelBuilder.Entity<DlvDeliverTrack>(entity =>
+            {
+                entity.HasComment("送货员送货情况追踪");
+
+                entity.Property(e => e.Id).HasComment("送货追踪id");
+
+                entity.Property(e => e.Crdate).HasComment("详细日期");
+
+                entity.Property(e => e.Crtime).HasComment("详细时间");
+
+                entity.Property(e => e.Deliverid).HasComment("送货员id");
+            });
+
+            modelBuilder.Entity<DlvDeliverTrackDetail>(entity =>
+            {
+                entity.HasKey(e => e.Trackid)
+                    .HasName("PRIMARY");
+
+                entity.HasComment("送货行为追踪");
+
+                entity.Property(e => e.Trackid)
+                    .ValueGeneratedNever()
+                    .HasComment("送货追踪id");
+
+                entity.Property(e => e.Companyid).HasComment("送达公司id");
+
+                entity.Property(e => e.Crtime).HasComment("时间");
+
+                entity.Property(e => e.State).HasComment("状态 1到达取货地点 2离开取货地点 3到达送货地点");
+
+                entity.Property(e => e.Supplierid).HasComment("供货商id");
+            });
+
+            modelBuilder.Entity<DlvException>(entity =>
+            {
+                entity.HasKey(e => new { e.Delivererid, e.Crdate })
+                    .HasName("PRIMARY")
+                    .HasAnnotation("MySql:IndexPrefixLength", new[] { 0, 0 });
+
+                entity.HasComment("送货人送货异常情况");
+
+                entity.Property(e => e.Delivererid).HasComment("送货人id");
+
+                entity.Property(e => e.Crdate).HasComment("日期");
+
+                entity.Property(e => e.LossValue).HasComment("损失评论（元）");
+
+                entity.Property(e => e.Msg).HasComment("异常描述");
+
+                entity.Property(e => e.ProductCount).HasComment("受影响的商品数量");
+
+                entity.Property(e => e.State).HasComment("状态 0未处理 1已处理");
+            });
+
+            modelBuilder.Entity<DlvOrderProductDeliver>(entity =>
+            {
+                entity.HasKey(e => new { e.Orderid, e.Productid })
+                    .HasName("PRIMARY")
+                    .HasAnnotation("MySql:IndexPrefixLength", new[] { 0, 0 });
+
+                entity.HasComment("订单中的商品的送货人");
+
+                entity.Property(e => e.Orderid).HasComment("订单号");
+
+                entity.Property(e => e.Productid).HasComment("商品id");
+
+                entity.Property(e => e.Delivererid).HasComment("送货人");
+
+                entity.Property(e => e.Msg).HasComment("说明");
+
+                entity.Property(e => e.State).HasComment("状态 0正常 1未送达");
+            });
+
+            modelBuilder.Entity<DlvUser>(entity =>
+            {
+                entity.HasComment("配送人信息");
+
+                entity.Property(e => e.Id).ValueGeneratedNever();
+
+                entity.Property(e => e.Address).HasComment("送货人地址");
+
+                entity.Property(e => e.Crtime).HasComment("创建时间");
+
+                entity.Property(e => e.Name).HasComment("送货人名称");
+
+                entity.Property(e => e.State).HasComment("状态 0正常 1禁用");
+            });
+
+            modelBuilder.Entity<SpCompanySupplier>(entity =>
+            {
+                entity.HasKey(e => e.Companyid)
+                    .HasName("PRIMARY");
+
+                entity.HasComment("公司与供货商关系");
+
+                entity.Property(e => e.Companyid)
+                    .ValueGeneratedNever()
+                    .HasComment("公司id");
+
+                entity.Property(e => e.EndTime).HasComment("结束日期");
+
+                entity.Property(e => e.StartTime).HasComment("起始日期");
+
+                entity.Property(e => e.Suplier).HasComment("供货商id");
+            });
+
+            modelBuilder.Entity<SpException>(entity =>
+            {
+                entity.HasKey(e => new { e.Supplierid, e.Crdate })
+                    .HasName("PRIMARY")
+                    .HasAnnotation("MySql:IndexPrefixLength", new[] { 0, 0 });
+
+                entity.HasComment("供货商供货异常情况");
+
+                entity.Property(e => e.Supplierid).HasComment("供货商id");
+
+                entity.Property(e => e.Crdate).HasComment("日期");
+
+                entity.Property(e => e.LossValue).HasComment("损失评论（元）");
+
+                entity.Property(e => e.Msg).HasComment("异常描述");
+
+                entity.Property(e => e.ProductCount).HasComment("受影响的商品数量");
+
+                entity.Property(e => e.State).HasComment("状态 0未处理 1已处理");
+            });
+
+            modelBuilder.Entity<SpOrderProductSupplier>(entity =>
+            {
+                entity.HasKey(e => new { e.Orderid, e.Productid })
+                    .HasName("PRIMARY")
+                    .HasAnnotation("MySql:IndexPrefixLength", new[] { 0, 0 });
+
+                entity.HasComment("订单中的商品的供货商");
+
+                entity.Property(e => e.Orderid).HasComment("订单号");
+
+                entity.Property(e => e.Productid).HasComment("商品id");
+
+                entity.Property(e => e.Msg).HasComment("说明");
+
+                entity.Property(e => e.State).HasComment("状态 0正常 1未出货");
+
+                entity.Property(e => e.Supplierid).HasComment("供货商");
+            });
+
+            modelBuilder.Entity<SpProductSupplier>(entity =>
+            {
+                entity.HasKey(e => e.Productid)
+                    .HasName("PRIMARY");
+
+                entity.HasComment("商品专用供货商");
+
+                entity.Property(e => e.Productid)
+                    .ValueGeneratedNever()
+                    .HasComment("商品id");
+
+                entity.Property(e => e.EndTime).HasComment("结束日期");
+
+                entity.Property(e => e.StartTime).HasComment("起始日期");
+
+                entity.Property(e => e.Suplier).HasComment("供货商id");
+            });
+
+            modelBuilder.Entity<SpUser>(entity =>
+            {
+                entity.HasComment("供货商信息");
+
+                entity.Property(e => e.Id).ValueGeneratedNever();
+
+                entity.Property(e => e.Address).HasComment("供货商地址");
+
+                entity.Property(e => e.Crtime).HasComment("创建时间");
+
+                entity.Property(e => e.Name).HasComment("供货商名称");
+
+                entity.Property(e => e.State).HasComment("状态 0正常 1禁用");
+            });
 
             modelBuilder.Entity<TCart>(entity =>
             {
@@ -191,6 +399,8 @@ namespace DAL
                     .HasPrecision(32, 2)
                     .HasComment("优惠金额");
 
+                entity.Property(e => e.Crdate).HasComment("创建日期");
+
                 entity.Property(e => e.Crtime).HasComment("创建时间");
 
                 entity.Property(e => e.Money)
@@ -200,6 +410,8 @@ namespace DAL
                 entity.Property(e => e.PayMoney)
                     .HasPrecision(32, 2)
                     .HasComment("实际支付金额");
+
+                entity.Property(e => e.Phone).HasComment("手机号");
 
                 entity.Property(e => e.State).HasComment("状态（0待支付，1已支付，2已完成，9已取消，10已删除）");
 
@@ -285,6 +497,8 @@ namespace DAL
 
                 entity.Property(e => e.ProductName).HasComment("商品名称");
 
+                entity.Property(e => e.Type).HasComment("类别 0普通 1早餐 2午餐 3晚餐");
+
                 entity.HasOne(d => d.Order)
                     .WithMany(p => p.TOrderProduct)
                     .HasForeignKey(d => d.Orderid)
@@ -332,6 +546,23 @@ namespace DAL
                     .HasForeignKey(d => d.Category)
                     .OnDelete(DeleteBehavior.ClientSetNull)
                     .HasConstraintName("t_product_ibfk_1");
+            });
+
+            modelBuilder.Entity<TProductCompany>(entity =>
+            {
+                entity.HasKey(e => new { e.Productid, e.Companyid, e.StartDate })
+                    .HasName("PRIMARY")
+                    .HasAnnotation("MySql:IndexPrefixLength", new[] { 0, 0, 0 });
+
+                entity.HasComment("商品定向公司展示");
+
+                entity.Property(e => e.Productid).HasComment("商品id");
+
+                entity.Property(e => e.Companyid).HasComment("公司id");
+
+                entity.Property(e => e.StartDate).HasComment("起始日期");
+
+                entity.Property(e => e.EndDate).HasComment("结束日期");
             });
 
             modelBuilder.Entity<TUser>(entity =>

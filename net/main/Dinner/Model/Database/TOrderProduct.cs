@@ -52,6 +52,11 @@ namespace Model.Database
         [Column("money")]
         public decimal Money { get; set; }
         /// <summary>
+        /// 类别 0普通 1早餐 2午餐 3晚餐
+        /// </summary>
+        [Column("type")]
+        public int Type { get; set; }
+        /// <summary>
         /// 商品图片
         /// </summary>
         [Required]

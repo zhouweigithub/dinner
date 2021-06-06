@@ -7,7 +7,7 @@ using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Options;
 
-namespace Libing.Portal.Core.Api.Common.Configs
+namespace ZwUtil
 {
     public static class ConfigurationManager
     {

@@ -4,6 +4,316 @@
         <name>Model</name>
     </assembly>
     <members>
+        <member name="P:Model.Database.DlvDeliverDetail.Crdate">
+            <summary>
+            日期
+            </summary>
+        </member>
+        <member name="P:Model.Database.DlvDeliverDetail.Deliverid">
+            <summary>
+            送货人id
+            </summary>
+        </member>
+        <member name="P:Model.Database.DlvDeliverDetail.Supplierid">
+            <summary>
+            供货商id
+            </summary>
+        </member>
+        <member name="P:Model.Database.DlvDeliverDetail.Productid">
+            <summary>
+            商品id
+            </summary>
+        </member>
+        <member name="P:Model.Database.DlvDeliverDetail.ProductCount">
+            <summary>
+            商品数量
+            </summary>
+        </member>
+        <member name="T:Model.Database.DlvDeliverTrack">
+            <summary>
+            送货员送货情况追踪
+            </summary>
+        </member>
+        <member name="P:Model.Database.DlvDeliverTrack.Id">
+            <summary>
+            送货追踪id
+            </summary>
+        </member>
+        <member name="P:Model.Database.DlvDeliverTrack.Deliverid">
+            <summary>
+            送货员id
+            </summary>
+        </member>
+        <member name="P:Model.Database.DlvDeliverTrack.Crdate">
+            <summary>
+            详细日期
+            </summary>
+        </member>
+        <member name="P:Model.Database.DlvDeliverTrack.Crtime">
+            <summary>
+            详细时间
+            </summary>
+        </member>
+        <member name="T:Model.Database.DlvDeliverTrackDetail">
+            <summary>
+            送货行为追踪
+            </summary>
+        </member>
+        <member name="P:Model.Database.DlvDeliverTrackDetail.Trackid">
+            <summary>
+            送货追踪id
+            </summary>
+        </member>
+        <member name="P:Model.Database.DlvDeliverTrackDetail.State">
+            <summary>
+            状态 1到达取货地点 2离开取货地点 3到达送货地点
+            </summary>
+        </member>
+        <member name="P:Model.Database.DlvDeliverTrackDetail.Supplierid">
+            <summary>
+            供货商id
+            </summary>
+        </member>
+        <member name="P:Model.Database.DlvDeliverTrackDetail.Companyid">
+            <summary>
+            送达公司id
+            </summary>
+        </member>
+        <member name="P:Model.Database.DlvDeliverTrackDetail.Crtime">
+            <summary>
+            时间
+            </summary>
+        </member>
+        <member name="T:Model.Database.DlvException">
+            <summary>
+            送货人送货异常情况
+            </summary>
+        </member>
+        <member name="P:Model.Database.DlvException.Delivererid">
+            <summary>
+            送货人id
+            </summary>
+        </member>
+        <member name="P:Model.Database.DlvException.Crdate">
+            <summary>
+            日期
+            </summary>
+        </member>
+        <member name="P:Model.Database.DlvException.Msg">
+            <summary>
+            异常描述
+            </summary>
+        </member>
+        <member name="P:Model.Database.DlvException.State">
+            <summary>
+            状态 0未处理 1已处理
+            </summary>
+        </member>
+        <member name="P:Model.Database.DlvException.ProductCount">
+            <summary>
+            受影响的商品数量
+            </summary>
+        </member>
+        <member name="P:Model.Database.DlvException.LossValue">
+            <summary>
+            损失评论（元）
+            </summary>
+        </member>
+        <member name="T:Model.Database.DlvOrderProductDeliver">
+            <summary>
+            订单中的商品的送货人
+            </summary>
+        </member>
+        <member name="P:Model.Database.DlvOrderProductDeliver.Orderid">
+            <summary>
+            订单号
+            </summary>
+        </member>
+        <member name="P:Model.Database.DlvOrderProductDeliver.Productid">
+            <summary>
+            商品id
+            </summary>
+        </member>
+        <member name="P:Model.Database.DlvOrderProductDeliver.Delivererid">
+            <summary>
+            送货人
+            </summary>
+        </member>
+        <member name="P:Model.Database.DlvOrderProductDeliver.State">
+            <summary>
+            状态 0正常 1未送达
+            </summary>
+        </member>
+        <member name="P:Model.Database.DlvOrderProductDeliver.Msg">
+            <summary>
+            说明
+            </summary>
+        </member>
+        <member name="T:Model.Database.DlvUser">
+            <summary>
+            配送人信息
+            </summary>
+        </member>
+        <member name="P:Model.Database.DlvUser.Name">
+            <summary>
+            送货人名称
+            </summary>
+        </member>
+        <member name="P:Model.Database.DlvUser.Address">
+            <summary>
+            送货人地址
+            </summary>
+        </member>
+        <member name="P:Model.Database.DlvUser.State">
+            <summary>
+            状态 0正常 1禁用
+            </summary>
+        </member>
+        <member name="P:Model.Database.DlvUser.Crtime">
+            <summary>
+            创建时间
+            </summary>
+        </member>
+        <member name="T:Model.Database.SpCompanySupplier">
+            <summary>
+            公司与供货商关系
+            </summary>
+        </member>
+        <member name="P:Model.Database.SpCompanySupplier.Companyid">
+            <summary>
+            公司id
+            </summary>
+        </member>
+        <member name="P:Model.Database.SpCompanySupplier.Suplier">
+            <summary>
+            供货商id
+            </summary>
+        </member>
+        <member name="P:Model.Database.SpCompanySupplier.StartTime">
+            <summary>
+            起始日期
+            </summary>
+        </member>
+        <member name="P:Model.Database.SpCompanySupplier.EndTime">
+            <summary>
+            结束日期
+            </summary>
+        </member>
+        <member name="T:Model.Database.SpException">
+            <summary>
+            供货商供货异常情况
+            </summary>
+        </member>
+        <member name="P:Model.Database.SpException.Supplierid">
+            <summary>
+            供货商id
+            </summary>
+        </member>
+        <member name="P:Model.Database.SpException.Crdate">
+            <summary>
+            日期
+            </summary>
+        </member>
+        <member name="P:Model.Database.SpException.Msg">
+            <summary>
+            异常描述
+            </summary>
+        </member>
+        <member name="P:Model.Database.SpException.State">
+            <summary>
+            状态 0未处理 1已处理
+            </summary>
+        </member>
+        <member name="P:Model.Database.SpException.ProductCount">
+            <summary>
+            受影响的商品数量
+            </summary>
+        </member>
+        <member name="P:Model.Database.SpException.LossValue">
+            <summary>
+            损失评论（元）
+            </summary>
+        </member>
+        <member name="T:Model.Database.SpOrderProductSupplier">
+            <summary>
+            订单中的商品的供货商
+            </summary>
+        </member>
+        <member name="P:Model.Database.SpOrderProductSupplier.Orderid">
+            <summary>
+            订单号
+            </summary>
+        </member>
+        <member name="P:Model.Database.SpOrderProductSupplier.Productid">
+            <summary>
+            商品id
+            </summary>
+        </member>
+        <member name="P:Model.Database.SpOrderProductSupplier.Supplierid">
+            <summary>
+            供货商
+            </summary>
+        </member>
+        <member name="P:Model.Database.SpOrderProductSupplier.State">
+            <summary>
+            状态 0正常 1未出货
+            </summary>
+        </member>
+        <member name="P:Model.Database.SpOrderProductSupplier.Msg">
+            <summary>
+            说明
+            </summary>
+        </member>
+        <member name="T:Model.Database.SpProductSupplier">
+            <summary>
+            商品专用供货商
+            </summary>
+        </member>
+        <member name="P:Model.Database.SpProductSupplier.Productid">
+            <summary>
+            商品id
+            </summary>
+        </member>
+        <member name="P:Model.Database.SpProductSupplier.Suplier">
+            <summary>
+            供货商id
+            </summary>
+        </member>
+        <member name="P:Model.Database.SpProductSupplier.StartTime">
+            <summary>
+            起始日期
+            </summary>
+        </member>
+        <member name="P:Model.Database.SpProductSupplier.EndTime">
+            <summary>
+            结束日期
+            </summary>
+        </member>
+        <member name="T:Model.Database.SpUser">
+            <summary>
+            供货商信息
+            </summary>
+        </member>
+        <member name="P:Model.Database.SpUser.Name">
+            <summary>
+            供货商名称
+            </summary>
+        </member>
+        <member name="P:Model.Database.SpUser.Address">
+            <summary>
+            供货商地址
+            </summary>
+        </member>
+        <member name="P:Model.Database.SpUser.State">
+            <summary>
+            状态 0正常 1禁用
+            </summary>
+        </member>
+        <member name="P:Model.Database.SpUser.Crtime">
+            <summary>
+            创建时间
+            </summary>
+        </member>
         <member name="T:Model.Database.TCart">
             <summary>
             购物车
@@ -239,14 +549,19 @@
             实际支付金额
             </summary>
         </member>
+        <member name="P:Model.Database.TOrder.Phone">
+            <summary>
+            手机号
+            </summary>
+        </member>
         <member name="P:Model.Database.TOrder.State">
             <summary>
             状态（0待支付，1已支付，2已完成，9已取消，10已删除）
             </summary>
         </member>
-        <member name="P:Model.Database.TOrder.Phone">
+        <member name="P:Model.Database.TOrder.Crdate">
             <summary>
-            手机号
+            创建日期
             </summary>
         </member>
         <member name="P:Model.Database.TOrder.Crtime">
@@ -349,6 +664,11 @@
             金额
             </summary>
         </member>
+        <member name="P:Model.Database.TOrderProduct.Type">
+            <summary>
+            类别 0普通 1早餐 2午餐 3晚餐
+            </summary>
+        </member>
         <member name="P:Model.Database.TOrderProduct.Img">
             <summary>
             商品图片
@@ -422,6 +742,31 @@
         <member name="P:Model.Database.TProduct.Crtime">
             <summary>
             创建时间
+            </summary>
+        </member>
+        <member name="T:Model.Database.TProductCompany">
+            <summary>
+            商品定向公司展示
+            </summary>
+        </member>
+        <member name="P:Model.Database.TProductCompany.Productid">
+            <summary>
+            商品id
+            </summary>
+        </member>
+        <member name="P:Model.Database.TProductCompany.Companyid">
+            <summary>
+            公司id
+            </summary>
+        </member>
+        <member name="P:Model.Database.TProductCompany.StartDate">
+            <summary>
+            起始日期
+            </summary>
+        </member>
+        <member name="P:Model.Database.TProductCompany.EndDate">
+            <summary>
+            结束日期
             </summary>
         </member>
         <member name="T:Model.Database.TUser">
@@ -559,6 +904,26 @@
             商品id
             </summary>
         </member>
+        <member name="T:Model.Request.CategoryAdd">
+            <summary>
+            商品分类添加
+            </summary>
+        </member>
+        <member name="P:Model.Request.CategoryAdd.Name">
+            <summary>
+            商品分类名称
+            </summary>
+        </member>
+        <member name="P:Model.Request.CategoryUpdate.Name">
+            <summary>
+            商品分类名称
+            </summary>
+        </member>
+        <member name="P:Model.Request.CategoryUpdate.State">
+            <summary>
+            状态0正常 1禁用
+            </summary>
+        </member>
         <member name="T:Model.Request.CompanyAdd">
             <summary>
             公司信息
@@ -662,6 +1027,11 @@
         <member name="P:Model.Request.ProductInfo.Count">
             <summary>
             数量
+            </summary>
+        </member>
+        <member name="P:Model.Request.ProductInfo.Type">
+            <summary>
+            类别 0普通 1早餐 2午餐 3晚餐
             </summary>
         </member>
         <member name="P:Model.Request.ProductInfo.Money">

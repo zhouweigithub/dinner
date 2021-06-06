@@ -5,6 +5,8 @@ using System.Threading.Tasks;
 using BLL;
 using BLL.Interface;
 using Microsoft.Extensions.DependencyInjection;
+using Util.Tools.QrCode;
+using Util.Tools.QrCode.QrCoder;
 
 namespace Api
 {
@@ -16,6 +18,7 @@ namespace Api
         /// <param name="services"></param>
         public static void AddDataServices(this IServiceCollection services)
         {
+            //数据操作服务
             services.AddTransient<IBaseService, BaseService>();
             services.AddTransient<ICompanyService, CompanyService>();
             services.AddTransient<ICartService, CartService>();
@@ -30,6 +33,10 @@ namespace Api
             services.AddTransient<IUserService, UserService>();
             services.AddTransient<IWxService, WxService>();
             services.AddTransient<IDbInitService, DbInitService>();
+            services.AddTransient<ICategoryService, CategoryService>();
+
+
+            //其他服务
         }
     }
 }

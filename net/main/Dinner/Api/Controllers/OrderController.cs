@@ -77,5 +77,30 @@ namespace Api.Controllers
             return await _services.DeleteAsync(orderid, openid);
         }
 
+
+        /// <summary>
+        /// 用户获取自己现在需要取货的商品信息
+        /// </summary>
+        /// <returns></returns>
+        [HttpGet]
+        [Route("[action]")]
+        public async Task<RespDataList<TOrderProduct>> GetTodayOrder()
+        {
+            string openid = GetUserCode();
+            return await _services.GetTodayOrderAsync(openid);
+        }
+
+
+        /// <summary>
+        /// 获取目标用户现在需要取的餐品信息
+        /// </summary>
+        /// <param name="userCode">目标用户代码(openid)</param>
+        /// <returns></returns>
+        [HttpGet]
+        [Route("[action]/{userCode}")]
+        public async Task<RespDataList<TOrderProduct>> GetTodayOrderByUserCode(string userCode)
+        {
+            return await _services.GetTodayOrderAsync(userCode);
+        }
     }
 }

@@ -62,6 +62,11 @@ namespace Model.Request
         public int Count { get; set; }
 
         /// <summary>
+        /// 类别 0普通 1早餐 2午餐 3晚餐
+        /// </summary>
+        public int Type { get; set; }
+
+        /// <summary>
         /// 总金额
         /// </summary>
         public decimal Money => Price * Count;

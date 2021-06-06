@@ -86,6 +86,12 @@ namespace Api
                 app.UseDeveloperExceptionPage();
             }
 
+            using (var serviceScope = app.ApplicationServices.GetService<IServiceScopeFactory>().CreateScope())
+            {
+                var context = serviceScope.ServiceProvider.GetRequiredService<DbService>();
+                context.Database.EnsureCreated();
+            }
+
             app.UseStaticFiles();
 
             app.UseSwaggerWare();

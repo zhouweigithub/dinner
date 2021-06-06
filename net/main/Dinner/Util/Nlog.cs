@@ -1,6 +1,6 @@
 ﻿using System;
 
-namespace Util
+namespace ZwUtil
 {
     public class Nlog
     {
