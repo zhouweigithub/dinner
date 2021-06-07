@@ -41,7 +41,7 @@ namespace Api.Controllers
         }
 
         /// <summary>
-        /// 登录，若该用户无未注册，则进行注册
+        /// 登录，若该用户未注册，则进行注册
         /// </summary>
         /// <param name="user">用户信息</param>
         /// <returns></returns>

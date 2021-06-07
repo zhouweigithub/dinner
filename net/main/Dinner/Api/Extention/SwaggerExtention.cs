@@ -55,6 +55,7 @@ namespace Api
                 var xmlPath2 = Path.Combine(AppContext.BaseDirectory, "Model.xml");
                 opti.IncludeXmlComments(xmlPath1);
                 opti.IncludeXmlComments(xmlPath2);
+                opti.DocInclusionPredicate((docName, description) => true);
             });
         }
 
