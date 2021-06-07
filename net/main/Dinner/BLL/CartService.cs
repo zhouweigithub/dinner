@@ -114,6 +114,7 @@ namespace BLL
             {
                 result.code = -1;
                 result.msg = "服务内部错误";
+                result.datas = new List<TCart>();
                 _logger.LogError(e.ToString());
             }
 

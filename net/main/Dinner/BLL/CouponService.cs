@@ -52,12 +52,14 @@ namespace BLL
                 {
                     result.code = -1;
                     result.msg = "该优惠券已存在";
+                    result.data = null;
                 }
             }
             catch (Exception e)
             {
                 result.code = -1;
                 result.msg = "服务内部错误";
+                result.data = null;
                 _logger.LogError(e.ToString());
             }
 
@@ -108,6 +110,7 @@ namespace BLL
                 _logger.LogError(e.ToString());
                 result.code = -1;
                 result.msg = "服务内部错误";
+                result.datas = new List<TUserCoupon>();
             }
 
             return result;

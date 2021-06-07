@@ -77,7 +77,7 @@ INSERT INTO `t_coupon` (`name`,`money`,`start_time`,`end_time`,`crtime`)VALUES('
 INSERT INTO `t_cart` (`userid`,`productid`,`count`,`crtime`)VALUES('1','1','1','2021-02-04'),('1','2','3','2021-02-02'),('2','3','1','2021-01-04');
 INSERT INTO `t_user_coupon` (`userid`,`couponid`,`count`,`crtime`)VALUES('1','1','1','2021-05-01'),('1','2','2','2021-06-01');
 INSERT INTO `t_feedback` (`userid`,`msg`,`crtime`,`replay`,`replay_time`)VALUES('1','太棒了','2021-09-01','谢谢','2021-10-02');
-INSERT INTO `t_order` (id,`userid`,`money`,`coupon_money`,`pay_money`,`state`,`crtime`)VALUES('225533664411','1','100','10','90','0','2021-02-14');
+INSERT INTO `t_order` (id,`userid`,`money`,`coupon_money`,`pay_money`,`state`,crdate,`crtime`)VALUES('225533664411','1','100','10','90','0','2021-02-14','2021-02-14');
 INSERT INTO `t_order_coupon` (`orderid`,`couponid`,`couponName`,`price`,`count`,`money`)VALUES('225533664411','1','任意优惠','4','1','4');
 INSERT INTO `t_order_product` (`orderid`,`productid`,`productName`,`price`,`count`,`money`,`img`)VALUES('225533664411','1','什么鸟装备','10','10','100','http://pic.ntimg.cn/file/20150514/3269097_162059846000_2.jpg');
 ";

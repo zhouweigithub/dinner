@@ -55,14 +55,17 @@ namespace Api.Controllers
             if (entity.code == -2)
             {
                 var addResult = await userService.AddAsync(user);
+                entity.code = addResult.code;
+                entity.msg = addResult.msg;
+                entity.data = addResult.data;
+
                 if (addResult.code == 0)
                 {
-                    entity.data = addResult.data;
+                    entity.token = GenerateToken(user.OpenId);
                 }
             }
-
             //如果没抛异常，则获则生成token
-            if (entity.code != -1)
+            else if (entity.code != -1)
             {
                 entity.token = GenerateToken(user.OpenId);
             }
@@ -114,6 +117,9 @@ namespace Api.Controllers
         /// <returns></returns>
         private string GenerateToken(string username)
         {
+            if (string.IsNullOrWhiteSpace(username))
+                return string.Empty;
+
             var claims = new Claim[]
             {
                 new Claim(ClaimTypes.Name, username),

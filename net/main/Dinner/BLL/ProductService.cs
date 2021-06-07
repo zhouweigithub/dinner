@@ -45,6 +45,7 @@ namespace BLL
             {
                 result.code = -1;
                 result.msg = "服务内部错误";
+                result.datas = new List<TProduct>();
                 _logger.LogError(e.ToString());
             }
 
@@ -64,6 +65,7 @@ namespace BLL
             {
                 result.code = -1;
                 result.msg = "服务内部错误";
+                result.data = null;
                 _logger.LogError(e.ToString());
             }
 
@@ -91,6 +93,7 @@ namespace BLL
             {
                 result.code = -1;
                 result.msg = "服务内部错误";
+                result.data = null;
                 _logger.LogError(e.ToString());
             }
 
@@ -110,6 +113,7 @@ namespace BLL
             {
                 result.code = -1;
                 result.msg = "服务内部错误";
+                result.data = null;
                 _logger.LogError(e.ToString());
             }
 

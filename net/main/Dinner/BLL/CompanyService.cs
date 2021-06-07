@@ -36,6 +36,7 @@ namespace BLL
             {
                 result.code = -1;
                 result.msg = "服务内部错误";
+                result.data = null;
                 _logger.LogError(e.ToString());
             }
 
@@ -63,14 +64,16 @@ namespace BLL
                 }
                 else
                 {
-                    result.code = -1;
+                    result.code = -2;
                     result.msg = "该公司已存在";
+                    result.data = null;
                 }
             }
             catch (Exception e)
             {
                 result.code = -1;
                 result.msg = "服务内部错误";
+                result.data = null;
                 _logger.LogError(e.ToString());
             }
 
@@ -90,6 +93,7 @@ namespace BLL
             {
                 result.code = -1;
                 result.msg = "服务内部错误";
+                result.data = null;
                 _logger.LogError(e.ToString());
             }
 

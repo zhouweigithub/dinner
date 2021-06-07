@@ -99,6 +99,7 @@ namespace BLL
             {
                 result.code = -1;
                 result.msg = "服务内部错误";
+                result.datas = new List<TCategory>();
                 _logger.LogError(e.ToString());
             }
 

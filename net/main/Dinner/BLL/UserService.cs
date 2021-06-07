@@ -37,12 +37,14 @@ namespace BLL
                 {
                     result.code = -2;
                     result.msg = "未找到相关用户信息";
+                    result.data = null;
                 }
             }
             catch (Exception e)
             {
                 result.code = -1;
                 result.msg = "服务内部错误";
+                result.data = null;
                 _logger.LogError(e.ToString());
             }
 
@@ -64,6 +66,7 @@ namespace BLL
                     {
                         result.code = -1;
                         result.msg = "公司信息不正确";
+                        result.data = null;
                     }
                     else
                     {
@@ -86,12 +89,14 @@ namespace BLL
                 {
                     result.code = -2;
                     result.msg = "该用户已存在";
+                    result.data = null;
                 }
             }
             catch (Exception e)
             {
                 result.code = -1;
                 result.msg = "服务内部错误";
+                result.data = null;
                 _logger.LogError(e.ToString());
             }
 
@@ -117,6 +122,7 @@ namespace BLL
             {
                 result.code = -1;
                 result.msg = "服务内部错误";
+                result.data = null;
                 _logger.LogError(e.ToString());
             }
 

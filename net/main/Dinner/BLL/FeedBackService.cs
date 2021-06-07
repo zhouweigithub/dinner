@@ -23,6 +23,7 @@ namespace BLL
             _logger = logger;
         }
 
+
         public async Task<RespData> AddAsync(string openid, FeedbackAdd data)
         {
             RespData result = new RespData();
@@ -62,6 +63,7 @@ namespace BLL
             {
                 result.code = -1;
                 result.msg = "服务内部错误";
+                result.datas = new List<TFeedback>();
                 _logger.LogError(e.ToString());
             }
 

@@ -55,6 +55,7 @@ namespace BLL
                     {
                         result.code = -2;
                         result.msg = "订单商品信息异常，请重新下单";
+                        result.data = null;
                         return result;
                     }
 
@@ -97,14 +98,16 @@ namespace BLL
 
                     if (couponData == null || userCoupon == null || couponData.Money != couponData.Money)
                     {
-                        result.code = -2;
+                        result.code = -3;
                         result.msg = "优惠券信息异常，请重新下单";
+                        result.data = null;
                         return result;
                     }
                     else if (couponData.StartTime > DateTime.Now || couponData.EndTime < DateTime.Now)
                     {
-                        result.code = -3;
+                        result.code = -4;
                         result.msg = "优惠券未在有效使用期内，请重新下单";
+                        result.data = null;
                         return result;
                     }
 
@@ -134,8 +137,9 @@ namespace BLL
 
                 if (data.Money != allProductMoney || data.CouponMoney != allCouponMoney || data.PayMoney != allProductMoney - allCouponMoney)
                 {
-                    result.code = -4;
+                    result.code = -5;
                     result.msg = "订单信息异常，请重新下单";
+                    result.data = null;
                     return result;
                 }
 
@@ -160,6 +164,7 @@ namespace BLL
             {
                 result.code = -1;
                 result.msg = "服务内部错误";
+                result.data = null;
                 _logger.LogError(e.ToString());
             }
 
@@ -267,6 +272,7 @@ namespace BLL
                 _logger.LogError(e.ToString());
                 result.code = -1;
                 result.msg = "服务内部错误";
+                result.datas = new List<TOrder>();
             }
 
             return result;
@@ -322,6 +328,7 @@ namespace BLL
                 _logger.LogError(e.ToString());
                 result.code = -1;
                 result.msg = "服务内部错误";
+                result.datas = new List<TOrderProduct>();
             }
 
             return result;
