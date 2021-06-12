@@ -19,6 +19,7 @@ namespace Model.Database
     {
         public TCompany()
         {
+            RCompanySupplier = new HashSet<RCompanySupplier>();
             TUser = new HashSet<TUser>();
         }
 
@@ -52,6 +53,8 @@ namespace Model.Database
         [Column("crtime", TypeName = "datetime")]
         public DateTime? Crtime { get; set; }
 
+        [InverseProperty("Company")]
+        public virtual ICollection<RCompanySupplier> RCompanySupplier { get; set; }
         [InverseProperty("Company")]
         public virtual ICollection<TUser> TUser { get; set; }
     }

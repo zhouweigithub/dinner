@@ -13,6 +13,7 @@ namespace Model.Database
     /// 支付信息
     /// </summary>
     [Table("t_pay")]
+    [Index(nameof(Orderid), Name = "fk_orderid2")]
     public partial class TPay
     {
         /// <summary>
@@ -45,5 +46,9 @@ namespace Model.Database
         /// </summary>
         [Column("crtime", TypeName = "datetime")]
         public DateTime Crtime { get; set; }
+
+        [ForeignKey(nameof(Orderid))]
+        [InverseProperty(nameof(TOrder.TPay))]
+        public virtual TOrder Order { get; set; }
     }
 }

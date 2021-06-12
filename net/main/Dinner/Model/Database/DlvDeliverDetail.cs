@@ -9,6 +9,9 @@ using Microsoft.EntityFrameworkCore;
 
 namespace Model.Database
 {
+    /// <summary>
+    /// 送货员送货详情
+    /// </summary>
     [Table("dlv_deliver_detail")]
     public partial class DlvDeliverDetail
     {

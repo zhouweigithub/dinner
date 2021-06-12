@@ -10,10 +10,10 @@ using Microsoft.EntityFrameworkCore;
 namespace Model.Database
 {
     /// <summary>
-    /// 订单中的商品的送货人
+    /// 订单中的商品的供货商
     /// </summary>
-    [Table("dlv_order_product_deliver")]
-    public partial class DlvOrderProductDeliver
+    [Table("r_orderproduct_supplier")]
+    public partial class ROrderproductSupplier
     {
         /// <summary>
         /// 订单号
@@ -29,12 +29,12 @@ namespace Model.Database
         [Column("productid")]
         public int Productid { get; set; }
         /// <summary>
-        /// 送货人
+        /// 供货商
         /// </summary>
-        [Column("delivererid")]
-        public int Delivererid { get; set; }
+        [Column("supplierid")]
+        public int Supplierid { get; set; }
         /// <summary>
-        /// 状态 0正常 1未送达
+        /// 状态 0正常 1未出货
         /// </summary>
         [Column("state")]
         public int State { get; set; }

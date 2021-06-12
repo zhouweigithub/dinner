@@ -19,6 +19,7 @@ namespace Model.Database
     {
         public TProduct()
         {
+            RProductSuplier = new HashSet<RProductSuplier>();
             TCart = new HashSet<TCart>();
         }
 
@@ -65,6 +66,8 @@ namespace Model.Database
         [ForeignKey(nameof(Category))]
         [InverseProperty(nameof(TCategory.TProduct))]
         public virtual TCategory CategoryNavigation { get; set; }
+        [InverseProperty("Product")]
+        public virtual ICollection<RProductSuplier> RProductSuplier { get; set; }
         [InverseProperty("Product")]
         public virtual ICollection<TCart> TCart { get; set; }
     }

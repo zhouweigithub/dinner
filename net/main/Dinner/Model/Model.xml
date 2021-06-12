@@ -4,6 +4,11 @@
         <name>Model</name>
     </assembly>
     <members>
+        <member name="T:Model.Database.DlvDeliverDetail">
+            <summary>
+            送货员送货详情
+            </summary>
+        </member>
         <member name="P:Model.Database.DlvDeliverDetail.Crdate">
             <summary>
             日期
@@ -89,14 +94,14 @@
             送货人送货异常情况
             </summary>
         </member>
-        <member name="P:Model.Database.DlvException.Delivererid">
-            <summary>
-            送货人id
-            </summary>
-        </member>
         <member name="P:Model.Database.DlvException.Crdate">
             <summary>
             日期
+            </summary>
+        </member>
+        <member name="P:Model.Database.DlvException.Delivererid">
+            <summary>
+            送货人id
             </summary>
         </member>
         <member name="P:Model.Database.DlvException.Msg">
@@ -117,36 +122,6 @@
         <member name="P:Model.Database.DlvException.LossValue">
             <summary>
             损失评论（元）
-            </summary>
-        </member>
-        <member name="T:Model.Database.DlvOrderProductDeliver">
-            <summary>
-            订单中的商品的送货人
-            </summary>
-        </member>
-        <member name="P:Model.Database.DlvOrderProductDeliver.Orderid">
-            <summary>
-            订单号
-            </summary>
-        </member>
-        <member name="P:Model.Database.DlvOrderProductDeliver.Productid">
-            <summary>
-            商品id
-            </summary>
-        </member>
-        <member name="P:Model.Database.DlvOrderProductDeliver.Delivererid">
-            <summary>
-            送货人
-            </summary>
-        </member>
-        <member name="P:Model.Database.DlvOrderProductDeliver.State">
-            <summary>
-            状态 0正常 1未送达
-            </summary>
-        </member>
-        <member name="P:Model.Database.DlvOrderProductDeliver.Msg">
-            <summary>
-            说明
             </summary>
         </member>
         <member name="T:Model.Database.DlvUser">
@@ -174,34 +149,154 @@
             创建时间
             </summary>
         </member>
-        <member name="T:Model.Database.SpCompanySupplier">
+        <member name="T:Model.Database.HisCompanySupplier">
             <summary>
-            公司与供货商关系
+            公司的主供货商历史记录
             </summary>
         </member>
-        <member name="P:Model.Database.SpCompanySupplier.Companyid">
+        <member name="P:Model.Database.HisCompanySupplier.Crdate">
+            <summary>
+            日期
+            </summary>
+        </member>
+        <member name="P:Model.Database.HisCompanySupplier.Companyid">
             <summary>
             公司id
             </summary>
         </member>
-        <member name="P:Model.Database.SpCompanySupplier.Suplier">
+        <member name="P:Model.Database.HisCompanySupplier.Suplierid">
             <summary>
             供货商id
             </summary>
         </member>
-        <member name="P:Model.Database.SpCompanySupplier.StartTime">
+        <member name="T:Model.Database.RCompanySupplier">
+            <summary>
+            公司与供货商关系
+            </summary>
+        </member>
+        <member name="P:Model.Database.RCompanySupplier.Companyid">
+            <summary>
+            公司id
+            </summary>
+        </member>
+        <member name="P:Model.Database.RCompanySupplier.Suplierid">
+            <summary>
+            供货商id
+            </summary>
+        </member>
+        <member name="P:Model.Database.RCompanySupplier.StartDate">
             <summary>
             起始日期
             </summary>
         </member>
-        <member name="P:Model.Database.SpCompanySupplier.EndTime">
+        <member name="P:Model.Database.RCompanySupplier.EndDate">
             <summary>
             结束日期
+            </summary>
+        </member>
+        <member name="T:Model.Database.ROrderproductDeliver">
+            <summary>
+            订单中的商品的送货人
+            </summary>
+        </member>
+        <member name="P:Model.Database.ROrderproductDeliver.Orderid">
+            <summary>
+            订单号
+            </summary>
+        </member>
+        <member name="P:Model.Database.ROrderproductDeliver.Productid">
+            <summary>
+            商品id
+            </summary>
+        </member>
+        <member name="P:Model.Database.ROrderproductDeliver.Delivererid">
+            <summary>
+            送货人
+            </summary>
+        </member>
+        <member name="P:Model.Database.ROrderproductDeliver.State">
+            <summary>
+            状态 0正常 1未送达
+            </summary>
+        </member>
+        <member name="P:Model.Database.ROrderproductDeliver.Msg">
+            <summary>
+            说明
+            </summary>
+        </member>
+        <member name="T:Model.Database.ROrderproductSupplier">
+            <summary>
+            订单中的商品的供货商
+            </summary>
+        </member>
+        <member name="P:Model.Database.ROrderproductSupplier.Orderid">
+            <summary>
+            订单号
+            </summary>
+        </member>
+        <member name="P:Model.Database.ROrderproductSupplier.Productid">
+            <summary>
+            商品id
+            </summary>
+        </member>
+        <member name="P:Model.Database.ROrderproductSupplier.Supplierid">
+            <summary>
+            供货商
+            </summary>
+        </member>
+        <member name="P:Model.Database.ROrderproductSupplier.State">
+            <summary>
+            状态 0正常 1未出货
+            </summary>
+        </member>
+        <member name="P:Model.Database.ROrderproductSupplier.Msg">
+            <summary>
+            说明
+            </summary>
+        </member>
+        <member name="T:Model.Database.RProductSuplier">
+            <summary>
+            部分商品的指定供货商
+            </summary>
+        </member>
+        <member name="P:Model.Database.RProductSuplier.Productid">
+            <summary>
+            商品id
+            </summary>
+        </member>
+        <member name="P:Model.Database.RProductSuplier.Suplierid">
+            <summary>
+            供货商id
+            </summary>
+        </member>
+        <member name="P:Model.Database.RProductSuplier.Type">
+            <summary>
+            类型 0由其供货 1不由其供货
+            </summary>
+        </member>
+        <member name="P:Model.Database.RProductSuplier.StartDate">
+            <summary>
+            开始日期
+            </summary>
+        </member>
+        <member name="P:Model.Database.RProductSuplier.EndDate">
+            <summary>
+            结束日期
+            </summary>
+        </member>
+        <member name="P:Model.Database.RProductSuplier.Crtime">
+            <summary>
+            创建时间
             </summary>
         </member>
         <member name="T:Model.Database.SpException">
             <summary>
             供货商供货异常情况
+            </summary>
+        </member>
+        <member name="P:Model.Database.SpException.Id">
+            <summary>
+            异常id
             </summary>
         </member>
         <member name="P:Model.Database.SpException.Supplierid">
@@ -232,61 +327,6 @@
         <member name="P:Model.Database.SpException.LossValue">
             <summary>
             损失评论（元）
-            </summary>
-        </member>
-        <member name="T:Model.Database.SpOrderProductSupplier">
-            <summary>
-            订单中的商品的供货商
-            </summary>
-        </member>
-        <member name="P:Model.Database.SpOrderProductSupplier.Orderid">
-            <summary>
-            订单号
-            </summary>
-        </member>
-        <member name="P:Model.Database.SpOrderProductSupplier.Productid">
-            <summary>
-            商品id
-            </summary>
-        </member>
-        <member name="P:Model.Database.SpOrderProductSupplier.Supplierid">
-            <summary>
-            供货商
-            </summary>
-        </member>
-        <member name="P:Model.Database.SpOrderProductSupplier.State">
-            <summary>
-            状态 0正常 1未出货
-            </summary>
-        </member>
-        <member name="P:Model.Database.SpOrderProductSupplier.Msg">
-            <summary>
-            说明
-            </summary>
-        </member>
-        <member name="T:Model.Database.SpProductSupplier">
-            <summary>
-            商品专用供货商
-            </summary>
-        </member>
-        <member name="P:Model.Database.SpProductSupplier.Productid">
-            <summary>
-            商品id
-            </summary>
-        </member>
-        <member name="P:Model.Database.SpProductSupplier.Suplier">
-            <summary>
-            供货商id
-            </summary>
-        </member>
-        <member name="P:Model.Database.SpProductSupplier.StartTime">
-            <summary>
-            起始日期
-            </summary>
-        </member>
-        <member name="P:Model.Database.SpProductSupplier.EndTime">
-            <summary>
-            结束日期
             </summary>
         </member>
         <member name="T:Model.Database.SpUser">

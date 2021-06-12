@@ -13,18 +13,23 @@ namespace Model.Database
     /// 供货商供货异常情况
     /// </summary>
     [Table("sp_exception")]
+    [Index(nameof(Supplierid), Name = "fk_spuser")]
     public partial class SpException
     {
         /// <summary>
-        /// 供货商id
+        /// 异常id
         /// </summary>
         [Key]
+        [Column("id")]
+        public int Id { get; set; }
+        /// <summary>
+        /// 供货商id
+        /// </summary>
         [Column("supplierid")]
         public int Supplierid { get; set; }
         /// <summary>
         /// 日期
         /// </summary>
-        [Key]
         [Column("crdate", TypeName = "date")]
         public DateTime Crdate { get; set; }
         /// <summary>
@@ -49,5 +54,9 @@ namespace Model.Database
         /// </summary>
         [Column("loss_value")]
         public int LossValue { get; set; }
+
+        [ForeignKey(nameof(Supplierid))]
+        [InverseProperty(nameof(SpUser.SpException))]
+        public virtual SpUser Supplier { get; set; }
     }
 }

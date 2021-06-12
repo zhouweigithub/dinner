@@ -13,20 +13,21 @@ namespace Model.Database
     /// 送货人送货异常情况
     /// </summary>
     [Table("dlv_exception")]
+    [Index(nameof(Delivererid), Name = "fk_delivererid")]
     public partial class DlvException
     {
-        /// <summary>
-        /// 送货人id
-        /// </summary>
-        [Key]
-        [Column("delivererid")]
-        public int Delivererid { get; set; }
         /// <summary>
         /// 日期
         /// </summary>
         [Key]
         [Column("crdate", TypeName = "date")]
         public DateTime Crdate { get; set; }
+        /// <summary>
+        /// 送货人id
+        /// </summary>
+        [Key]
+        [Column("delivererid")]
+        public int Delivererid { get; set; }
         /// <summary>
         /// 异常描述
         /// </summary>
@@ -49,5 +50,9 @@ namespace Model.Database
         /// </summary>
         [Column("loss_value")]
         public int LossValue { get; set; }
+
+        [ForeignKey(nameof(Delivererid))]
+        [InverseProperty(nameof(DlvUser.DlvException))]
+        public virtual DlvUser Deliverer { get; set; }
     }
 }

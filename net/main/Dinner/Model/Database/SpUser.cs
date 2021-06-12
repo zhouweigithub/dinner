@@ -15,6 +15,13 @@ namespace Model.Database
     [Table("sp_user")]
     public partial class SpUser
     {
+        public SpUser()
+        {
+            RCompanySupplier = new HashSet<RCompanySupplier>();
+            RProductSuplier = new HashSet<RProductSuplier>();
+            SpException = new HashSet<SpException>();
+        }
+
         [Key]
         [Column("id")]
         public int Id { get; set; }
@@ -42,5 +49,12 @@ namespace Model.Database
         /// </summary>
         [Column("crtime", TypeName = "datetime")]
         public DateTime Crtime { get; set; }
+
+        [InverseProperty("Suplier")]
+        public virtual ICollection<RCompanySupplier> RCompanySupplier { get; set; }
+        [InverseProperty("Suplier")]
+        public virtual ICollection<RProductSuplier> RProductSuplier { get; set; }
+        [InverseProperty("Supplier")]
+        public virtual ICollection<SpException> SpException { get; set; }
     }
 }

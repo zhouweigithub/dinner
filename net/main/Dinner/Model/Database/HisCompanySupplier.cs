@@ -10,11 +10,17 @@ using Microsoft.EntityFrameworkCore;
 namespace Model.Database
 {
     /// <summary>
-    /// 公司与供货商关系
+    /// 公司的主供货商历史记录
     /// </summary>
-    [Table("sp_company_supplier")]
-    public partial class SpCompanySupplier
+    [Table("his_company_supplier")]
+    public partial class HisCompanySupplier
     {
+        /// <summary>
+        /// 日期
+        /// </summary>
+        [Key]
+        [Column("crdate", TypeName = "date")]
+        public DateTime Crdate { get; set; }
         /// <summary>
         /// 公司id
         /// </summary>
@@ -24,17 +30,7 @@ namespace Model.Database
         /// <summary>
         /// 供货商id
         /// </summary>
-        [Column("suplier")]
-        public int Suplier { get; set; }
-        /// <summary>
-        /// 起始日期
-        /// </summary>
-        [Column("start_time", TypeName = "date")]
-        public DateTime StartTime { get; set; }
-        /// <summary>
-        /// 结束日期
-        /// </summary>
-        [Column("end_time", TypeName = "date")]
-        public DateTime EndTime { get; set; }
+        [Column("suplierid")]
+        public int Suplierid { get; set; }
     }
 }

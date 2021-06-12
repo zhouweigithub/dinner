@@ -30,27 +30,31 @@
          "ObjectType": 0
       },
       {
-         "Name": "dlv_order_product_deliver",
-         "ObjectType": 0
-      },
-      {
          "Name": "dlv_user",
          "ObjectType": 0
       },
       {
-         "Name": "sp_company_supplier",
+         "Name": "his_company_supplier",
+         "ObjectType": 0
+      },
+      {
+         "Name": "r_company_supplier",
+         "ObjectType": 0
+      },
+      {
+         "Name": "r_orderproduct_deliver",
+         "ObjectType": 0
+      },
+      {
+         "Name": "r_orderproduct_supplier",
+         "ObjectType": 0
+      },
+      {
+         "Name": "r_product_suplier",
          "ObjectType": 0
       },
       {
          "Name": "sp_exception",
-         "ObjectType": 0
-      },
-      {
-         "Name": "sp_order_product_supplier",
-         "ObjectType": 0
-      },
-      {
-         "Name": "sp_product_supplier",
          "ObjectType": 0
       },
       {

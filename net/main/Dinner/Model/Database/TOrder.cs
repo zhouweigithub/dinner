@@ -20,6 +20,7 @@ namespace Model.Database
             TComment = new HashSet<TComment>();
             TOrderCoupon = new HashSet<TOrderCoupon>();
             TOrderProduct = new HashSet<TOrderProduct>();
+            TPay = new HashSet<TPay>();
         }
 
         /// <summary>
@@ -79,5 +80,7 @@ namespace Model.Database
         public virtual ICollection<TOrderCoupon> TOrderCoupon { get; set; }
         [InverseProperty("Order")]
         public virtual ICollection<TOrderProduct> TOrderProduct { get; set; }
+        [InverseProperty("Order")]
+        public virtual ICollection<TPay> TPay { get; set; }
     }
 }

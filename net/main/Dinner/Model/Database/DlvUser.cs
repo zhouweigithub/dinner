@@ -15,6 +15,11 @@ namespace Model.Database
     [Table("dlv_user")]
     public partial class DlvUser
     {
+        public DlvUser()
+        {
+            DlvException = new HashSet<DlvException>();
+        }
+
         [Key]
         [Column("id")]
         public int Id { get; set; }
@@ -42,5 +47,8 @@ namespace Model.Database
         /// </summary>
         [Column("crtime", TypeName = "datetime")]
         public DateTime Crtime { get; set; }
+
+        [InverseProperty("Deliverer")]
+        public virtual ICollection<DlvException> DlvException { get; set; }
     }
 }
