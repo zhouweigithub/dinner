@@ -76,6 +76,12 @@ namespace ZwUtil
             }
         }
 
+        /// <summary>
+        /// 获取随机字符串
+        /// </summary>
+        /// <param name="length">长度</param>
+        /// <param name="sourcesChars">字符来源</param>
+        /// <returns></returns>
         public static string GetRandomString(int length, string sourcesChars)
         {
             if (length == 0 || string.IsNullOrWhiteSpace(sourcesChars))
