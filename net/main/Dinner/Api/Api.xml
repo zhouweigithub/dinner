@@ -208,6 +208,19 @@
             <param name="username">用户名</param>
             <returns></returns>
         </member>
+        <member name="M:Api.Controllers.HomeController.CreateUserQrcode(System.String)">
+            <summary>
+            生成用户的二维码图片
+            </summary>
+            <param name="openid">openid</param>
+        </member>
+        <member name="M:Api.Controllers.HomeController.CreateUserInfo(Model.Database.TUser)">
+            <summary>
+            创建UserInfo实例，包含二维码图片地址
+            </summary>
+            <param name="user">TUser信息</param>
+            <returns></returns>
+        </member>
         <member name="T:Api.Controllers.NoticeController">
             <summary>
             公告信息
@@ -435,6 +448,12 @@
             配置Cache序列化的JSON策略
             </summary>
             <param name="t"></param>
+        </member>
+        <member name="M:Api.Startup.CreateStaticFolder(System.String)">
+            <summary>
+            创建文件，若目录不存在，先创建目录
+            </summary>
+            <param name="file"></param>
         </member>
     </members>
 </doc>

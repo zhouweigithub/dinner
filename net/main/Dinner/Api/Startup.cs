@@ -19,6 +19,7 @@ using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
+using Microsoft.Extensions.FileProviders;
 using Microsoft.Extensions.Hosting;
 using Microsoft.Extensions.Logging;
 using Microsoft.IdentityModel.Tokens;
@@ -28,6 +29,7 @@ using Model.Request.Wx;
 using Newtonsoft.Json;
 using Newtonsoft.Json.Serialization;
 using NLog.Extensions.Logging;
+using ZwUtil;
 
 namespace Api
 {
@@ -94,7 +96,17 @@ namespace Api
             }
 
 
-            app.UseStaticFiles();
+            //静态文件路径
+            string staticFolder = Path.Combine(AppDomain.CurrentDomain.BaseDirectory, "statics");
+            CreateStaticFolder(staticFolder + "\\readme.txt");
+
+            app.UseStaticFiles(new StaticFileOptions
+            {
+                //资源所在的绝对路径。
+                FileProvider = new PhysicalFileProvider(staticFolder),
+                //表示访问路径,必须'/'开头
+                RequestPath = "/statics"
+            });
 
             app.UseSwaggerWare();
 
@@ -123,6 +135,17 @@ namespace Api
         private void SetJsonPara(EasyCachingJsonSerializerOptions t)
         {
             t.ReferenceLoopHandling = ReferenceLoopHandling.Ignore;
+        }
+
+
+        /// <summary>
+        /// 创建文件，若目录不存在，先创建目录
+        /// </summary>
+        /// <param name="file"></param>
+        private void CreateStaticFolder(string file)
+        {
+            byte[] content = Encoding.UTF8.GetBytes("本目录为站点所有静态文件存放目录");
+            FileHelper.CreateFile(file, content);
         }
     }
 }

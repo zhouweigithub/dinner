@@ -13,7 +13,10 @@ using Model;
 using Model.Database;
 using Model.Request;
 using Model.Request.Wx;
+using Model.Response;
 using Model.Response.Com;
+using ZwUtil;
+using ZwUtil.QrCode;
 
 namespace Api.Controllers
 {
@@ -55,19 +58,31 @@ namespace Api.Controllers
             if (entity.code == -2)
             {
                 var addResult = await userService.AddAsync(user);
+
+                //生成二维码地址
+                var userInfo = CreateUserInfo(addResult.data);
+
                 entity.code = addResult.code;
                 entity.msg = addResult.msg;
-                entity.data = addResult.data;
+                entity.data = userInfo;
 
                 if (addResult.code == 0)
                 {
                     entity.token = GenerateToken(user.OpenId);
+                    //创建二维码图片
+                    CreateUserQrcode(user.OpenId);
                 }
             }
             //如果没抛异常，则获则生成token
             else if (entity.code != -1)
             {
                 entity.token = GenerateToken(user.OpenId);
+                var userInfo = CreateUserInfo(entity.data);
+                entity.data = userInfo;
+
+                //若二维码图片不存在，则创建
+                if (!FileHelper.IsFileExists(userInfo.QrCode))
+                    CreateUserQrcode(user.OpenId);
             }
 
             return entity;
@@ -138,6 +153,32 @@ namespace Api.Controllers
             return new JwtSecurityTokenHandler().WriteToken(token);
         }
 
+        /// <summary>
+        /// 生成用户的二维码图片
+        /// </summary>
+        /// <param name="openid">openid</param>
+        private void CreateUserQrcode(string openid)
+        {
+            //生成二维码
+            byte[] imgBytes = QrCodeUtil.CreateQrCode($"userid:{openid}", ErrorCorrectionLevel.L, QrSize.Middle);
+
+            string filePath = string.Format("{0}{1}\\{2}.jpg", AppDomain.CurrentDomain.BaseDirectory, "statics\\imgs\\qrcode\\user", openid);
+
+            FileHelper.CreateFile(filePath, imgBytes);
+        }
+
+
+        /// <summary>
+        /// 创建UserInfo实例，包含二维码图片地址
+        /// </summary>
+        /// <param name="user">TUser信息</param>
+        /// <returns></returns>
+        private UserInfo CreateUserInfo(TUser user)
+        {
+            UserInfo userInfo = new(user);
+            userInfo.QrCode = string.Format("{0}://{1}/statics/imgs/qrcode/user/{2}.jpg", Request.Scheme, Request.Host.Value, user.Code);
+            return userInfo;
+        }
 
     }
 }

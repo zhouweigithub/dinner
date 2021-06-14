@@ -1407,5 +1407,21 @@
             总金额
             </summary>
         </member>
+        <member name="T:Model.Response.UserInfo">
+            <summary>
+            带QrCode的TUser
+            </summary>
+        </member>
+        <member name="P:Model.Response.UserInfo.QrCode">
+            <summary>
+            二维码名片路径
+            </summary>
+        </member>
+        <member name="M:Model.Response.UserInfo.#ctor(Model.Database.TUser)">
+            <summary>
+            根据父类创建新的实例
+            </summary>
+            <param name="user">用户人信息</param>
+        </member>
     </members>
 </doc>
