@@ -31,7 +31,7 @@ namespace Api.Controllers
         /// <param name="page">页码</param>
         /// <returns></returns>
         [HttpGet]
-        [Route("[action]/{productName}/{pageSize}/{page}")]
+        [Route("[action]")]
         public async Task<RespDataList<TOrder>> GetList(string productName, int pageSize, int page)
         {
             string openid = GetUserCode();

@@ -12,7 +12,7 @@ namespace BLL.Interface
     /// <summary>
     /// 支付信息
     /// </summary>
-    public interface IPayService : IBaseService
+    public interface IPayService
     {
         public Task<RespDataList<TOrder>> PayAsync(string userCode);
 

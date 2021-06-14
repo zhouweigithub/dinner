@@ -13,7 +13,7 @@ namespace BLL.Interface
     /// <summary>
     /// 商品信息
     /// </summary>
-    public interface IProductService : IBaseService
+    public interface IProductService
     {
         public Task<RespDataList<TProduct>> GetListAsync(int categoryid, int pageSize, int page);
 

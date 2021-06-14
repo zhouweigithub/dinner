@@ -10,6 +10,10 @@
 	</PropertyGroup>
 
 	<ItemGroup>
+	  <Compile Remove="Interface\IBaseService.cs" />
+	</ItemGroup>
+
+	<ItemGroup>
 	  <PackageReference Include="EasyCaching.CSRedis" Version="1.2.0" />
 	  <PackageReference Include="Microsoft.AspNetCore.Http.Abstractions" Version="2.2.0" />
 	  <PackageReference Include="Newtonsoft.Json" Version="13.0.1" />

@@ -12,7 +12,7 @@ namespace BLL.Interface
     /// <summary>
     /// 商品分类
     /// </summary>
-    public interface ICategoryService : IBaseService
+    public interface ICategoryService
     {
         public Task<RespDataList<TCategory>> GetListAsync();
 

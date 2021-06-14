@@ -13,7 +13,7 @@ using Microsoft.EntityFrameworkCore;
 
 namespace BLL
 {
-    public class BaseService : IBaseService
+    public class BaseService
     {
 
         protected readonly DbService context;

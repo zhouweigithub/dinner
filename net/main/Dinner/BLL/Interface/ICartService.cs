@@ -12,7 +12,7 @@ namespace BLL.Interface
     /// <summary>
     /// 购物车
     /// </summary>
-    public interface ICartService : IBaseService
+    public interface ICartService
     {
         public Task<RespDataList<TCart>> GetListAsync(String openid);
 

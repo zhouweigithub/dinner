@@ -13,7 +13,7 @@ namespace BLL.Interface
     /// <summary>
     /// 反馈信息
     /// </summary>
-    public interface IFeedBackService : IBaseService
+    public interface IFeedBackService
     {
         public Task<RespDataList<TFeedback>> GetListAsync(string openid);
 

@@ -12,7 +12,7 @@ namespace BLL.Interface
     /// <summary>
     /// 消息中心
     /// </summary>
-    public interface IMessageService : IBaseService
+    public interface IMessageService
     {
         public Task<RespDataList<TMessage>> GetListAsync(string openid);
     }

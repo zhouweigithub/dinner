@@ -13,7 +13,7 @@ namespace BLL.Interface
     /// <summary>
     /// 优惠券信息
     /// </summary>
-    public interface ICouponService : IBaseService
+    public interface ICouponService
     {
         public Task<RespDataList<TUserCoupon>> GetListAsync(string openid);
 

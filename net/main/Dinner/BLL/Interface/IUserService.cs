@@ -12,7 +12,7 @@ namespace BLL.Interface
     /// <summary>
     /// 用户信息
     /// </summary>
-    public interface IUserService : IBaseService
+    public interface IUserService
     {
         public Task<RespDataToken<TUser>> GetEntityAsync(String openid);
 

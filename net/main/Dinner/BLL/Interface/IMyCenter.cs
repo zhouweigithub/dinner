@@ -12,7 +12,7 @@ namespace BLL.Interface
     /// <summary>
     /// 个人中心
     /// </summary>
-    public interface IMyCenter : IBaseService
+    public interface IMyCenter
     {
         //Task<RespDataList<>> GetListAsync(string openid);
     }

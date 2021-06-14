@@ -14,7 +14,7 @@ namespace BLL.Interface
     /// <summary>
     /// 订单信息
     /// </summary>
-    public interface IOrderService : IBaseService
+    public interface IOrderService
     {
         public Task<RespDataList<TOrder>> GetListAsync(string openid, string productName, int pageSize, int page);
 
