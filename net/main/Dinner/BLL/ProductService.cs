@@ -100,14 +100,29 @@ namespace BLL
             return result;
         }
 
-        public async Task<RespData<TProduct>> UpdateAsync(TProduct data)
+        public async Task<RespData<TProduct>> UpdateAsync(ProductUpdate data)
         {
             RespData<TProduct> result = new();
             try
             {
-                context.Update(data);
+                TProduct model = new TProduct()
+                {
+                    Id = data.Id,
+                    Category = data.Category,
+                    Img = data.Img,
+                    Name = data.Name,
+                    Price = data.Price,
+                    Sales = data.Sales,
+                };
+
+                context.Entry(model).Property(a => a.Category).IsModified = true;
+                context.Entry(model).Property(a => a.Img).IsModified = true;
+                context.Entry(model).Property(a => a.Name).IsModified = true;
+                context.Entry(model).Property(a => a.Price).IsModified = true;
+                context.Entry(model).Property(a => a.Sales).IsModified = true;
+
                 await context.SaveChangesAsync();
-                result.data = data;
+                result.data = model;
             }
             catch (Exception e)
             {

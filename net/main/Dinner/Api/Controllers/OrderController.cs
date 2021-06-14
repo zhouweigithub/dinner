@@ -32,7 +32,7 @@ namespace Api.Controllers
         /// <returns></returns>
         [HttpGet]
         [Route("[action]")]
-        public async Task<RespDataList<TOrder>> GetList(string productName, int pageSize, int page)
+        public async Task<RespDataList<TOrder>> GetList(string productName, int pageSize = 10, int page = 1)
         {
             string openid = GetUserCode();
             return await _services.GetListAsync(openid, productName, pageSize, page);

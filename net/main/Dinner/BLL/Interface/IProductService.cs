@@ -21,7 +21,7 @@ namespace BLL.Interface
 
         public Task<RespData<TProduct>> AddAsync(ProductAdd data);
 
-        public Task<RespData<TProduct>> UpdateAsync(TProduct data);
+        public Task<RespData<TProduct>> UpdateAsync(ProductUpdate data);
 
         public Task<RespData> DeleteAsync(int productid);
     }

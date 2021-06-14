@@ -327,6 +327,27 @@
             <param name="productid">商品id</param>
             <returns></returns>
         </member>
+        <member name="M:Api.Controllers.ProductController.Update(Model.Request.ProductUpdate)">
+            <summary>
+            修改商品信息
+            </summary>
+            <param name="data">参数</param>
+            <returns></returns>
+        </member>
+        <member name="M:Api.Controllers.ProductController.Delete(System.Int32)">
+            <summary>
+            删除商品
+            </summary>
+            <param name="id">商品id</param>
+            <returns></returns>
+        </member>
+        <member name="M:Api.Controllers.ProductController.Add(Model.Request.ProductAdd)">
+            <summary>
+            添加商品信息
+            </summary>
+            <param name="data">参数</param>
+            <returns></returns>
+        </member>
         <member name="T:Api.Controllers.UserController">
             <summary>
             用户信息

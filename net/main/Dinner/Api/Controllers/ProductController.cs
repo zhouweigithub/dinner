@@ -8,6 +8,7 @@ using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using Model;
 using Model.Database;
+using Model.Request;
 using Model.Response.Com;
 
 namespace Api.Controllers
@@ -35,7 +36,7 @@ namespace Api.Controllers
         /// <returns></returns>
         [HttpGet]
         [Route("[action]")]
-        public async Task<RespDataList<TProduct>> GetList(int categoryid, int pageSize, int page)
+        public async Task<RespDataList<TProduct>> GetList(int categoryid, int pageSize = 10, int page = 1)
         {
             return await _services.GetListAsync(categoryid, pageSize, page);
         }
@@ -53,5 +54,43 @@ namespace Api.Controllers
         {
             return await _services.GetEntityAsync(productid);
         }
+
+        /// <summary>
+        /// 修改商品信息
+        /// </summary>
+        /// <param name="data">参数</param>
+        /// <returns></returns>
+        [HttpPost]
+        [Route("[action]")]
+        public async Task<RespData> Update(ProductUpdate data)
+        {
+            return await _services.UpdateAsync(data);
+        }
+
+        /// <summary>
+        /// 删除商品
+        /// </summary>
+        /// <param name="id">商品id</param>
+        /// <returns></returns>
+        [HttpPost]
+        [Route("[action]")]
+        public async Task<RespData> Delete(int id)
+        {
+            return await _services.DeleteAsync(id);
+        }
+
+
+        /// <summary>
+        /// 添加商品信息
+        /// </summary>
+        /// <param name="data">参数</param>
+        /// <returns></returns>
+        [HttpPost]
+        [Route("[action]")]
+        public async Task<RespData> Add(ProductAdd data)
+        {
+            return await _services.AddAsync(data);
+        }
+
     }
 }

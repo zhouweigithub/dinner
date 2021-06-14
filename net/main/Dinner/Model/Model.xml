@@ -1209,6 +1209,16 @@
             商品图片
             </summary>
         </member>
+        <member name="T:Model.Request.ProductUpdate">
+            <summary>
+            修改商品参数
+            </summary>
+        </member>
+        <member name="P:Model.Request.ProductUpdate.Id">
+            <summary>
+            商品id
+            </summary>
+        </member>
         <member name="T:Model.Request.UserAdd">
             <summary>
             注册用户时提交的信息

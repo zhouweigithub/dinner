@@ -37,7 +37,7 @@ namespace Api.Controllers
         /// <returns></returns>
         [HttpGet]
         [Route("[action]")]
-        public async Task<RespDataList<TNotice>> GetList(DateTime startDate, DateTime endDate, int pageSize, int page)
+        public async Task<RespDataList<TNotice>> GetList(DateTime startDate, DateTime endDate, int pageSize = 10, int page = 1)
         {
             return await _services.GetListAsync(startDate, endDate, pageSize, page);
         }
