@@ -171,6 +171,43 @@ namespace BLL
             return result;
         }
 
+        /// <summary>
+        /// 添加订单评论
+        /// </summary>
+        /// <param name="orderid">订单id</param>
+        /// <param name="comment">评论内容</param>
+        /// <returns></returns>
+        public async Task<RespData> AddCommentAsync(String orderid, String comment)
+        {
+            RespData result = new RespData();
+
+            try
+            {
+                context.Set<TComment>().Add(new TComment()
+                {
+                    Orderid = orderid,
+                    Msg = comment,
+                    Crtime = DateTime.Now,
+                });
+
+                await context.SaveChangesAsync();
+            }
+            catch (Exception e)
+            {
+                _logger.LogError(e.ToString());
+                result.code = -1;
+                result.msg = "服务内部错误";
+            }
+
+            return result;
+        }
+
+        /// <summary>
+        /// 取消订单
+        /// </summary>
+        /// <param name="orderid"></param>
+        /// <param name="openid"></param>
+        /// <returns></returns>
         public async Task<RespData> CancelAsync(String orderid, string openid)
         {
             RespData result = new RespData();
@@ -252,7 +289,14 @@ namespace BLL
             return result;
         }
 
-
+        /// <summary>
+        /// 获取订单列表
+        /// </summary>
+        /// <param name="openid"></param>
+        /// <param name="productName"></param>
+        /// <param name="pageSize"></param>
+        /// <param name="page"></param>
+        /// <returns></returns>
         public async Task<RespDataList<TOrder>> GetListAsync(string openid, String productName, Int32 pageSize, Int32 page)
         {
             RespDataList<TOrder> result = new RespDataList<TOrder>();

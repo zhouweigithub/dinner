@@ -56,7 +56,7 @@ namespace Api
                 //不使用驼峰样式的key
                 //opt.SerializerSettings.ContractResolver = new DefaultContractResolver();
                 //设置时间格式
-                opt.SerializerSettings.DateFormatString = "yyyy-MM-dd HH:mm:ss";
+                //opt.SerializerSettings.DateFormatString = "yyyy-MM-dd HH:mm:ss";
             });
             services.AddDbContext<DbService>(
                 options => options.UseMySql(Configuration.GetConnectionString("DefaultConnection"), MySqlServerVersion.LatestSupportedServerVersion).UseLoggerFactory(efLogger)

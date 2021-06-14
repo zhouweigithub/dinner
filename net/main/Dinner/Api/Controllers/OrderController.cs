@@ -77,6 +77,18 @@ namespace Api.Controllers
             return await _services.DeleteAsync(orderid, openid);
         }
 
+        /// <summary>
+        /// 添加订单评论
+        /// </summary>
+        /// <param name="orderid">订单id</param>
+        /// <param name="comment">评论内容</param>
+        /// <returns></returns>
+        [HttpPost]
+        [Route("[action]")]
+        public async Task<RespData> AddComment(string orderid, string comment)
+        {
+            return await _services.AddCommentAsync(orderid, comment);
+        }
 
         /// <summary>
         /// 用户获取自己现在需要取货的商品信息

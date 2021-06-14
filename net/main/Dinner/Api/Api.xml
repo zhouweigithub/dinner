@@ -243,6 +243,14 @@
             <param name="orderid">订单id</param>
             <returns></returns>
         </member>
+        <member name="M:Api.Controllers.OrderController.AddComment(System.String,System.String)">
+            <summary>
+            添加订单评论
+            </summary>
+            <param name="orderid">订单id</param>
+            <param name="comment">评论内容</param>
+            <returns></returns>
+        </member>
         <member name="M:Api.Controllers.OrderController.GetTodayOrder">
             <summary>
             用户获取自己现在需要取货的商品信息

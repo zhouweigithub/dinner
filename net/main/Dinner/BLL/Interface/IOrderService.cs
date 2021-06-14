@@ -31,5 +31,7 @@ namespace BLL.Interface
         /// <returns></returns>
         public Task<RespDataList<TOrderProduct>> GetTodayOrderAsync(string openid);
 
+        public Task<RespData> AddCommentAsync(string orderid, string comment);
+
     }
 }
