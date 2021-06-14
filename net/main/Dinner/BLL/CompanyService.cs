@@ -80,14 +80,25 @@ namespace BLL
             return result;
         }
 
-        public async Task<RespData<TCompany>> UpdateAsync(TCompany data)
+        public async Task<RespData<TCompany>> UpdateAsync(CompanyUpdate data)
         {
             RespData<TCompany> result = new();
             try
             {
-                context.Update(data);
+                var model = new TCompany()
+                {
+                    Id = data.Id,
+                    Name = data.Name,
+                    Address = data.Address,
+                };
+
+                context.Attach(model);
+                context.Entry(model).Property(a => a.Id).IsModified = true;
+                context.Entry(model).Property(a => a.Name).IsModified = true;
+                context.Entry(model).Property(a => a.Address).IsModified = true;
+
                 await context.SaveChangesAsync();
-                result.data = data;
+                result.data = model;
             }
             catch (Exception e)
             {

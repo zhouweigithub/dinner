@@ -103,7 +103,7 @@
             <param name="company">公司信息</param>
             <returns></returns>
         </member>
-        <member name="M:Api.Controllers.CompanyController.Update(Model.Database.TCompany)">
+        <member name="M:Api.Controllers.CompanyController.Update(Model.Request.CompanyUpdate)">
             <summary>
             更新公司信息
             </summary>

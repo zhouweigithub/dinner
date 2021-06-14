@@ -1009,6 +1009,16 @@
             公司地址
             </summary>
         </member>
+        <member name="T:Model.Request.CompanyUpdate">
+            <summary>
+            更新公司参数
+            </summary>
+        </member>
+        <member name="P:Model.Request.CompanyUpdate.Id">
+            <summary>
+            公司id
+            </summary>
+        </member>
         <member name="T:Model.Request.CouponAdd">
             <summary>
             优惠券新增参数

@@ -45,7 +45,7 @@ namespace Api.Controllers
         /// <returns></returns>
         [HttpPost]
         [Route("[action]")]
-        public async Task<RespData<TCompany>> Update(TCompany data)
+        public async Task<RespData<TCompany>> Update(CompanyUpdate data)
         {
             return await _services.UpdateAsync(data);
         }

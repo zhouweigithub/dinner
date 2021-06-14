@@ -16,7 +16,7 @@ namespace BLL.Interface
     {
         public Task<RespData<TCompany>> AddAsync(CompanyAdd company);
 
-        public Task<RespData<TCompany>> UpdateAsync(TCompany data);
+        public Task<RespData<TCompany>> UpdateAsync(CompanyUpdate data);
 
         public Task<RespData> DeleteAsync(int companyid);
 
