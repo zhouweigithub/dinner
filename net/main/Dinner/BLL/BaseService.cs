@@ -27,6 +27,40 @@ namespace BLL
         }
 
 
+        #region 同步方法
+
+        public virtual T Add<T>(T t) where T : class
+        {
+            context.Set<T>().Add(t);
+            context.SaveChanges();
+            return t;
+        }
+
+        public virtual Int32 Update<T>(T t) where T : class
+        {
+            context.Set<T>().Update(t);
+            return context.SaveChanges();
+        }
+
+        public virtual Int32 Delete<T>(T t) where T : class
+        {
+            context.Entry(t).State = EntityState.Deleted;
+            return context.SaveChanges();
+        }
+
+        public virtual int DeleteMultiple<T>(List<T> ts) where T : class
+        {
+            foreach (var item in ts)
+            {
+                context.Entry(item).State = EntityState.Deleted;
+            }
+            return context.SaveChanges();
+        }
+
+        #endregion
+
+        #region 异步方法
+
         public virtual async Task<T> AddAsync<T>(T t) where T : class
         {
             await context.Set<T>().AddAsync(t);
@@ -36,7 +70,7 @@ namespace BLL
 
         public virtual async Task<int> DeleteAsync<T>(T t) where T : class
         {
-            context.Entry(t).State = Microsoft.EntityFrameworkCore.EntityState.Deleted;
+            context.Entry(t).State = EntityState.Deleted;
             return await context.SaveChangesAsync();
         }
 
@@ -44,16 +78,20 @@ namespace BLL
         {
             foreach (var item in ts)
             {
-                context.Entry(item).State = Microsoft.EntityFrameworkCore.EntityState.Deleted;
+                context.Entry(item).State = EntityState.Deleted;
             }
             return await context.SaveChangesAsync();
         }
+
 
         public virtual async Task<int> UpdateAsync<T>(T t) where T : class
         {
             context.Set<T>().Update(t);
             return await context.SaveChangesAsync();
         }
+
+        #endregion
+
 
         /// <summary>
         /// 根据UserCode获取Userid
@@ -81,5 +119,6 @@ namespace BLL
                 return 0;
             }
         }
+
     }
 }

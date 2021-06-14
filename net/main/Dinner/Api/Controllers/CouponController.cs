@@ -54,8 +54,8 @@ namespace Api.Controllers
         /// </summary>
         /// <param name="couponid">优惠券id</param>
         /// <returns></returns>
-        [HttpGet]
-        [Route("[action]/{couponid}")]
+        [HttpPost]
+        [Route("[action]")]
         public async Task<RespData> Delete(Int32 couponid)
         {
             return await _services.DeleteAsync(couponid);

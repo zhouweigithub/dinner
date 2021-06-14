@@ -17,8 +17,15 @@ namespace Model.Request
         public string Name { get; set; }
     }
 
+    /// <summary>
+    /// 商品分类更新参数
+    /// </summary>
     public class CategoryUpdate
     {
+        /// <summary>
+        /// id
+        /// </summary>
+        public int Id { get; set; }
         /// <summary>
         /// 商品分类名称
         /// </summary>

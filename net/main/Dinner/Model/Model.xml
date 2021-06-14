@@ -519,16 +519,6 @@
             创建时间
             </summary>
         </member>
-        <member name="P:Model.Database.TFeedback.Replay">
-            <summary>
-            回复内容
-            </summary>
-        </member>
-        <member name="P:Model.Database.TFeedback.ReplayTime">
-            <summary>
-            回复时间
-            </summary>
-        </member>
         <member name="T:Model.Database.TMessage">
             <summary>
             消息中心
@@ -557,6 +547,36 @@
         <member name="P:Model.Database.TMessage.Crtime">
             <summary>
             创建时间
+            </summary>
+        </member>
+        <member name="T:Model.Database.TNotice">
+            <summary>
+            公告信息
+            </summary>
+        </member>
+        <member name="P:Model.Database.TNotice.Id">
+            <summary>
+            公告id
+            </summary>
+        </member>
+        <member name="P:Model.Database.TNotice.Content">
+            <summary>
+            公告内容
+            </summary>
+        </member>
+        <member name="P:Model.Database.TNotice.StartDate">
+            <summary>
+            公告生效起始日期
+            </summary>
+        </member>
+        <member name="P:Model.Database.TNotice.EndDate">
+            <summary>
+            公告生效结束日期
+            </summary>
+        </member>
+        <member name="P:Model.Database.TNotice.Crtime">
+            <summary>
+            创建日期
             </summary>
         </member>
         <member name="T:Model.Database.TOrder">
@@ -954,6 +974,16 @@
             商品分类名称
             </summary>
         </member>
+        <member name="T:Model.Request.CategoryUpdate">
+            <summary>
+            商品分类更新参数
+            </summary>
+        </member>
+        <member name="P:Model.Request.CategoryUpdate.Id">
+            <summary>
+            id
+            </summary>
+        </member>
         <member name="P:Model.Request.CategoryUpdate.Name">
             <summary>
             商品分类名称
@@ -1012,6 +1042,51 @@
         <member name="P:Model.Request.FeedbackAdd.content">
             <summary>
             反馈内容
+            </summary>
+        </member>
+        <member name="T:Model.Request.NoticeAdd">
+            <summary>
+            添加公告内容
+            </summary>
+        </member>
+        <member name="P:Model.Request.NoticeAdd.Content">
+            <summary>
+            公告内容
+            </summary>
+        </member>
+        <member name="P:Model.Request.NoticeAdd.StartDate">
+            <summary>
+            生效起始日期
+            </summary>
+        </member>
+        <member name="P:Model.Request.NoticeAdd.EndDate">
+            <summary>
+            生效结束日期
+            </summary>
+        </member>
+        <member name="T:Model.Request.NoticeUpdate">
+            <summary>
+            用户更新参数
+            </summary>
+        </member>
+        <member name="P:Model.Request.NoticeUpdate.Id">
+            <summary>
+            公告id
+            </summary>
+        </member>
+        <member name="P:Model.Request.NoticeUpdate.Content">
+            <summary>
+            公告内容
+            </summary>
+        </member>
+        <member name="P:Model.Request.NoticeUpdate.StartDate">
+            <summary>
+            公告生效起始日期
+            </summary>
+        </member>
+        <member name="P:Model.Request.NoticeUpdate.EndDate">
+            <summary>
+            公告生效结束日期
             </summary>
         </member>
         <member name="T:Model.Request.OrderAdd">

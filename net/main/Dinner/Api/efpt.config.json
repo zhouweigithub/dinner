@@ -90,6 +90,10 @@
          "ObjectType": 0
       },
       {
+         "Name": "t_notice",
+         "ObjectType": 0
+      },
+      {
          "Name": "t_order",
          "ObjectType": 0
       },

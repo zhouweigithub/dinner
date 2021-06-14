@@ -54,8 +54,8 @@ namespace Api.Controllers
         /// </summary>
         /// <param name="id">商品分类id</param>
         /// <returns></returns>
-        [HttpGet]
-        [Route("[action]/{id}")]
+        [HttpPost]
+        [Route("[action]")]
         public async Task<RespData> Delete(int id)
         {
             return await _services.DeleteProductsAsync(id);

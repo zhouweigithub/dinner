@@ -208,6 +208,48 @@
             <param name="username">用户名</param>
             <returns></returns>
         </member>
+        <member name="T:Api.Controllers.NoticeController">
+            <summary>
+            公告信息
+            </summary>
+        </member>
+        <member name="M:Api.Controllers.NoticeController.#ctor(BLL.Interface.INoticeService)">
+            <summary>
+            公告
+            </summary>
+            <param name="service"></param>
+        </member>
+        <member name="M:Api.Controllers.NoticeController.GetList(System.DateTime,System.DateTime,System.Int32,System.Int32)">
+            <summary>
+            获取公告列表
+            </summary>
+            <param name="startDate">起始日期</param>
+            <param name="endDate">结束日期</param>
+            <param name="pageSize">每页数据条数</param>
+            <param name="page">页码</param>
+            <returns></returns>
+        </member>
+        <member name="M:Api.Controllers.NoticeController.Update(Model.Request.NoticeUpdate)">
+            <summary>
+            修改公告信息
+            </summary>
+            <param name="data">参数</param>
+            <returns></returns>
+        </member>
+        <member name="M:Api.Controllers.NoticeController.Delete(System.Int32)">
+            <summary>
+            删除公告
+            </summary>
+            <param name="id">公告id</param>
+            <returns></returns>
+        </member>
+        <member name="M:Api.Controllers.NoticeController.Add(Model.Request.NoticeAdd)">
+            <summary>
+            添加公告信息
+            </summary>
+            <param name="data">参数</param>
+            <returns></returns>
+        </member>
         <member name="T:Api.Controllers.OrderController">
             <summary>
             订单信息

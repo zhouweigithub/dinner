@@ -10,38 +10,38 @@ using Microsoft.EntityFrameworkCore;
 namespace Model.Database
 {
     /// <summary>
-    /// 用户反馈
+    /// 公告信息
     /// </summary>
-    [Table("t_feedback")]
-    [Index(nameof(Userid), Name = "fkuserid_idx")]
-    public partial class TFeedback
+    [Table("t_notice")]
+    public partial class TNotice
     {
         /// <summary>
-        /// id
+        /// 公告id
         /// </summary>
         [Key]
         [Column("id")]
         public int Id { get; set; }
         /// <summary>
-        /// 用户id
-        /// </summary>
-        [Column("userid")]
-        public int Userid { get; set; }
-        /// <summary>
-        /// 内容
+        /// 公告内容
         /// </summary>
         [Required]
-        [Column("msg")]
+        [Column("content")]
         [StringLength(512)]
-        public string Msg { get; set; }
+        public string Content { get; set; }
         /// <summary>
-        /// 创建时间
+        /// 公告生效起始日期
+        /// </summary>
+        [Column("start_date", TypeName = "date")]
+        public DateTime StartDate { get; set; }
+        /// <summary>
+        /// 公告生效结束日期
+        /// </summary>
+        [Column("end_date", TypeName = "date")]
+        public DateTime EndDate { get; set; }
+        /// <summary>
+        /// 创建日期
         /// </summary>
         [Column("crtime", TypeName = "datetime")]
         public DateTime Crtime { get; set; }
-
-        [ForeignKey(nameof(Userid))]
-        [InverseProperty(nameof(TUser.TFeedback))]
-        public virtual TUser User { get; set; }
     }
 }

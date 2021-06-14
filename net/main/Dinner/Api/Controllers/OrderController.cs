@@ -56,8 +56,8 @@ namespace Api.Controllers
         /// </summary>
         /// <param name="orderid">订单id</param>
         /// <returns></returns>
-        [HttpGet]
-        [Route("[action]/{orderid}")]
+        [HttpPost]
+        [Route("[action]")]
         public async Task<RespData> Cancel(string orderid)
         {
             string openid = GetUserCode();
@@ -69,8 +69,8 @@ namespace Api.Controllers
         /// </summary>
         /// <param name="orderid">订单id</param>
         /// <returns></returns>
-        [HttpGet]
-        [Route("[action]/{orderid}")]
+        [HttpPost]
+        [Route("[action]")]
         public async Task<RespData> Delete(string orderid)
         {
             string openid = GetUserCode();

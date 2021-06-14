@@ -55,8 +55,8 @@ namespace Api.Controllers
         /// </summary>
         /// <param name="companyid">公司id</param>
         /// <returns></returns>
-        [HttpGet]
-        [Route("[action]/{companyid}")]
+        [HttpPost]
+        [Route("[action]")]
         public async Task<RespData> Delete(Int32 companyid)
         {
             return await _services.DeleteAsync(companyid);

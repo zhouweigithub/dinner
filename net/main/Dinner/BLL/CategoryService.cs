@@ -66,6 +66,7 @@ namespace BLL
             {
                 var model = new TCategory()
                 {
+                    Id = data.Id,
                     Name = data.Name,
                     State = data.State,
                 };

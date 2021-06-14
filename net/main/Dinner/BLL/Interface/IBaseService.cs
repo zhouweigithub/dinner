@@ -15,11 +15,13 @@ namespace BLL.Interface
     {
         //同步方法
 
-        //T Add<T>(T t) where T : class;
+        public T Add<T>(T t) where T : class;
 
-        //int Update<T>(T t) where T : class;
+        public int Update<T>(T t) where T : class;
 
-        //int Delete<T>(T t) where T : class;
+        public int Delete<T>(T t) where T : class;
+
+        public int DeleteMultiple<T>(List<T> ts) where T : class;
 
 
         //异步方法

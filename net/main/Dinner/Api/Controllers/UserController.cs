@@ -66,8 +66,8 @@ namespace Api.Controllers
         /// </summary>
         /// <param name="openid">用户代码</param>
         /// <returns></returns>
-        [HttpGet]
-        [Route("[action]/{openid}")]
+        [HttpPost]
+        [Route("[action]")]
         public async Task<RespData> Delete(String openid)
         {
             return await _services.DeleteAsync(openid);

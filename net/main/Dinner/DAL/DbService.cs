@@ -38,6 +38,7 @@ namespace DAL
         public virtual DbSet<TCoupon> TCoupon { get; set; }
         public virtual DbSet<TFeedback> TFeedback { get; set; }
         public virtual DbSet<TMessage> TMessage { get; set; }
+        public virtual DbSet<TNotice> TNotice { get; set; }
         public virtual DbSet<TOrder> TOrder { get; set; }
         public virtual DbSet<TOrderCallback> TOrderCallback { get; set; }
         public virtual DbSet<TOrderCoupon> TOrderCoupon { get; set; }
@@ -409,10 +410,6 @@ namespace DAL
 
                 entity.Property(e => e.Msg).HasComment("内容");
 
-                entity.Property(e => e.Replay).HasComment("回复内容");
-
-                entity.Property(e => e.ReplayTime).HasComment("回复时间");
-
                 entity.Property(e => e.Userid).HasComment("用户id");
 
                 entity.HasOne(d => d.User)
@@ -441,6 +438,21 @@ namespace DAL
                     .HasForeignKey(d => d.Userid)
                     .OnDelete(DeleteBehavior.ClientSetNull)
                     .HasConstraintName("fkuserid");
+            });
+
+            modelBuilder.Entity<TNotice>(entity =>
+            {
+                entity.HasComment("公告信息");
+
+                entity.Property(e => e.Id).HasComment("公告id");
+
+                entity.Property(e => e.Content).HasComment("公告内容");
+
+                entity.Property(e => e.Crtime).HasComment("创建日期");
+
+                entity.Property(e => e.EndDate).HasComment("公告生效结束日期");
+
+                entity.Property(e => e.StartDate).HasComment("公告生效起始日期");
             });
 
             modelBuilder.Entity<TOrder>(entity =>

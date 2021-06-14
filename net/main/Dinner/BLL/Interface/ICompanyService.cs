@@ -12,7 +12,7 @@ namespace BLL.Interface
     /// <summary>
     /// 公司信息
     /// </summary>
-    public interface ICompanyService : IBaseService
+    public interface ICompanyService
     {
         public Task<RespData<TCompany>> AddAsync(CompanyAdd company);
 

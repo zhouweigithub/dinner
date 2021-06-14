@@ -34,7 +34,7 @@ namespace Api.Controllers
         /// <param name="page">页码</param>
         /// <returns></returns>
         [HttpGet]
-        [Route("[action]/{categoryid}/{pageSize}/{page}")]
+        [Route("[action]")]
         public async Task<RespDataList<TProduct>> GetList(int categoryid, int pageSize, int page)
         {
             return await _services.GetListAsync(categoryid, pageSize, page);
