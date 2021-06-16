@@ -14,7 +14,7 @@ namespace BLL
 {
     public class MiniPayService
     {
-        //文档地址 https://pay.weixin.qq.com/wiki/doc/apiv3/apis/chapter3_5_3.shtmlhttps://pay.weixin.qq.com/wiki/doc/apiv3/apis/chapter3_5_3.shtml
+        //文档地址 https://pay.weixin.qq.com/wiki/doc/apiv3/apis/chapter3_5_3.shtml
 
         private readonly ILogger<MiniPayService> _logger;
 
