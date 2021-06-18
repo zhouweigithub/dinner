@@ -23,19 +23,22 @@ namespace Model.Database
         [StringLength(32)]
         public string Orderid { get; set; }
         /// <summary>
-        /// 微信支付订单号
+        /// 用户id
         /// </summary>
-        [Required]
-        [Column("wx_orderid")]
-        [StringLength(32)]
-        public string WxOrderid { get; set; }
+        [Column("userid")]
+        public int Userid { get; set; }
         /// <summary>
-        /// 状态
+        /// 金额
         /// </summary>
-        [Column("state")]
-        public int State { get; set; }
+        [Column("money")]
+        public int Money { get; set; }
         /// <summary>
-        /// 创建时间
+        /// 支付完成日期
+        /// </summary>
+        [Column("crdate", TypeName = "date")]
+        public DateTime Crdate { get; set; }
+        /// <summary>
+        /// 支付完成时间
         /// </summary>
         [Column("crtime", TypeName = "datetime")]
         public DateTime Crtime { get; set; }

@@ -34,7 +34,8 @@ namespace Api
             services.AddTransient<IWxService, WxService>();
             services.AddTransient<IDbInitService, DbInitService>();
             services.AddTransient<ICategoryService, CategoryService>();
-
+            services.AddTransient<IMiniPayNotifyService, MiniPayNotifyService>();
+            services.AddTransient<IMiniPayService, MiniPayService>();
 
             //其他服务
         }

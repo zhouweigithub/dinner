@@ -128,6 +128,10 @@
       {
          "Name": "t_user_coupon",
          "ObjectType": 0
+      },
+      {
+         "Name": "t_wx_order_callback",
+         "ObjectType": 0
       }
    ],
    "UiHint": ".dinner",

@@ -54,7 +54,7 @@ namespace BLL
                     if (productData == null || productData.Price != item.Price)
                     {
                         result.code = -2;
-                        result.msg = "订单商品信息异常，请重新下单";
+                        result.msg = "创建订单失败：订单商品信息异常，请重新下单";
                         result.data = null;
                         return result;
                     }
@@ -99,14 +99,14 @@ namespace BLL
                     if (couponData == null || userCoupon == null || couponData.Money != couponData.Money)
                     {
                         result.code = -3;
-                        result.msg = "优惠券信息异常，请重新下单";
+                        result.msg = "创建订单失败：优惠券信息异常，请重新下单";
                         result.data = null;
                         return result;
                     }
                     else if (couponData.StartTime > DateTime.Now || couponData.EndTime < DateTime.Now)
                     {
                         result.code = -4;
-                        result.msg = "优惠券未在有效使用期内，请重新下单";
+                        result.msg = "创建订单失败：优惠券未在有效使用期内，请重新下单";
                         result.data = null;
                         return result;
                     }
@@ -138,7 +138,7 @@ namespace BLL
                 if (data.Money != allProductMoney || data.CouponMoney != allCouponMoney || data.PayMoney != allProductMoney - allCouponMoney)
                 {
                     result.code = -5;
-                    result.msg = "订单信息异常，请重新下单";
+                    result.msg = "创建订单失败：订单信息异常，请重新下单";
                     result.data = null;
                     return result;
                 }
@@ -163,7 +163,7 @@ namespace BLL
             catch (Exception e)
             {
                 result.code = -1;
-                result.msg = "服务内部错误";
+                result.msg = "创建订单失败：服务内部错误";
                 result.data = null;
                 _logger.LogError(e.ToString());
             }

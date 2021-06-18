@@ -639,19 +639,24 @@
             订单编号
             </summary>
         </member>
-        <member name="P:Model.Database.TOrderCallback.WxOrderid">
+        <member name="P:Model.Database.TOrderCallback.Userid">
             <summary>
-            微信支付订单号
+            用户id
             </summary>
         </member>
-        <member name="P:Model.Database.TOrderCallback.State">
+        <member name="P:Model.Database.TOrderCallback.Money">
             <summary>
-            状态
+            金额
+            </summary>
+        </member>
+        <member name="P:Model.Database.TOrderCallback.Crdate">
+            <summary>
+            支付完成日期
             </summary>
         </member>
         <member name="P:Model.Database.TOrderCallback.Crtime">
             <summary>
-            创建时间
+            支付完成时间
             </summary>
         </member>
         <member name="T:Model.Database.TOrderCoupon">
@@ -902,6 +907,91 @@
         <member name="P:Model.Database.TUserCoupon.Crtime">
             <summary>
             创建时间
+            </summary>
+        </member>
+        <member name="T:Model.Database.TWxOrderCallback">
+            <summary>
+            微信支付回调数据
+            </summary>
+        </member>
+        <member name="P:Model.Database.TWxOrderCallback.TransactionId">
+            <summary>
+            微信支付订单号
+            </summary>
+        </member>
+        <member name="P:Model.Database.TWxOrderCallback.OutTradeNo">
+            <summary>
+            商户订单号
+            </summary>
+        </member>
+        <member name="P:Model.Database.TWxOrderCallback.Appid">
+            <summary>
+            应用ID
+            </summary>
+        </member>
+        <member name="P:Model.Database.TWxOrderCallback.Mchid">
+            <summary>
+            商户号
+            </summary>
+        </member>
+        <member name="P:Model.Database.TWxOrderCallback.TradeType">
+            <summary>
+            交易类型
+            </summary>
+        </member>
+        <member name="P:Model.Database.TWxOrderCallback.TradeState">
+            <summary>
+            交易状态
+            </summary>
+        </member>
+        <member name="P:Model.Database.TWxOrderCallback.TradeStateDesc">
+            <summary>
+            交易状态描述
+            </summary>
+        </member>
+        <member name="P:Model.Database.TWxOrderCallback.BankType">
+            <summary>
+            付款银行
+            </summary>
+        </member>
+        <member name="P:Model.Database.TWxOrderCallback.Attach">
+            <summary>
+            附加数据，在查询API和支付通知中原样返可作为自定义参数使用
+            </summary>
+        </member>
+        <member name="P:Model.Database.TWxOrderCallback.SuccessTime">
+            <summary>
+            支付完成时间
+            </summary>
+        </member>
+        <member name="P:Model.Database.TWxOrderCallback.Openid">
+            <summary>
+            支付者标识
+            </summary>
+        </member>
+        <member name="P:Model.Database.TWxOrderCallback.Total">
+            <summary>
+            总金额
+            </summary>
+        </member>
+        <member name="P:Model.Database.TWxOrderCallback.PayerTotal">
+            <summary>
+            用户支付金额
+            </summary>
+        </member>
+        <member name="P:Model.Database.TWxOrderCallback.Currency">
+            <summary>
+            货币类型
+            </summary>
+        </member>
+        <member name="P:Model.Database.TWxOrderCallback.PayerCurrency">
+            <summary>
+            用户支付币种
+            </summary>
+        </member>
+        <member name="P:Model.Database.TWxOrderCallback.DeviceId">
+            <summary>
+            商户端设备号
             </summary>
         </member>
         <member name="T:Model.JwtSetting">
@@ -1284,6 +1374,46 @@
             手机号
             </summary>
         </member>
+        <member name="T:Model.Request.Wx.MiniPayStartPara">
+            <summary>
+            微信小程序预支付参数
+            </summary>
+        </member>
+        <member name="P:Model.Request.Wx.MiniPayStartPara.appid">
+            <summary>
+            由微信生成的应用ID，全局唯一。示例值：wxd678efh567hg6787
+            </summary>
+        </member>
+        <member name="P:Model.Request.Wx.MiniPayStartPara.mchid">
+            <summary>
+            直连商户的商户号，由微信支付生成并下发。示例值：1230000109
+            </summary>
+        </member>
+        <member name="P:Model.Request.Wx.MiniPayStartPara.description">
+            <summary>
+            商品描述
+            </summary>
+        </member>
+        <member name="P:Model.Request.Wx.MiniPayStartPara.out_trade_no">
+            <summary>
+            商户系统内部订单号
+            </summary>
+        </member>
+        <member name="P:Model.Request.Wx.MiniPayStartPara.notify_url">
+            <summary>
+            通知地址。通知URL必须为直接可访问的URL，不允许携带查询串，要求必须为https地址。
+            </summary>
+        </member>
+        <member name="P:Model.Request.Wx.MiniPayStartPara.total">
+            <summary>
+            订单总金额，单位为分
+            </summary>
+        </member>
+        <member name="P:Model.Request.Wx.MiniPayStartPara.openid">
+            <summary>
+            用户在直连商户appid下的唯一标识
+            </summary>
+        </member>
         <member name="T:Model.Request.Wx.WxOpenidConfigModel">
             <summary>
             微信小程序获取openid的参数
@@ -1297,6 +1427,16 @@
         <member name="P:Model.Request.Wx.WxOpenidConfigModel.AppSecret">
             <summary>
             密钥
+            </summary>
+        </member>
+        <member name="P:Model.Request.Wx.WxOpenidConfigModel.Mchid">
+            <summary>
+            商户号
+            </summary>
+        </member>
+        <member name="P:Model.Request.Wx.WxOpenidConfigModel.AesKey">
+            <summary>
+            商户平台上设置的APIv3密钥
             </summary>
         </member>
         <member name="T:Model.Response.Com.RespData">
@@ -1432,6 +1572,226 @@
             根据父类创建新的实例
             </summary>
             <param name="user">用户人信息</param>
+        </member>
+        <member name="T:Model.Response.Wx.QueryWxPayResp">
+            <summary>
+            微信支付查询结果信息
+            </summary>
+        </member>
+        <member name="P:Model.Response.Wx.QueryWxPayResp.out_trade_no">
+            <summary>
+            商户订单号
+            </summary>
+        </member>
+        <member name="P:Model.Response.Wx.QueryWxPayResp.transaction_id">
+            <summary>
+            微信支付订单号
+            </summary>
+        </member>
+        <member name="P:Model.Response.Wx.QueryWxPayResp.trade_state">
+            <summary>
+            交易状态
+            </summary>
+        </member>
+        <member name="P:Model.Response.Wx.QueryWxPayResp.trade_state_desc">
+            <summary>
+            交易状态描述
+            </summary>
+        </member>
+        <member name="P:Model.Response.Wx.QueryWxPayResp.success_time">
+            <summary>
+            支付完成时间
+            </summary>
+        </member>
+        <member name="P:Model.Response.Wx.QueryWxPayResp.openid">
+            <summary>
+            用户标识
+            </summary>
+        </member>
+        <member name="P:Model.Response.Wx.QueryWxPayResp.payer_total">
+            <summary>
+            用户支付金额，单位为分
+            </summary>
+        </member>
+        <member name="T:Model.Response.Wx.WxPayNotify">
+            <summary>
+            微信支付结果通知
+            </summary>
+        </member>
+        <member name="P:Model.Response.Wx.WxPayNotify.id">
+            <summary>
+            通知ID	
+            </summary>
+        </member>
+        <member name="P:Model.Response.Wx.WxPayNotify.create_time">
+            <summary>
+            通知创建时间	
+            </summary>
+        </member>
+        <member name="P:Model.Response.Wx.WxPayNotify.event_type">
+            <summary>
+            通知类型
+            </summary>
+        </member>
+        <member name="P:Model.Response.Wx.WxPayNotify.resource_type">
+            <summary>
+            通知数据类型
+            </summary>
+        </member>
+        <member name="P:Model.Response.Wx.WxPayNotify.resource">
+            <summary>
+            通知数据
+            </summary>
+        </member>
+        <member name="P:Model.Response.Wx.WxPayNotify.summary">
+            <summary>
+            回调摘要
+            </summary>
+        </member>
+        <member name="T:Model.Response.Wx.WxPayNotifyDetail">
+            <summary>
+            微信支付通知数据
+            </summary>
+        </member>
+        <member name="P:Model.Response.Wx.WxPayNotifyDetail.algorithm">
+            <summary>
+            加密算法类型	
+            </summary>
+        </member>
+        <member name="P:Model.Response.Wx.WxPayNotifyDetail.ciphertext">
+            <summary>
+            数据密文
+            </summary>
+        </member>
+        <member name="P:Model.Response.Wx.WxPayNotifyDetail.associated_data">
+            <summary>
+            附加数据
+            </summary>
+        </member>
+        <member name="P:Model.Response.Wx.WxPayNotifyDetail.original_type">
+            <summary>
+            原始类型
+            </summary>
+        </member>
+        <member name="P:Model.Response.Wx.WxPayNotifyDetail.nonce">
+            <summary>
+            随机串
+            </summary>
+        </member>
+        <member name="T:Model.Response.Wx.WxPayNotifyData">
+            <summary>
+            微信支付通知解密后的有效数据
+            </summary>
+        </member>
+        <member name="P:Model.Response.Wx.WxPayNotifyData.appid">
+            <summary>
+            应用ID
+            </summary>
+        </member>
+        <member name="P:Model.Response.Wx.WxPayNotifyData.mchid">
+            <summary>
+            商户号
+            </summary>
+        </member>
+        <member name="P:Model.Response.Wx.WxPayNotifyData.out_trade_no">
+            <summary>
+            商户订单号
+            </summary>
+        </member>
+        <member name="P:Model.Response.Wx.WxPayNotifyData.transaction_id">
+            <summary>
+            微信支付订单号
+            </summary>
+        </member>
+        <member name="P:Model.Response.Wx.WxPayNotifyData.trade_type">
+            <summary>
+            交易类型
+            </summary>
+        </member>
+        <member name="P:Model.Response.Wx.WxPayNotifyData.trade_state">
+            <summary>
+            交易状态
+            </summary>
+        </member>
+        <member name="P:Model.Response.Wx.WxPayNotifyData.trade_state_desc">
+            <summary>
+            交易状态描述
+            </summary>
+        </member>
+        <member name="P:Model.Response.Wx.WxPayNotifyData.bank_type">
+            <summary>
+            付款银行
+            </summary>
+        </member>
+        <member name="P:Model.Response.Wx.WxPayNotifyData.attach">
+            <summary>
+            附加数据，在查询API和支付通知中原样返回，可作为自定义参数使用
+            </summary>
+        </member>
+        <member name="P:Model.Response.Wx.WxPayNotifyData.success_time">
+            <summary>
+            支付完成时间
+            </summary>
+        </member>
+        <member name="P:Model.Response.Wx.WxPayNotifyData.payer">
+            <summary>
+            支付者
+            </summary>
+        </member>
+        <member name="P:Model.Response.Wx.WxPayNotifyData.amount">
+            <summary>
+            订单金额
+            </summary>
+        </member>
+        <member name="P:Model.Response.Wx.WxPayNotifyData.scene_info">
+            <summary>
+            场景信息
+            </summary>
+        </member>
+        <member name="T:Model.Response.Wx.WxPayNotifyPayer">
+            <summary>
+            支付者
+            </summary>
+        </member>
+        <member name="P:Model.Response.Wx.WxPayNotifyPayer.openid">
+            <summary>
+            用户标识
+            </summary>
+        </member>
+        <member name="T:Model.Response.Wx.WxPayNotifyAmount">
+            <summary>
+            订单金额
+            </summary>
+        </member>
+        <member name="P:Model.Response.Wx.WxPayNotifyAmount.total">
+            <summary>
+            总金额
+            </summary>
+        </member>
+        <member name="P:Model.Response.Wx.WxPayNotifyAmount.payer_total">
+            <summary>
+            用户支付金额
+            </summary>
+        </member>
+        <member name="P:Model.Response.Wx.WxPayNotifyAmount.currency">
+            <summary>
+            货币类型
+            </summary>
+        </member>
+        <member name="P:Model.Response.Wx.WxPayNotifyAmount.payer_currency">
+            <summary>
+            用户支付币种
+            </summary>
+        </member>
+        <member name="T:Model.Response.Wx.WxPayNotifySceneInfo">
+            <summary>
+            场景信息
+            </summary>
+        </member>
+        <member name="P:Model.Response.Wx.WxPayNotifySceneInfo.device_id">
+            <summary>
+            商户端设备号
+            </summary>
         </member>
     </members>
 </doc>

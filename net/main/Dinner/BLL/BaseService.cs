@@ -13,6 +13,9 @@ using Microsoft.EntityFrameworkCore;
 
 namespace BLL
 {
+    /// <summary>
+    /// 数据库操作类
+    /// </summary>
     public class BaseService
     {
 

@@ -48,6 +48,7 @@ namespace DAL
         public virtual DbSet<TProductCompany> TProductCompany { get; set; }
         public virtual DbSet<TUser> TUser { get; set; }
         public virtual DbSet<TUserCoupon> TUserCoupon { get; set; }
+        public virtual DbSet<TWxOrderCallback> TWxOrderCallback { get; set; }
 
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
@@ -482,6 +483,12 @@ namespace DAL
                 entity.Property(e => e.State).HasComment("状态（0待支付，1已支付，2已完成，9已取消，10已删除）");
 
                 entity.Property(e => e.Userid).HasComment("用户id");
+
+                entity.HasOne(d => d.User)
+                    .WithMany(p => p.TOrder)
+                    .HasForeignKey(d => d.Userid)
+                    .OnDelete(DeleteBehavior.ClientSetNull)
+                    .HasConstraintName("fk_order_userid");
             });
 
             modelBuilder.Entity<TOrderCallback>(entity =>
@@ -493,11 +500,13 @@ namespace DAL
 
                 entity.Property(e => e.Orderid).HasComment("订单编号");
 
-                entity.Property(e => e.Crtime).HasComment("创建时间");
+                entity.Property(e => e.Crdate).HasComment("支付完成日期");
 
-                entity.Property(e => e.State).HasComment("状态");
+                entity.Property(e => e.Crtime).HasComment("支付完成时间");
 
-                entity.Property(e => e.WxOrderid).HasComment("微信支付订单号");
+                entity.Property(e => e.Money).HasComment("金额");
+
+                entity.Property(e => e.Userid).HasComment("用户id");
 
                 entity.HasOne(d => d.Order)
                     .WithOne(p => p.TOrderCallback)
@@ -693,6 +702,50 @@ namespace DAL
                     .HasForeignKey(d => d.Userid)
                     .OnDelete(DeleteBehavior.ClientSetNull)
                     .HasConstraintName("fk_user");
+            });
+
+            modelBuilder.Entity<TWxOrderCallback>(entity =>
+            {
+                entity.HasKey(e => e.TransactionId)
+                    .HasName("PRIMARY");
+
+                entity.HasComment("微信支付回调数据");
+
+                entity.Property(e => e.TransactionId).HasComment("微信支付订单号");
+
+                entity.Property(e => e.Appid).HasComment("应用ID");
+
+                entity.Property(e => e.Attach).HasComment("附加数据，在查询API和支付通知中原样返可作为自定义参数使用");
+
+                entity.Property(e => e.BankType).HasComment("付款银行");
+
+                entity.Property(e => e.Currency).HasComment("货币类型");
+
+                entity.Property(e => e.DeviceId).HasComment("商户端设备号");
+
+                entity.Property(e => e.Mchid).HasComment("商户号");
+
+                entity.Property(e => e.Openid).HasComment("支付者标识");
+
+                entity.Property(e => e.OutTradeNo).HasComment("商户订单号");
+
+                entity.Property(e => e.PayerCurrency).HasComment("用户支付币种");
+
+                entity.Property(e => e.PayerTotal)
+                    .HasDefaultValueSql("'0'")
+                    .HasComment("用户支付金额");
+
+                entity.Property(e => e.SuccessTime).HasComment("支付完成时间");
+
+                entity.Property(e => e.Total)
+                    .HasDefaultValueSql("'0'")
+                    .HasComment("总金额");
+
+                entity.Property(e => e.TradeState).HasComment("交易状态");
+
+                entity.Property(e => e.TradeStateDesc).HasComment("交易状态描述");
+
+                entity.Property(e => e.TradeType).HasComment("交易类型");
             });
 
             OnModelCreatingPartial(modelBuilder);

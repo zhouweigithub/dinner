@@ -319,6 +319,44 @@
             <param name="userCode">目标用户代码(openid)</param>
             <returns></returns>
         </member>
+        <member name="T:Api.Controllers.PayController">
+            <summary>
+            支付相关功能
+            </summary>
+        </member>
+        <member name="M:Api.Controllers.PayController.PreMiniPay(System.String)">
+            <summary>
+            生成微信预支付订单
+            </summary>
+            <param name="orderid">商户订单号</param>
+            <returns></returns>
+        </member>
+        <member name="M:Api.Controllers.PayController.CloseMiniPay(System.String)">
+            <summary>
+            关闭微信支付订单
+            </summary>
+            <param name="orderid">商户订单号</param>
+            <returns></returns>
+        </member>
+        <member name="M:Api.Controllers.PayController.QueryMiniPay(System.String)">
+            <summary>
+            查询微信支付订单
+            </summary>
+            <param name="transaction_id">微信订单号</param>
+            <returns></returns>
+        </member>
+        <member name="T:Api.Controllers.PayNotifyController">
+            <summary>
+            微信支付回调功能
+            </summary>
+        </member>
+        <member name="M:Api.Controllers.PayNotifyController.ReceiveWxPayNotyfy(Model.Response.Wx.WxPayNotify)">
+            <summary>
+            接收微信小程序支付回调数据
+            </summary>
+            <param name="notifyInfo">回调数据</param>
+            <returns></returns>
+        </member>
         <member name="T:Api.Controllers.ProductController">
             <summary>
             商品信息

@@ -4,42 +4,74 @@ using System.Linq;
 using System.Net.Http;
 using System.Text;
 using System.Threading.Tasks;
+using BLL.Interface;
+using DAL;
 using Microsoft.Extensions.Logging;
+using Microsoft.Extensions.Options;
 using Model.Request.Wx;
 using Model.Response.Com;
 using Model.Response.Wx;
 using ZqUtils.Core.Helpers;
+using Model.Database;
+using Microsoft.EntityFrameworkCore;
 
 namespace BLL
 {
-    public class MiniPayService
+    /// <summary>
+    /// 微信小程序支付功能
+    /// </summary>
+    public class MiniPayService : BaseService, IMiniPayService
     {
         //文档地址 https://pay.weixin.qq.com/wiki/doc/apiv3/apis/chapter3_5_3.shtml
 
         private readonly ILogger<MiniPayService> _logger;
+        private readonly IOptions<WxOpenidConfigModel> _wxconfig;
 
-        public MiniPayService(ILogger<MiniPayService> logger)
+        public MiniPayService(DbService context, ILogger<MiniPayService> logger, IOptions<WxOpenidConfigModel> wxconfig) : base(context, logger)
         {
             _logger = logger;
+            _wxconfig = wxconfig;
         }
 
         /// <summary>
-        /// 预支付
+        /// 预支付，生成的传话标识有效期：2小时
         /// </summary>
-        /// <param name="para">支付参数</param>
+        /// <param name="orderid">订单号</param>
+        /// <param name="host">回调地址域名信息</param>
         /// <returns></returns>
-        public RespData<string> PreMiniPay(MiniPayStartPara para)
+        public RespData<string> PreMiniPay(string orderid, string host)
         {
             RespData<String> result = new RespData<string>();
             try
             {
+                //获取订单详情
+                var orderInfo = context.Set<TOrder>().AsNoTracking().Include(a => a.TOrderProduct).Include(b => b.User).FirstOrDefault(c => c.Id == orderid);
+
+                if (orderInfo == null || orderInfo.TOrderProduct.Count == 0 || orderInfo.User == null)
+                {
+                    result.code = -1;
+                    result.msg = "预支付失败：订单信息异常";
+                    return result;
+                }
+
+                MiniPayStartPara para = new MiniPayStartPara()
+                {
+                    appid = _wxconfig.Value.AppId,
+                    mchid = _wxconfig.Value.Mchid,
+                    out_trade_no = orderid,
+                    description = orderInfo.TOrderProduct.First().ProductName,
+                    openid = orderInfo.User.Code,
+                    total = (int)(orderInfo.PayMoney * 100),
+                    notify_url = string.Format("{0}/PayNotify/ReceiveWxPayNotyfy", host)
+                };
+
                 //检测支付参数是否正确
                 string errMsg = IsValidPrePayPara(para);
 
                 if (!string.IsNullOrWhiteSpace(errMsg))
                 {
                     result.code = -2;
-                    result.msg = "支付参数异常：" + errMsg;
+                    result.msg = "预支付失败：支付参数异常：" + errMsg;
                     return result;
                 }
 
@@ -62,12 +94,14 @@ namespace BLL
 
                 var jobject = ZqUtils.Core.Extensions.StringExtensions.ToJObject(resp.ResultString);
 
+                //预支付交易会话标识。用于后续接口调用中使用，该值有效期为2小时
+                //示例值：wx201410272009395522657a690389285100
                 result.data = jobject["prepay_id"].ToString();
             }
             catch (Exception e)
             {
                 result.code = -1;
-                result.msg = "服务内部错误";
+                result.msg = "预支付失败：服务内部错误";
                 _logger.LogError(e.ToString());
             }
 
@@ -76,16 +110,18 @@ namespace BLL
 
         /// <summary>
         /// 关闭微信订单
+        /// 以下情况需要调用关单接口：
+        /// 1、商户订单支付失败需要生成新单号重新发起支付，要对原订单号调用关单，避免重复支付；
+        /// 2、系统下单后，用户支付超时，系统退出不再受理，避免用户继续，请调用关单接口。
         /// </summary>
-        /// <param name="mchid">直连商户号</param>
         /// <param name="out_trade_no">商户订单号</param>
         /// <returns></returns>
-        public RespData ClosePay(string mchid, string out_trade_no)
+        public RespData ClosePay(string out_trade_no)
         {
             RespData result = new RespData();
             try
             {
-                if (string.IsNullOrWhiteSpace(mchid) || string.IsNullOrWhiteSpace(out_trade_no))
+                if (string.IsNullOrWhiteSpace(_wxconfig.Value.Mchid) || string.IsNullOrWhiteSpace(out_trade_no))
                 {
                     result.code = -3;
                     result.msg = "参数错误";
@@ -94,7 +130,7 @@ namespace BLL
 
                 string url = string.Format("https://api.mch.weixin.qq.com/v3/pay/transactions/out-trade-no/{0}/close", out_trade_no);
 
-                string postData = string.Format("{{\"mchid\": \"{0}\"}}", mchid);
+                string postData = string.Format("{{\"mchid\": \"{0}\"}}", _wxconfig.Value.Mchid);
 
                 using HttpHelper request = new HttpHelper(CreatePostRequest(url, postData));
 
@@ -120,22 +156,21 @@ namespace BLL
         /// <summary>
         /// 查询支付情况
         /// </summary>
-        /// <param name="mchid">直连商户号</param>
         /// <param name="transaction_id">微信支付订单号</param>
         /// <returns></returns>
-        public RespData<QueryWxPayResp> QueryPay(string mchid, string transaction_id)
+        public RespData<QueryWxPayResp> QueryPay(string transaction_id)
         {
             RespData<QueryWxPayResp> result = new RespData<QueryWxPayResp>();
             try
             {
-                if (string.IsNullOrWhiteSpace(mchid) || string.IsNullOrWhiteSpace(transaction_id))
+                if (string.IsNullOrWhiteSpace(_wxconfig.Value.Mchid) || string.IsNullOrWhiteSpace(transaction_id))
                 {
                     result.code = -2;
                     result.msg = "参数错误";
                     return result;
                 }
 
-                string url = string.Format("https://api.mch.weixin.qq.com/v3/pay/transactions/id/{0}?mchid={1}", transaction_id, mchid);
+                string url = string.Format("https://api.mch.weixin.qq.com/v3/pay/transactions/id/{0}?mchid={1}", transaction_id, _wxconfig.Value.Mchid);
 
                 using HttpHelper request = new HttpHelper(CreateGetRequest(url));
 

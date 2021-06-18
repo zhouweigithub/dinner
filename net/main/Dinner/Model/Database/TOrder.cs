@@ -13,6 +13,7 @@ namespace Model.Database
     /// 订单信息
     /// </summary>
     [Table("t_order")]
+    [Index(nameof(Userid), Name = "fk_order_userid")]
     public partial class TOrder
     {
         public TOrder()
@@ -72,6 +73,9 @@ namespace Model.Database
         [Column("crtime", TypeName = "datetime")]
         public DateTime Crtime { get; set; }
 
+        [ForeignKey(nameof(Userid))]
+        [InverseProperty(nameof(TUser.TOrder))]
+        public virtual TUser User { get; set; }
         [InverseProperty("Order")]
         public virtual TOrderCallback TOrderCallback { get; set; }
         [InverseProperty("Order")]

@@ -22,6 +22,7 @@ namespace Model.Database
             TCart = new HashSet<TCart>();
             TFeedback = new HashSet<TFeedback>();
             TMessage = new HashSet<TMessage>();
+            TOrder = new HashSet<TOrder>();
             TUserCoupon = new HashSet<TUserCoupon>();
         }
 
@@ -89,6 +90,8 @@ namespace Model.Database
         public virtual ICollection<TFeedback> TFeedback { get; set; }
         [InverseProperty("User")]
         public virtual ICollection<TMessage> TMessage { get; set; }
+        [InverseProperty("User")]
+        public virtual ICollection<TOrder> TOrder { get; set; }
         [InverseProperty("User")]
         public virtual ICollection<TUserCoupon> TUserCoupon { get; set; }
     }
