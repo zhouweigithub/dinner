@@ -27,5 +27,13 @@ namespace Api.Controllers
             return User.Identity.Name;
         }
 
+        /// <summary>
+        /// 获取域名信息
+        /// </summary>
+        /// <returns></returns>
+        protected string GetHostInfo()
+        {
+            return string.Format("{0}://{1}", Request.Scheme, Request.Host.Value);
+        }
     }
 }

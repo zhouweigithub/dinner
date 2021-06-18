@@ -39,16 +39,31 @@ namespace Api.Controllers
         }
 
         /// <summary>
+        /// 获取订单信息
+        /// </summary>
+        /// <param name="orderid">订单号</param>
+        /// <returns></returns>
+        [HttpGet]
+        [Route("[action]")]
+        public async Task<RespData<TOrder>> GetEntity(string orderid)
+        {
+            string openid = GetUserCode();
+            return await _services.GetEntity(orderid, openid);
+        }
+
+
+        /// <summary>
         /// 提交订单
         /// </summary>
         /// <param name="data">订单信息</param>
         /// <returns></returns>
         [HttpPost]
         [Route("[action]")]
-        public async Task<RespData> Add(OrderAdd data)
+        public async Task<RespData<string>> Add(OrderAdd data)
         {
             string openid = GetUserCode();
-            return await _services.AddAsync(data, openid);
+            string hostInfo = GetHostInfo();
+            return await _services.AddAsync(data, openid, hostInfo);
         }
 
         /// <summary>

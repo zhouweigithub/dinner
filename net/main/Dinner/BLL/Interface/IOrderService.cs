@@ -18,7 +18,9 @@ namespace BLL.Interface
     {
         public Task<RespDataList<TOrder>> GetListAsync(string openid, string productName, int pageSize, int page);
 
-        public Task<RespData<TOrder>> AddAsync(OrderAdd data, string openid);
+        public Task<RespData<TOrder>> GetEntity(string orderid, string openid);
+
+        public Task<RespData<string>> AddAsync(OrderAdd data, string openid, string host);
 
         public Task<RespData> DeleteAsync(string orderid, string openid);
 

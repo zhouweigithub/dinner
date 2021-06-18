@@ -19,10 +19,12 @@ namespace BLL
     public class OrderService : BaseService, IOrderService
     {
         private readonly ILogger<OrderService> _logger;
+        private readonly IMiniPayService _payService;
 
-        public OrderService(DbService context, ILogger<OrderService> logger) : base(context, logger)
+        public OrderService(DbService context, ILogger<OrderService> logger, IMiniPayService payService) : base(context, logger)
         {
             _logger = logger;
+            _payService = payService;
         }
 
         /// <summary>
@@ -31,9 +33,9 @@ namespace BLL
         /// <param name="data">订单信息</param>
         /// <param name="userid">用户id</param>
         /// <returns></returns>
-        public async Task<RespData<TOrder>> AddAsync(OrderAdd data, string openid)
+        public async Task<RespData<string>> AddAsync(OrderAdd data, string openid, string host)
         {
-            RespData<TOrder> result = new RespData<TOrder>();
+            RespData<string> result = new RespData<string>();
 
             try
             {
@@ -156,15 +158,21 @@ namespace BLL
                 };
 
                 await context.Set<TOrder>().AddAsync(order);
-                result.data = order;
 
                 await context.SaveChangesAsync();
+
+
+                //预支付
+                var preInfo = _payService.PreMiniPay(orderid, host);
+
+                //预支付参数
+                result.data = preInfo.data;
             }
             catch (Exception e)
             {
                 result.code = -1;
                 result.msg = "创建订单失败：服务内部错误";
-                result.data = null;
+                result.data = string.Empty;
                 _logger.LogError(e.ToString());
             }
 
@@ -317,6 +325,34 @@ namespace BLL
                 result.code = -1;
                 result.msg = "服务内部错误";
                 result.datas = new List<TOrder>();
+            }
+
+            return result;
+        }
+
+        /// <summary>
+        /// 查询订单信息
+        /// </summary>
+        /// <param name="orderid">订单号</param>
+        /// <param name="openid">用户代码</param>
+        /// <returns></returns>
+        public async Task<RespData<TOrder>> GetEntity(string orderid, string openid)
+        {
+            RespData<TOrder> result = new RespData<TOrder>();
+
+            try
+            {
+                int userid = GetUserIdByCode(openid);
+                var data = await context.Set<TOrder>().AsNoTracking().Include(a => a.TOrderProduct).Include(b => b.TOrderCoupon).FirstOrDefaultAsync(a => a.Id == orderid && a.Userid == userid);
+
+                result.data = data;
+            }
+            catch (Exception e)
+            {
+                _logger.LogError(e.ToString());
+                result.code = -1;
+                result.msg = "服务内部错误";
+                result.data = null;
             }
 
             return result;

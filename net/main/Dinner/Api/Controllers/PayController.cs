@@ -31,7 +31,7 @@ namespace Api.Controllers
         [Route("[action]")]
         public RespData<string> PreMiniPay(string orderid)
         {
-            string hostInfo = string.Format("{0}://{1}", Request.Scheme, Request.Host.Value);
+            string hostInfo = GetHostInfo();
             return _services.PreMiniPay(orderid, hostInfo);
         }
 

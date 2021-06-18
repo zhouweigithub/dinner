@@ -706,12 +706,9 @@ namespace DAL
 
             modelBuilder.Entity<TWxOrderCallback>(entity =>
             {
-                entity.HasKey(e => e.TransactionId)
-                    .HasName("PRIMARY");
-
                 entity.HasComment("微信支付回调数据");
 
-                entity.Property(e => e.TransactionId).HasComment("微信支付订单号");
+                entity.Property(e => e.Id).HasComment("自增ID");
 
                 entity.Property(e => e.Appid).HasComment("应用ID");
 
@@ -746,6 +743,8 @@ namespace DAL
                 entity.Property(e => e.TradeStateDesc).HasComment("交易状态描述");
 
                 entity.Property(e => e.TradeType).HasComment("交易类型");
+
+                entity.Property(e => e.TransactionId).HasComment("微信支付订单号");
             });
 
             OnModelCreatingPartial(modelBuilder);

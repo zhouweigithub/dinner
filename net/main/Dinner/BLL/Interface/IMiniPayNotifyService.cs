@@ -10,6 +10,6 @@ namespace BLL.Interface
 {
     public interface IMiniPayNotifyService
     {
-        public RespData ReceiveWxPayNotyfy(WxPayNotify notifyInfo);
+        public Task<RespData> ReceiveWxPayNotyfy(WxPayNotify notifyInfo);
     }
 }

@@ -914,6 +914,11 @@
             微信支付回调数据
             </summary>
         </member>
+        <member name="P:Model.Database.TWxOrderCallback.Id">
+            <summary>
+            自增ID
+            </summary>
+        </member>
         <member name="P:Model.Database.TWxOrderCallback.TransactionId">
             <summary>
             微信支付订单号

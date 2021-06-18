@@ -35,9 +35,9 @@ namespace Api.Controllers
         /// <returns></returns>
         [HttpPost]
         [Route("[action]")]
-        public RespData ReceiveWxPayNotyfy(WxPayNotify notifyInfo)
+        public async Task<RespData> ReceiveWxPayNotyfy(WxPayNotify notifyInfo)
         {
-            return _services.ReceiveWxPayNotyfy(notifyInfo);
+            return await _services.ReceiveWxPayNotyfy(notifyInfo);
         }
     }
 }

@@ -17,9 +17,14 @@ namespace Model.Database
     public partial class TWxOrderCallback
     {
         /// <summary>
-        /// 微信支付订单号
+        /// 自增ID
         /// </summary>
         [Key]
+        [Column("id")]
+        public int Id { get; set; }
+        /// <summary>
+        /// 微信支付订单号
+        /// </summary>
         [Column("transaction_id")]
         [StringLength(64)]
         public string TransactionId { get; set; }

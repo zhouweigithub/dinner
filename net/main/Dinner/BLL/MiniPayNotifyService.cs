@@ -14,6 +14,7 @@ using Model.Response.Wx;
 using ZqUtils.Core.Helpers;
 using ZwUtil;
 using Model.Database;
+using Microsoft.EntityFrameworkCore;
 
 namespace BLL
 {
@@ -36,8 +37,8 @@ namespace BLL
         /// <summary>
         /// 接收并处理微信支付通知结果
         /// </summary>
-        /// <param name="notifyContent">通知内容</param>
-        public RespData ReceiveWxPayNotyfy(WxPayNotify notifyInfo)
+        /// <param name="notifyInfo">通知内容</param>
+        public async Task<RespData> ReceiveWxPayNotyfy(WxPayNotify notifyInfo)
         {
             RespData result = new RespData();
             try
@@ -65,6 +66,15 @@ namespace BLL
 
                     result.code = -1;
                     result.msg = errmsg;
+                    return result;
+                }
+
+                //检测是否已经处理过
+                var serverInfo = await context.Set<TWxOrderCallback>().AsNoTracking().FirstOrDefaultAsync(a => a.TransactionId == data.transaction_id && a.TradeState == data.trade_state);
+
+                //已经处理过，直接返回
+                if (serverInfo != null)
+                {
                     return result;
                 }
 
@@ -99,7 +109,7 @@ namespace BLL
                     Userid = GetUserIdByCode(data.payer.openid)
                 });
 
-                context.SaveChanges();
+                await context.SaveChangesAsync();
 
                 return result;
             }
