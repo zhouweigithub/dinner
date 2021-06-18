@@ -20,5 +20,11 @@ namespace Model.Request.Wx
         /// 密钥
         /// </summary>
         public string AppSecret { get; set; }
+
+        /// <summary>
+        /// 商户平台上设置的APIv3密钥
+        /// </summary>
+        public string AesKey { get; set; }
+
     }
 }

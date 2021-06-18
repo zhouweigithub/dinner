@@ -38,7 +38,7 @@ namespace Model.Response.Wx
     }
 
     /// <summary>
-    /// 通知数据
+    /// 微信支付通知数据
     /// </summary>
     public class WxPayNotifyDetail
     {
@@ -66,7 +66,7 @@ namespace Model.Response.Wx
 
 
     /// <summary>
-    /// 通知解密后的有效数据
+    /// 微信支付通知解密后的有效数据
     /// </summary>
     public class WxPayNotifyData
     {
@@ -109,7 +109,7 @@ namespace Model.Response.Wx
         /// <summary>
         /// 支付完成时间
         /// </summary>
-        public string success_time { get; set; }
+        public DateTime success_time { get; set; }
         /// <summary>
         /// 支付者
         /// </summary>
@@ -144,11 +144,11 @@ namespace Model.Response.Wx
         /// <summary>
         /// 总金额
         /// </summary>
-        public string total { get; set; }
+        public int total { get; set; }
         /// <summary>
         /// 用户支付金额
         /// </summary>
-        public string payer_total { get; set; }
+        public int payer_total { get; set; }
         /// <summary>
         /// 货币类型
         /// </summary>
