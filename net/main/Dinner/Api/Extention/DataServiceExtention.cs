@@ -19,7 +19,6 @@ namespace Api
         public static void AddDataServices(this IServiceCollection services)
         {
             //数据操作服务
-            //services.AddTransient<IBaseService, BaseService>();
             services.AddTransient<ICompanyService, CompanyService>();
             services.AddTransient<ICartService, CartService>();
             services.AddTransient<ICommentService, CommentService>();
@@ -36,8 +35,8 @@ namespace Api
             services.AddTransient<ICategoryService, CategoryService>();
             services.AddTransient<IMiniPayNotifyService, MiniPayNotifyService>();
             services.AddTransient<IMiniPayService, MiniPayService>();
+            services.AddTransient<IMiniPaySignService, MiniPaySignService>();
 
-            //其他服务
         }
     }
 }

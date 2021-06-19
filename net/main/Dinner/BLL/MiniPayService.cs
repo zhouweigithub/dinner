@@ -14,6 +14,7 @@ using Model.Response.Wx;
 using ZqUtils.Core.Helpers;
 using Model.Database;
 using Microsoft.EntityFrameworkCore;
+using System.IO;
 
 namespace BLL
 {
@@ -26,11 +27,13 @@ namespace BLL
 
         private readonly ILogger<MiniPayService> _logger;
         private readonly IOptions<WxOpenidConfigModel> _wxconfig;
+        private readonly IMiniPaySignService _signServer;
 
-        public MiniPayService(DbService context, ILogger<MiniPayService> logger, IOptions<WxOpenidConfigModel> wxconfig) : base(context, logger)
+        public MiniPayService(DbService context, IMiniPaySignService signServer, ILogger<MiniPayService> logger, IOptions<WxOpenidConfigModel> wxconfig) : base(context, logger)
         {
             _logger = logger;
             _wxconfig = wxconfig;
+            _signServer = signServer;
         }
 
         /// <summary>
@@ -276,20 +279,65 @@ namespace BLL
         /// 创建Post请求对象
         /// </summary>
         /// <param name="url">请求地址</param>
-        /// <param name="para">请求参数</param>
+        /// <param name="postData">请求参数</param>
         /// <returns></returns>
-        private HttpRequest CreatePostRequest(string url, string para)
+        private HttpRequest CreatePostRequest(string url, string postData)
         {
-            return new HttpRequest()
+            var request = new HttpRequest()
             {
                 Url = url,
                 HttpMethod = HttpMethod.Post,
                 ContentType = "application/json",
-                PostString = para,
-                KeepAlive = true
+                PostString = postData,
+                KeepAlive = true,
             };
+
+            MiniPaySignPara signPara = new MiniPaySignPara
+            {
+                Method = "Post",
+                Body = postData,
+                Path = new Uri(url).PathAndQuery
+            };
+
+            //添加头部签名
+            request.Header.Add("Authorization", _signServer.Sign(signPara));
+
+            return request;
         }
 
+        /// <summary>
+        /// 创建Get请求对象
+        /// </summary>
+        /// <param name="url">请求地址</param>
+        /// <returns></returns>
+        private HttpRequest CreateGetRequest(string url)
+        {
+            var request = new HttpRequest()
+            {
+                Url = url,
+                HttpMethod = HttpMethod.Get,
+                KeepAlive = true
+            };
+
+
+            MiniPaySignPara signPara = new MiniPaySignPara
+            {
+                Method = "Get",
+                Body = string.Empty,
+                Path = new Uri(url).PathAndQuery
+            };
+
+            //添加头部签名
+            request.Header.Add("Authorization", _signServer.Sign(signPara));
+
+            return request;
+        }
+
+        /// <summary>
+        /// 获取内容
+        /// </summary>
+        /// <param name="respString">json串</param>
+        /// <returns></returns>
         private QueryWxPayResp GetQueryPayResult(string respString)
         {
             QueryWxPayResp result = new QueryWxPayResp();
@@ -307,19 +355,5 @@ namespace BLL
             return result;
         }
 
-        /// <summary>
-        /// 创建Get请求对象
-        /// </summary>
-        /// <param name="url">请求地址</param>
-        /// <returns></returns>
-        private HttpRequest CreateGetRequest(string url)
-        {
-            return new HttpRequest()
-            {
-                Url = url,
-                HttpMethod = HttpMethod.Get,
-                KeepAlive = true
-            };
-        }
     }
 }

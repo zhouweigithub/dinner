@@ -370,6 +370,12 @@
             <param name="notifyInfo">回调数据</param>
             <returns></returns>
         </member>
+        <member name="M:Api.Controllers.PayNotifyController.GetSignInfo">
+            <summary>
+            获取验证签名需要的参数
+            </summary>
+            <returns></returns>
+        </member>
         <member name="T:Api.Controllers.ProductController">
             <summary>
             商品信息

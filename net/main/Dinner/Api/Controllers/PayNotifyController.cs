@@ -1,9 +1,11 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Text;
 using System.Threading.Tasks;
 using BLL.Interface;
 using Microsoft.AspNetCore.Mvc;
+using Model.Request.Wx;
 using Model.Response.Com;
 using Model.Response.Wx;
 
@@ -37,7 +39,30 @@ namespace Api.Controllers
         [Route("[action]")]
         public async Task<RespData> ReceiveWxPayNotyfy(WxPayNotify notifyInfo)
         {
-            return await _services.ReceiveWxPayNotyfy(notifyInfo);
+            MiniPayDeSignPara data = GetSignInfo();
+            return await _services.ReceiveWxPayNotyfy(notifyInfo, data);
         }
+
+
+        /// <summary>
+        /// 获取验证签名需要的参数
+        /// </summary>
+        /// <returns></returns>
+        private MiniPayDeSignPara GetSignInfo()
+        {
+            byte[] bytes = new byte[Request.Body.Length];
+            Request.Body.Read(bytes, 0, (int)Request.Body.Length);
+            string postData = Encoding.UTF8.GetString(bytes);
+
+            return new MiniPayDeSignPara()
+            {
+                WechatpayTimestamp = Request.Headers["Wechatpay-Timestamp"],
+                ResponseBody = postData,
+                WechatpayNonce = Request.Headers["Wechatpay-Nonce"],
+                WechatpaySerial = Request.Headers["Wechatpay-Serial"],
+                WechatpaySignature = Request.Headers["Wechatpay-Signature"],
+            };
+        }
+
     }
 }

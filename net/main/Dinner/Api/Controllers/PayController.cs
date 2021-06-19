@@ -1,11 +1,16 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.IO;
 using System.Linq;
+using System.Text;
 using System.Threading.Tasks;
 using BLL.Interface;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.Extensions.Options;
+using Model.Request.Wx;
 using Model.Response.Com;
 using Model.Response.Wx;
+using ZwUtil;
 
 namespace Api.Controllers
 {
@@ -16,10 +21,12 @@ namespace Api.Controllers
     public class PayController : BaseAuthController
     {
         private readonly IMiniPayService _services;
+        private readonly IOptions<WxOpenidConfigModel> _wxconfig;
 
-        public PayController(IMiniPayService service)
+        public PayController(IMiniPayService service, IOptions<WxOpenidConfigModel> wxconfig)
         {
             _services = service;
+            _wxconfig = wxconfig;
         }
 
         /// <summary>
@@ -58,5 +65,6 @@ namespace Api.Controllers
         {
             return _services.QueryPay(transaction_id);
         }
+
     }
 }

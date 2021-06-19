@@ -9,11 +9,14 @@ using Org.BouncyCastle.Crypto.Parameters;
 
 namespace ZwUtil
 {
+    /// <summary>
+    /// AEAD_AES_256_GCM 算法
+    /// </summary>
     public class AesGcmHelper
     {
-        private static string ALGORITHM = "AES/GCM/NoPadding";
-        private static int TAG_LENGTH_BIT = 128;
-        private static int NONCE_LENGTH_BYTE = 12;
+        //private static string ALGORITHM = "AES/GCM/NoPadding";
+        //private static int TAG_LENGTH_BIT = 128;
+        //private static int NONCE_LENGTH_BYTE = 12;
 
         /// <summary>
         /// AEAD_AES_256_GCM 算法解密
@@ -39,5 +42,6 @@ namespace ZwUtil
             gcmBlockCipher.DoFinal(plaintext, length);
             return Encoding.UTF8.GetString(plaintext);
         }
+
     }
 }

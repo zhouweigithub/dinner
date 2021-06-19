@@ -27,18 +27,21 @@ namespace BLL
 
         private readonly ILogger<MiniPayNotifyService> _logger;
         private readonly IOptions<WxOpenidConfigModel> _wxconfig;
+        private readonly IMiniPaySignService _signService;
 
-        public MiniPayNotifyService(DbService context, ILogger<MiniPayNotifyService> logger, IOptions<WxOpenidConfigModel> wxconfig) : base(context, logger)
+        public MiniPayNotifyService(DbService context, ILogger<MiniPayNotifyService> logger, IOptions<WxOpenidConfigModel> wxconfig, IMiniPaySignService signService) : base(context, logger)
         {
             _wxconfig = wxconfig;
             _logger = logger;
+            _signService = signService;
         }
 
         /// <summary>
         /// 接收并处理微信支付通知结果
         /// </summary>
         /// <param name="notifyInfo">通知内容</param>
-        public async Task<RespData> ReceiveWxPayNotyfy(WxPayNotify notifyInfo)
+        /// <param name="para">验证签名的参数</param>
+        public async Task<RespData> ReceiveWxPayNotyfy(WxPayNotify notifyInfo, MiniPayDeSignPara para)
         {
             RespData result = new RespData();
             try
@@ -47,11 +50,21 @@ namespace BLL
                 {
                     string errmsg = "未获取到微信支付回调数据！";
                     _logger.LogError(errmsg);
-
                     result.code = -1;
                     result.msg = errmsg;
                     return result;
                 };
+
+                //验证签名是否正确
+                if (!MiniPaySignHelper.Verify(para.WechatpaySignature, para.ResponseBody, _wxconfig.Value.PlatformPublicKey))
+                {
+                    string errmsg = "微信支付回调数据签名验证失败！！";
+                    _logger.LogError(errmsg);
+                    result.code = -2;
+                    result.msg = errmsg;
+                    return result;
+                }
+
 
                 //解密后的JSON串
                 string sourceJson = AesGcmHelper.AesGcmDecrypt(notifyInfo.resource.associated_data, notifyInfo.resource.nonce, notifyInfo.resource.ciphertext, _wxconfig.Value.AesKey);
@@ -123,6 +136,7 @@ namespace BLL
             }
 
         }
+
 
     }
 }
