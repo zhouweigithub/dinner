@@ -13,6 +13,7 @@ namespace Model.Database
     /// 订单中的商品的送货人
     /// </summary>
     [Table("r_orderproduct_deliver")]
+    [Index(nameof(Delivererid), Name = "fk_dlver")]
     public partial class ROrderproductDeliver
     {
         /// <summary>
@@ -44,5 +45,12 @@ namespace Model.Database
         [Column("msg")]
         [StringLength(256)]
         public string Msg { get; set; }
+
+        [ForeignKey(nameof(Delivererid))]
+        [InverseProperty(nameof(DlvUser.ROrderproductDeliver))]
+        public virtual DlvUser Deliverer { get; set; }
+        [ForeignKey("Orderid,Productid")]
+        [InverseProperty("ROrderproductDeliver")]
+        public virtual TOrderProduct TOrderProduct { get; set; }
     }
 }

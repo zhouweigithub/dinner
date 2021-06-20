@@ -10,13 +10,16 @@ using Util.Tools.QrCode.QrCoder;
 
 namespace Api
 {
+    /// <summary>
+    /// 注册自定义服务
+    /// </summary>
     public static class DataServiceExtention
     {
         /// <summary>
-        /// 注册内部服务
+        /// 注册自定义服务
         /// </summary>
         /// <param name="services"></param>
-        public static void AddDataServices(this IServiceCollection services)
+        public static void AddCustomerServices(this IServiceCollection services)
         {
             //数据操作服务
             services.AddTransient<ICompanyService, CompanyService>();

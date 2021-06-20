@@ -18,7 +18,7 @@ namespace Model.Request
         /// <summary>
         /// 商品分类
         /// </summary>
-        public int Category { get; set; }
+        public int CategoryId { get; set; }
         /// <summary>
         /// 价格
         /// </summary>

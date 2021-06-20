@@ -13,11 +13,13 @@ namespace Model.Database
     /// 供货商信息
     /// </summary>
     [Table("sp_user")]
+    [Index(nameof(Username), Name = "ix_username", IsUnique = true)]
     public partial class SpUser
     {
         public SpUser()
         {
             RCompanySupplier = new HashSet<RCompanySupplier>();
+            ROrderproductSupplier = new HashSet<ROrderproductSupplier>();
             RProductSuplier = new HashSet<RProductSuplier>();
             SpException = new HashSet<SpException>();
         }
@@ -25,6 +27,20 @@ namespace Model.Database
         [Key]
         [Column("id")]
         public int Id { get; set; }
+        /// <summary>
+        /// 登录账号
+        /// </summary>
+        [Required]
+        [Column("username")]
+        [StringLength(50)]
+        public string Username { get; set; }
+        /// <summary>
+        /// 登录密码
+        /// </summary>
+        [Required]
+        [Column("password")]
+        [StringLength(32)]
+        public string Password { get; set; }
         /// <summary>
         /// 供货商名称
         /// </summary>
@@ -52,6 +68,8 @@ namespace Model.Database
 
         [InverseProperty("Suplier")]
         public virtual ICollection<RCompanySupplier> RCompanySupplier { get; set; }
+        [InverseProperty("Supplier")]
+        public virtual ICollection<ROrderproductSupplier> ROrderproductSupplier { get; set; }
         [InverseProperty("Suplier")]
         public virtual ICollection<RProductSuplier> RProductSuplier { get; set; }
         [InverseProperty("Supplier")]

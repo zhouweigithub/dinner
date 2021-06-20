@@ -13,16 +13,32 @@ namespace Model.Database
     /// 配送人信息
     /// </summary>
     [Table("dlv_user")]
+    [Index(nameof(Username), Name = "ix_username", IsUnique = true)]
     public partial class DlvUser
     {
         public DlvUser()
         {
             DlvException = new HashSet<DlvException>();
+            ROrderproductDeliver = new HashSet<ROrderproductDeliver>();
         }
 
         [Key]
         [Column("id")]
         public int Id { get; set; }
+        /// <summary>
+        /// 登录账号
+        /// </summary>
+        [Required]
+        [Column("username")]
+        [StringLength(50)]
+        public string Username { get; set; }
+        /// <summary>
+        /// 登录密码
+        /// </summary>
+        [Required]
+        [Column("password")]
+        [StringLength(32)]
+        public string Password { get; set; }
         /// <summary>
         /// 送货人名称
         /// </summary>
@@ -50,5 +66,7 @@ namespace Model.Database
 
         [InverseProperty("Deliverer")]
         public virtual ICollection<DlvException> DlvException { get; set; }
+        [InverseProperty("Deliverer")]
+        public virtual ICollection<ROrderproductDeliver> ROrderproductDeliver { get; set; }
     }
 }

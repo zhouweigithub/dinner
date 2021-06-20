@@ -129,6 +129,16 @@
             配送人信息
             </summary>
         </member>
+        <member name="P:Model.Database.DlvUser.Username">
+            <summary>
+            登录账号
+            </summary>
+        </member>
+        <member name="P:Model.Database.DlvUser.Password">
+            <summary>
+            登录密码
+            </summary>
+        </member>
         <member name="P:Model.Database.DlvUser.Name">
             <summary>
             送货人名称
@@ -254,6 +264,31 @@
             说明
             </summary>
         </member>
+        <member name="T:Model.Database.RProductCompany">
+            <summary>
+            商品定向公司展示
+            </summary>
+        </member>
+        <member name="P:Model.Database.RProductCompany.Productid">
+            <summary>
+            商品id
+            </summary>
+        </member>
+        <member name="P:Model.Database.RProductCompany.Companyid">
+            <summary>
+            公司id
+            </summary>
+        </member>
+        <member name="P:Model.Database.RProductCompany.StartDate">
+            <summary>
+            起始日期
+            </summary>
+        </member>
+        <member name="P:Model.Database.RProductCompany.EndDate">
+            <summary>
+            结束日期
+            </summary>
+        </member>
         <member name="T:Model.Database.RProductSuplier">
             <summary>
             部分商品的指定供货商
@@ -332,6 +367,16 @@
         <member name="T:Model.Database.SpUser">
             <summary>
             供货商信息
+            </summary>
+        </member>
+        <member name="P:Model.Database.SpUser.Username">
+            <summary>
+            登录账号
+            </summary>
+        </member>
+        <member name="P:Model.Database.SpUser.Password">
+            <summary>
+            登录密码
             </summary>
         </member>
         <member name="P:Model.Database.SpUser.Name">
@@ -784,7 +829,7 @@
             商品名称
             </summary>
         </member>
-        <member name="P:Model.Database.TProduct.Category">
+        <member name="P:Model.Database.TProduct.Categoryid">
             <summary>
             商品分类
             </summary>
@@ -799,6 +844,11 @@
             销量
             </summary>
         </member>
+        <member name="P:Model.Database.TProduct.Type">
+            <summary>
+            是否为餐饮 1是 0不是
+            </summary>
+        </member>
         <member name="P:Model.Database.TProduct.Img">
             <summary>
             商品图片
@@ -807,31 +857,6 @@
         <member name="P:Model.Database.TProduct.Crtime">
             <summary>
             创建时间
-            </summary>
-        </member>
-        <member name="T:Model.Database.TProductCompany">
-            <summary>
-            商品定向公司展示
-            </summary>
-        </member>
-        <member name="P:Model.Database.TProductCompany.Productid">
-            <summary>
-            商品id
-            </summary>
-        </member>
-        <member name="P:Model.Database.TProductCompany.Companyid">
-            <summary>
-            公司id
-            </summary>
-        </member>
-        <member name="P:Model.Database.TProductCompany.StartDate">
-            <summary>
-            起始日期
-            </summary>
-        </member>
-        <member name="P:Model.Database.TProductCompany.EndDate">
-            <summary>
-            结束日期
             </summary>
         </member>
         <member name="T:Model.Database.TUser">
@@ -1139,6 +1164,31 @@
             使用截止日期
             </summary>
         </member>
+        <member name="T:Model.Request.DlvUserAdd">
+            <summary>
+            添加送货员信息
+            </summary>
+        </member>
+        <member name="P:Model.Request.DlvUserAdd.Username">
+            <summary>
+            用户名
+            </summary>
+        </member>
+        <member name="P:Model.Request.DlvUserAdd.Password">
+            <summary>
+            密码
+            </summary>
+        </member>
+        <member name="P:Model.Request.DlvUserAdd.Name">
+            <summary>
+            送货人名称
+            </summary>
+        </member>
+        <member name="P:Model.Request.DlvUserAdd.Address">
+            <summary>
+            送货人地址
+            </summary>
+        </member>
         <member name="T:Model.Request.FeedbackAdd">
             <summary>
             用户反馈信息
@@ -1147,6 +1197,41 @@
         <member name="P:Model.Request.FeedbackAdd.content">
             <summary>
             反馈内容
+            </summary>
+        </member>
+        <member name="T:Model.Request.LoginInfo">
+            <summary>
+            登录信息
+            </summary>
+        </member>
+        <member name="P:Model.Request.LoginInfo.Username">
+            <summary>
+            用户名
+            </summary>
+        </member>
+        <member name="P:Model.Request.LoginInfo.Password">
+            <summary>
+            密码
+            </summary>
+        </member>
+        <member name="T:Model.Request.ModifyPassword">
+            <summary>
+            修改密码参数
+            </summary>
+        </member>
+        <member name="P:Model.Request.ModifyPassword.Userid">
+            <summary>
+            用户id
+            </summary>
+        </member>
+        <member name="P:Model.Request.ModifyPassword.Password">
+            <summary>
+            旧密码
+            </summary>
+        </member>
+        <member name="P:Model.Request.ModifyPassword.NewPassword">
+            <summary>
+            新密码
             </summary>
         </member>
         <member name="T:Model.Request.NoticeAdd">
@@ -1294,7 +1379,7 @@
             商品名称
             </summary>
         </member>
-        <member name="P:Model.Request.ProductAdd.Category">
+        <member name="P:Model.Request.ProductAdd.CategoryId">
             <summary>
             商品分类
             </summary>
@@ -1322,6 +1407,31 @@
         <member name="P:Model.Request.ProductUpdate.Id">
             <summary>
             商品id
+            </summary>
+        </member>
+        <member name="T:Model.Request.SpUserAdd">
+            <summary>
+            供货商添加参数
+            </summary>
+        </member>
+        <member name="P:Model.Request.SpUserAdd.Username">
+            <summary>
+            用户名
+            </summary>
+        </member>
+        <member name="P:Model.Request.SpUserAdd.Password">
+            <summary>
+            密码
+            </summary>
+        </member>
+        <member name="P:Model.Request.SpUserAdd.Name">
+            <summary>
+            供货商名称
+            </summary>
+        </member>
+        <member name="P:Model.Request.SpUserAdd.Address">
+            <summary>
+            供货商地址
             </summary>
         </member>
         <member name="T:Model.Request.UserAdd">
@@ -1633,6 +1743,31 @@
         <member name="P:Model.Response.OrderProductResp.Money">
             <summary>
             总金额
+            </summary>
+        </member>
+        <member name="T:Model.Response.SupplierTask">
+            <summary>
+            供货商任务
+            </summary>
+        </member>
+        <member name="P:Model.Response.SupplierTask.ProductId">
+            <summary>
+            商品id
+            </summary>
+        </member>
+        <member name="P:Model.Response.SupplierTask.ProductName">
+            <summary>
+            商品名称
+            </summary>
+        </member>
+        <member name="P:Model.Response.SupplierTask.Count">
+            <summary>
+            商品数量
+            </summary>
+        </member>
+        <member name="P:Model.Response.SupplierTask.Type">
+            <summary>
+            类别 0普通 1早餐 2午餐 3晚餐
             </summary>
         </member>
         <member name="T:Model.Response.UserInfo">

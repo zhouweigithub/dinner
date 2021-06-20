@@ -64,7 +64,7 @@ namespace Model.Request
         /// <summary>
         /// 类别 0普通 1早餐 2午餐 3晚餐
         /// </summary>
-        public int Type { get; set; }
+        public int Type { get; set; } = 0;
 
         /// <summary>
         /// 总金额

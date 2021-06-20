@@ -50,6 +50,10 @@
          "ObjectType": 0
       },
       {
+         "Name": "r_product_company",
+         "ObjectType": 0
+      },
+      {
          "Name": "r_product_suplier",
          "ObjectType": 0
       },
@@ -115,10 +119,6 @@
       },
       {
          "Name": "t_product",
-         "ObjectType": 0
-      },
-      {
-         "Name": "t_product_company",
          "ObjectType": 0
       },
       {

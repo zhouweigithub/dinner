@@ -45,7 +45,7 @@ namespace Model.Database
         [Column("crtime", TypeName = "datetime")]
         public DateTime Crtime { get; set; }
 
-        [InverseProperty("CategoryNavigation")]
+        [InverseProperty("Category")]
         public virtual ICollection<TProduct> TProduct { get; set; }
     }
 }

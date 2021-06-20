@@ -12,8 +12,8 @@ namespace Model.Database
     /// <summary>
     /// 商品定向公司展示
     /// </summary>
-    [Table("t_product_company")]
-    public partial class TProductCompany
+    [Table("r_product_company")]
+    public partial class RProductCompany
     {
         /// <summary>
         /// 商品id

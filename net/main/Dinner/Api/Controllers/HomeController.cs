@@ -30,13 +30,17 @@ namespace Api.Controllers
         private readonly IWxService _wxservices;
         private readonly IOptions<WxOpenidConfigModel> _wxconfig;
         private readonly IUserService userService;
+        private readonly ISupplierService supplierService;
+        private readonly IDelivererService deliverService;
         private readonly IDbInitService _dbservice;
         private readonly JwtSetting jwt;
 
 
-        public HomeController(IUserService userService, IWxService wxService, IOptions<WxOpenidConfigModel> wxconfig, IOptions<JwtSetting> option, IDbInitService dbservice)
+        public HomeController(IUserService userService, ISupplierService supplierService, IDelivererService deliverService, IWxService wxService, IOptions<WxOpenidConfigModel> wxconfig, IOptions<JwtSetting> option, IDbInitService dbservice)
         {
             this.userService = userService;
+            this.supplierService = supplierService;
+            this.deliverService = deliverService;
             _wxservices = wxService;
             _wxconfig = wxconfig;
             _dbservice = dbservice;
@@ -44,7 +48,7 @@ namespace Api.Controllers
         }
 
         /// <summary>
-        /// 登录，若该用户未注册，则进行注册
+        /// 普通用户登录，若该用户未注册，则进行注册
         /// </summary>
         /// <param name="user">用户信息</param>
         /// <returns></returns>
@@ -87,6 +91,47 @@ namespace Api.Controllers
 
             return entity;
         }
+
+        /// <summary>
+        /// 供货商登录
+        /// </summary>
+        /// <param name="user">参数</param>
+        /// <returns></returns>
+        [HttpPost]
+        [Route("[action]")]
+        public async Task<RespDataToken<SpUser>> SupplierLogin(LoginInfo user)
+        {
+            var entity = await supplierService.LoginAsync(user);
+
+            //如果登录成功，则生成token
+            if (entity.code == 0)
+            {
+                entity.token = GenerateToken(entity.data.Id.ToString());
+            }
+
+            return entity;
+        }
+
+        /// <summary>
+        /// 送货员登录
+        /// </summary>
+        /// <param name="user">参数</param>
+        /// <returns></returns>
+        [HttpPost]
+        [Route("[action]")]
+        public async Task<RespDataToken<DlvUser>> DeliverLogin(LoginInfo user)
+        {
+            var entity = await deliverService.LoginAsync(user);
+
+            //如果登录成功，则生成token
+            if (entity.code == 0)
+            {
+                entity.token = GenerateToken(entity.data.Id.ToString());
+            }
+
+            return entity;
+        }
+
 
         /// <summary>
         /// 获取微信用户的openid

@@ -164,6 +164,32 @@
             </summary>
             <returns></returns>
         </member>
+        <member name="T:Api.Controllers.DeliverController">
+            <summary>
+            送货员
+            </summary>
+        </member>
+        <member name="M:Api.Controllers.DeliverController.Add(Model.Request.DlvUserAdd)">
+            <summary>
+            添加送货员信息
+            </summary>
+            <param name="data">参数</param>
+            <returns></returns>
+        </member>
+        <member name="M:Api.Controllers.DeliverController.ChangePassword(Model.Request.ModifyPassword)">
+            <summary>
+            修改自己密码
+            </summary>
+            <param name="data">参数</param>
+            <returns></returns>
+        </member>
+        <member name="M:Api.Controllers.DeliverController.Delete(System.Int32)">
+            <summary>
+            删除送货员
+            </summary>
+            <param name="id">送货员id</param>
+            <returns></returns>
+        </member>
         <member name="T:Api.Controllers.FeedBackController">
             <summary>
             用户反馈信息
@@ -189,9 +215,23 @@
         </member>
         <member name="M:Api.Controllers.HomeController.Login(Model.Request.UserAdd)">
             <summary>
-            登录，若该用户未注册，则进行注册
+            普通用户登录，若该用户未注册，则进行注册
             </summary>
             <param name="user">用户信息</param>
+            <returns></returns>
+        </member>
+        <member name="M:Api.Controllers.HomeController.SupplierLogin(Model.Request.LoginInfo)">
+            <summary>
+            供货商登录
+            </summary>
+            <param name="user">参数</param>
+            <returns></returns>
+        </member>
+        <member name="M:Api.Controllers.HomeController.DeliverLogin(Model.Request.LoginInfo)">
+            <summary>
+            送货员登录
+            </summary>
+            <param name="user">参数</param>
             <returns></returns>
         </member>
         <member name="M:Api.Controllers.HomeController.GetOpenId(System.String)">
@@ -418,6 +458,32 @@
             <param name="data">参数</param>
             <returns></returns>
         </member>
+        <member name="T:Api.Controllers.SupplierController">
+            <summary>
+            供货商
+            </summary>
+        </member>
+        <member name="M:Api.Controllers.SupplierController.Add(Model.Request.SpUserAdd)">
+            <summary>
+            添加供货商信息
+            </summary>
+            <param name="data">参数</param>
+            <returns></returns>
+        </member>
+        <member name="M:Api.Controllers.SupplierController.ChangePassword(Model.Request.ModifyPassword)">
+            <summary>
+            修改自己密码
+            </summary>
+            <param name="data">参数</param>
+            <returns></returns>
+        </member>
+        <member name="M:Api.Controllers.SupplierController.Delete(System.Int32)">
+            <summary>
+            删除供货商
+            </summary>
+            <param name="id">供货商id</param>
+            <returns></returns>
+        </member>
         <member name="T:Api.Controllers.UserController">
             <summary>
             用户信息
@@ -466,9 +532,14 @@
             <param name="key">节点名称</param>
             <returns></returns>
         </member>
-        <member name="M:Api.DataServiceExtention.AddDataServices(Microsoft.Extensions.DependencyInjection.IServiceCollection)">
+        <member name="T:Api.DataServiceExtention">
             <summary>
-            注册内部服务
+            注册自定义服务
+            </summary>
+        </member>
+        <member name="M:Api.DataServiceExtention.AddCustomerServices(Microsoft.Extensions.DependencyInjection.IServiceCollection)">
+            <summary>
+            注册自定义服务
             </summary>
             <param name="services"></param>
         </member>

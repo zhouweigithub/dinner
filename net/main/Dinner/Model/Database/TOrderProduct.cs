@@ -67,5 +67,9 @@ namespace Model.Database
         [ForeignKey(nameof(Orderid))]
         [InverseProperty(nameof(TOrder.TOrderProduct))]
         public virtual TOrder Order { get; set; }
+        [InverseProperty("TOrderProduct")]
+        public virtual ROrderproductDeliver ROrderproductDeliver { get; set; }
+        [InverseProperty("TOrderProduct")]
+        public virtual ROrderproductSupplier ROrderproductSupplier { get; set; }
     }
 }

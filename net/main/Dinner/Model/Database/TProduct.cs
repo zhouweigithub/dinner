@@ -13,7 +13,7 @@ namespace Model.Database
     /// 商品
     /// </summary>
     [Table("t_product")]
-    [Index(nameof(Category), Name = "category")]
+    [Index(nameof(Categoryid), Name = "category")]
     [Index(nameof(Name), Name = "ix_name", IsUnique = true)]
     public partial class TProduct
     {
@@ -39,8 +39,8 @@ namespace Model.Database
         /// <summary>
         /// 商品分类
         /// </summary>
-        [Column("category")]
-        public int Category { get; set; }
+        [Column("categoryid")]
+        public int Categoryid { get; set; }
         /// <summary>
         /// 价格
         /// </summary>
@@ -51,6 +51,11 @@ namespace Model.Database
         /// </summary>
         [Column("sales")]
         public int Sales { get; set; }
+        /// <summary>
+        /// 是否为餐饮 1是 0不是
+        /// </summary>
+        [Column("type")]
+        public int Type { get; set; }
         /// <summary>
         /// 商品图片
         /// </summary>
@@ -63,9 +68,9 @@ namespace Model.Database
         [Column("crtime", TypeName = "datetime")]
         public DateTime Crtime { get; set; }
 
-        [ForeignKey(nameof(Category))]
+        [ForeignKey(nameof(Categoryid))]
         [InverseProperty(nameof(TCategory.TProduct))]
-        public virtual TCategory CategoryNavigation { get; set; }
+        public virtual TCategory Category { get; set; }
         [InverseProperty("Product")]
         public virtual ICollection<RProductSuplier> RProductSuplier { get; set; }
         [InverseProperty("Product")]

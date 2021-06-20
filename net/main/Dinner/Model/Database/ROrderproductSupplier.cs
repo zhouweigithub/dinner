@@ -13,6 +13,7 @@ namespace Model.Database
     /// 订单中的商品的供货商
     /// </summary>
     [Table("r_orderproduct_supplier")]
+    [Index(nameof(Supplierid), Name = "fk_supplier")]
     public partial class ROrderproductSupplier
     {
         /// <summary>
@@ -44,5 +45,12 @@ namespace Model.Database
         [Column("msg")]
         [StringLength(256)]
         public string Msg { get; set; }
+
+        [ForeignKey(nameof(Supplierid))]
+        [InverseProperty(nameof(SpUser.ROrderproductSupplier))]
+        public virtual SpUser Supplier { get; set; }
+        [ForeignKey("Orderid,Productid")]
+        [InverseProperty("ROrderproductSupplier")]
+        public virtual TOrderProduct TOrderProduct { get; set; }
     }
 }

@@ -31,7 +31,8 @@ namespace BLL
         /// 创建订单
         /// </summary>
         /// <param name="data">订单信息</param>
-        /// <param name="userid">用户id</param>
+        /// <param name="openid">openid</param>
+        /// <param name="host">域名信息</param>
         /// <returns></returns>
         public async Task<RespData<string>> AddAsync(OrderAdd data, string openid, string host)
         {
@@ -46,8 +47,13 @@ namespace BLL
 
                 //商品信息
                 var productids = data.Products.Select(a => a.Productid);
+
                 //服务器上存储的商品信息
                 var productDatas = context.Set<TProduct>().Where(a => productids.Contains(a.Id)).ToList();
+
+
+                //需要分早中晚送货的餐饮商品
+                List<ProductInfo> foodProducts = new List<ProductInfo>();
 
                 foreach (ProductInfo item in data.Products)
                 {
@@ -75,6 +81,12 @@ namespace BLL
 
                     await context.Set<TOrderProduct>().AddAsync(t);
 
+
+                    //收集餐饮商品
+                    if (productData.Type == 1)
+                    {
+                        foodProducts.Add(item);
+                    }
 
                     //商品销量
                     productData.Sales++;
@@ -160,6 +172,13 @@ namespace BLL
                 await context.Set<TOrder>().AddAsync(order);
 
                 await context.SaveChangesAsync();
+
+
+
+                //给订单中的商品分配供货商
+                //此方法会异步执行，因为无返回值无法await
+                SetProductSupplier(orderid, userid, foodProducts);
+
 
 
                 //预支付
@@ -412,6 +431,112 @@ namespace BLL
             }
 
             return result;
+        }
+
+
+
+        /// <summary>
+        /// 给订单中的商品分配供货商
+        /// </summary>
+        /// <param name="orderid">订单id</param>
+        /// <param name="userid">用户id</param>
+        /// <param name="products">订单中的餐饮商品信息</param>
+        private async void SetProductSupplier(string orderid, int userid, List<ProductInfo> products)
+        {
+            try
+            {
+                //用户详情
+                var userInfo = await context.Set<TUser>().Include(a => a.Company).FirstAsync(b => b.Id == userid);
+
+
+                //所有商品id集
+                var productids = products.Select(a => a.Productid).ToList();
+
+                //部分商品的指定供货商
+                var specialSuppliers = await context.Set<RProductSuplier>().AsNoTracking().Where(a => productids.Contains(a.Productid) && a.StartDate <= DateTime.Today && a.EndDate >= DateTime.Today).ToListAsync();
+
+                foreach (var item in products)
+                {
+                    //需要查找的供货商id
+                    int supplierid = 0;
+
+                    //先分配指定了供货商的商品
+                    var special = specialSuppliers.FirstOrDefault(a => a.Productid == item.Productid);
+                    if (special != null)
+                    {
+                        supplierid = special.Suplierid;
+                    }
+                    else
+                    {
+                        //用户公司分配的供货商信息
+                        var supplierInfo = context.Set<RCompanySupplier>().AsNoTracking().Where(a => a.Companyid == userInfo.Companyid && a.StartDate <= DateTime.Today && a.EndDate >= DateTime.Today).FirstOrDefaultAsync();
+
+                        if (supplierInfo == null)
+                        {
+                            //查找历史记录中最近一次的供货商
+                            var lastSupplier = await context.Set<HisCompanySupplier>().AsNoTracking().Where(a => a.Companyid == userInfo.Companyid).OrderByDescending(a => a.Crdate).FirstOrDefaultAsync();
+
+                            if (lastSupplier != null)
+                            {
+                                supplierid = lastSupplier.Suplierid;
+                            }
+                            else
+                            {
+                                //历史记录也没数据，就随机分配一个供货商
+                                var randSupplier = await context.Set<SpUser>().AsNoTracking().Where(a => a.State == 0).OrderBy(b => Guid.NewGuid()).FirstOrDefaultAsync();
+
+                                if (randSupplier == null)
+                                {
+                                    logger.LogError("给订单中商品随机分配供货商时，未找到有效供货商");
+                                }
+                                else
+                                {
+                                    supplierid = randSupplier.Id;
+                                }
+                            }
+
+                            //未找到供货商
+                            logger.LogError("发现公司未分配供货商，公司ID：{0} 公司名称：{1}", userInfo.Companyid, userInfo.Company.Name);
+                        }
+                        else
+                        {
+                            //已分配供货商
+                        }
+                    }
+
+
+                    //分配订单商品与供货商关系
+                    await AddAsync(new ROrderproductSupplier()
+                    {
+                        Orderid = orderid,
+                        Productid = item.Productid,
+                        Supplierid = supplierid,
+                        State = 0,
+                        Msg = string.Empty
+                    });
+
+
+                    //公司与对应供货商的历史记录
+                    //历史记录
+                    var hisData = await context.Set<HisCompanySupplier>().AsNoTracking().FirstOrDefaultAsync(a => a.Companyid == userInfo.Companyid && a.Crdate == DateTime.Today);
+
+                    //不存在则添加历史记录
+                    if (hisData == null)
+                    {
+                        await AddAsync(new HisCompanySupplier()
+                        {
+                            Companyid = userInfo.Companyid,
+                            Suplierid = supplierid,
+                            Crdate = DateTime.Today
+                        });
+                    }
+                }
+
+            }
+            catch (Exception e)
+            {
+                _logger.LogError("给订单中的商品分配供货商时出错！orderid:{0}, userid:{1}\r\n{2}", orderid, userid, e.ToString());
+            }
         }
 
 

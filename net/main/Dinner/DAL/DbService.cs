@@ -28,6 +28,7 @@ namespace DAL
         public virtual DbSet<RCompanySupplier> RCompanySupplier { get; set; }
         public virtual DbSet<ROrderproductDeliver> ROrderproductDeliver { get; set; }
         public virtual DbSet<ROrderproductSupplier> ROrderproductSupplier { get; set; }
+        public virtual DbSet<RProductCompany> RProductCompany { get; set; }
         public virtual DbSet<RProductSuplier> RProductSuplier { get; set; }
         public virtual DbSet<SpException> SpException { get; set; }
         public virtual DbSet<SpUser> SpUser { get; set; }
@@ -45,7 +46,6 @@ namespace DAL
         public virtual DbSet<TOrderProduct> TOrderProduct { get; set; }
         public virtual DbSet<TPay> TPay { get; set; }
         public virtual DbSet<TProduct> TProduct { get; set; }
-        public virtual DbSet<TProductCompany> TProductCompany { get; set; }
         public virtual DbSet<TUser> TUser { get; set; }
         public virtual DbSet<TUserCoupon> TUserCoupon { get; set; }
         public virtual DbSet<TWxOrderCallback> TWxOrderCallback { get; set; }
@@ -146,7 +146,11 @@ namespace DAL
 
                 entity.Property(e => e.Name).HasComment("送货人名称");
 
+                entity.Property(e => e.Password).HasComment("登录密码");
+
                 entity.Property(e => e.State).HasComment("状态 0正常 1禁用");
+
+                entity.Property(e => e.Username).HasComment("登录账号");
             });
 
             modelBuilder.Entity<HisCompanySupplier>(entity =>
@@ -210,6 +214,18 @@ namespace DAL
                 entity.Property(e => e.Msg).HasComment("说明");
 
                 entity.Property(e => e.State).HasComment("状态 0正常 1未送达");
+
+                entity.HasOne(d => d.Deliverer)
+                    .WithMany(p => p.ROrderproductDeliver)
+                    .HasForeignKey(d => d.Delivererid)
+                    .OnDelete(DeleteBehavior.ClientSetNull)
+                    .HasConstraintName("fk_dlver");
+
+                entity.HasOne(d => d.TOrderProduct)
+                    .WithOne(p => p.ROrderproductDeliver)
+                    .HasForeignKey<ROrderproductDeliver>(d => new { d.Orderid, d.Productid })
+                    .OnDelete(DeleteBehavior.ClientSetNull)
+                    .HasConstraintName("fk_order_product");
             });
 
             modelBuilder.Entity<ROrderproductSupplier>(entity =>
@@ -229,6 +245,35 @@ namespace DAL
                 entity.Property(e => e.State).HasComment("状态 0正常 1未出货");
 
                 entity.Property(e => e.Supplierid).HasComment("供货商");
+
+                entity.HasOne(d => d.Supplier)
+                    .WithMany(p => p.ROrderproductSupplier)
+                    .HasForeignKey(d => d.Supplierid)
+                    .OnDelete(DeleteBehavior.ClientSetNull)
+                    .HasConstraintName("fk_supplier");
+
+                entity.HasOne(d => d.TOrderProduct)
+                    .WithOne(p => p.ROrderproductSupplier)
+                    .HasForeignKey<ROrderproductSupplier>(d => new { d.Orderid, d.Productid })
+                    .OnDelete(DeleteBehavior.ClientSetNull)
+                    .HasConstraintName("fk_orderproduct");
+            });
+
+            modelBuilder.Entity<RProductCompany>(entity =>
+            {
+                entity.HasKey(e => new { e.Productid, e.Companyid, e.StartDate })
+                    .HasName("PRIMARY")
+                    .HasAnnotation("MySql:IndexPrefixLength", new[] { 0, 0, 0 });
+
+                entity.HasComment("商品定向公司展示");
+
+                entity.Property(e => e.Productid).HasComment("商品id");
+
+                entity.Property(e => e.Companyid).HasComment("公司id");
+
+                entity.Property(e => e.StartDate).HasComment("起始日期");
+
+                entity.Property(e => e.EndDate).HasComment("结束日期");
             });
 
             modelBuilder.Entity<RProductSuplier>(entity =>
@@ -301,7 +346,11 @@ namespace DAL
 
                 entity.Property(e => e.Name).HasComment("供货商名称");
 
+                entity.Property(e => e.Password).HasComment("登录密码");
+
                 entity.Property(e => e.State).HasComment("状态 0正常 1禁用");
+
+                entity.Property(e => e.Username).HasComment("登录账号");
             });
 
             modelBuilder.Entity<TCart>(entity =>
@@ -608,7 +657,7 @@ namespace DAL
 
                 entity.Property(e => e.Id).HasComment("商品id");
 
-                entity.Property(e => e.Category).HasComment("商品分类");
+                entity.Property(e => e.Categoryid).HasComment("商品分类");
 
                 entity.Property(e => e.Crtime).HasComment("创建时间");
 
@@ -622,28 +671,13 @@ namespace DAL
 
                 entity.Property(e => e.Sales).HasComment("销量");
 
-                entity.HasOne(d => d.CategoryNavigation)
+                entity.Property(e => e.Type).HasComment("是否为餐饮 1是 0不是");
+
+                entity.HasOne(d => d.Category)
                     .WithMany(p => p.TProduct)
-                    .HasForeignKey(d => d.Category)
+                    .HasForeignKey(d => d.Categoryid)
                     .OnDelete(DeleteBehavior.ClientSetNull)
                     .HasConstraintName("t_product_ibfk_1");
-            });
-
-            modelBuilder.Entity<TProductCompany>(entity =>
-            {
-                entity.HasKey(e => new { e.Productid, e.Companyid, e.StartDate })
-                    .HasName("PRIMARY")
-                    .HasAnnotation("MySql:IndexPrefixLength", new[] { 0, 0, 0 });
-
-                entity.HasComment("商品定向公司展示");
-
-                entity.Property(e => e.Productid).HasComment("商品id");
-
-                entity.Property(e => e.Companyid).HasComment("公司id");
-
-                entity.Property(e => e.StartDate).HasComment("起始日期");
-
-                entity.Property(e => e.EndDate).HasComment("结束日期");
             });
 
             modelBuilder.Entity<TUser>(entity =>

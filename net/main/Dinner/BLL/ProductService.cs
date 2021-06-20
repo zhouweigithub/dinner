@@ -35,7 +35,7 @@ namespace BLL
             {
                 var datas = context.Set<TProduct>().AsNoTracking().Where(a => true);
                 if (categoryid != default)
-                    datas = datas.Where(a => a.Category == categoryid);
+                    datas = datas.Where(a => a.Categoryid == categoryid);
 
                 datas = datas.Skip(pageSize * (page - 1)).Take(pageSize);
 
@@ -57,7 +57,7 @@ namespace BLL
             RespData<TProduct> result = new RespData<TProduct>();
             try
             {
-                result.data = await context.Set<TProduct>().AsNoTracking().Include(a => a.CategoryNavigation).FirstOrDefaultAsync(b => b.Id == productid);
+                result.data = await context.Set<TProduct>().AsNoTracking().Include(a => a.Category).FirstOrDefaultAsync(b => b.Id == productid);
 
                 var yyy = _cache.TryAdd("prod", result.data, TimeSpan.FromMinutes(10));
             }
@@ -80,10 +80,11 @@ namespace BLL
                 var t = new TProduct()
                 {
                     Name = data.Name,
-                    Category = data.Category,
+                    Categoryid = data.CategoryId,
                     Crtime = DateTime.Now,
                     Price = data.Price,
                     Sales = 0,
+                    Type = 1,    //目前默认为餐饮
                     Img = data.Img,
                 };
 
@@ -108,7 +109,7 @@ namespace BLL
                 TProduct model = new TProduct()
                 {
                     Id = data.Id,
-                    Category = data.Category,
+                    Categoryid = data.CategoryId,
                     Img = data.Img,
                     Name = data.Name,
                     Price = data.Price,
