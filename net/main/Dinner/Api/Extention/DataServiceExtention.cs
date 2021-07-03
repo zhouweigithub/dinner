@@ -39,6 +39,8 @@ namespace Api
             services.AddTransient<IMiniPayNotifyService, MiniPayNotifyService>();
             services.AddTransient<IMiniPayService, MiniPayService>();
             services.AddTransient<IMiniPaySignService, MiniPaySignService>();
+            services.AddTransient<ISupplierService, SupplierService>();
+            services.AddTransient<IDelivererService, DelivererService>();
 
         }
     }
