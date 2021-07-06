@@ -29,6 +29,7 @@ using Model.Request.Wx;
 using Newtonsoft.Json;
 using Newtonsoft.Json.Serialization;
 using NLog.Extensions.Logging;
+using TanvirArjel.Extensions.Microsoft.DependencyInjection;
 using ZwUtil;
 
 namespace Api
@@ -75,7 +76,9 @@ namespace Api
             });
             services.AddSwaggerService();
             services.AddJwt(jswSetting);
-            services.AddCustomerServices();
+            //services.AddCustomerServices();
+
+            services.AddServicesOfAllTypes("BLL");
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.

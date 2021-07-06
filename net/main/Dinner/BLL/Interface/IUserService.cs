@@ -6,12 +6,14 @@ using Model;
 using Model.Database;
 using Model.Request;
 using Model.Response.Com;
+using TanvirArjel.Extensions.Microsoft.DependencyInjection;
 
 namespace BLL.Interface
 {
     /// <summary>
     /// 用户信息
     /// </summary>
+    [TransientService]
     public interface IUserService
     {
         public Task<RespDataToken<TUser>> GetEntityAsync(String openid);

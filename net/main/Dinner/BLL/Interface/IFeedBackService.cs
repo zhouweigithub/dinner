@@ -7,12 +7,14 @@ using Model;
 using Model.Database;
 using Model.Request;
 using Model.Response.Com;
+using TanvirArjel.Extensions.Microsoft.DependencyInjection;
 
 namespace BLL.Interface
 {
     /// <summary>
     /// 反馈信息
     /// </summary>
+    [TransientService]
     public interface IFeedBackService
     {
         public Task<RespDataList<TFeedback>> GetListAsync(string openid);

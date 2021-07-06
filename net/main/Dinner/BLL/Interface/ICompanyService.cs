@@ -6,12 +6,14 @@ using Model;
 using Model.Database;
 using Model.Request;
 using Model.Response.Com;
+using TanvirArjel.Extensions.Microsoft.DependencyInjection;
 
 namespace BLL.Interface
 {
     /// <summary>
     /// 公司信息
     /// </summary>
+    [TransientService]
     public interface ICompanyService
     {
         public Task<RespData<TCompany>> AddAsync(CompanyAdd company);

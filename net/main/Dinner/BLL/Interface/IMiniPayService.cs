@@ -6,12 +6,14 @@ using System.Threading.Tasks;
 using Model.Request.Wx;
 using Model.Response.Com;
 using Model.Response.Wx;
+using TanvirArjel.Extensions.Microsoft.DependencyInjection;
 
 namespace BLL.Interface
 {
     /// <summary>
     /// 微信小程序支付功能
     /// </summary>
+    [TransientService]
     public interface IMiniPayService
     {
         /// <summary>

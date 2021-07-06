@@ -7,12 +7,14 @@ using Model;
 using Model.Database;
 using Model.Request;
 using Model.Response.Com;
+using TanvirArjel.Extensions.Microsoft.DependencyInjection;
 
 namespace BLL.Interface
 {
     /// <summary>
     /// 商品信息
     /// </summary>
+    [TransientService]
     public interface IProductService
     {
         public Task<RespDataList<TProduct>> GetListAsync(int categoryid, int pageSize, int page);

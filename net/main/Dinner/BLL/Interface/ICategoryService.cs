@@ -6,12 +6,14 @@ using System.Threading.Tasks;
 using Model.Database;
 using Model.Request;
 using Model.Response.Com;
+using TanvirArjel.Extensions.Microsoft.DependencyInjection;
 
 namespace BLL.Interface
 {
     /// <summary>
     /// 商品分类
     /// </summary>
+    [TransientService]
     public interface ICategoryService
     {
         public Task<RespDataList<TCategory>> GetListAsync();

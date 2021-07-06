@@ -6,12 +6,14 @@ using System.Threading.Tasks;
 using Model.Database;
 using Model.Request;
 using Model.Response.Com;
+using TanvirArjel.Extensions.Microsoft.DependencyInjection;
 
 namespace BLL.Interface
 {
     /// <summary>
     /// 送货员相关
     /// </summary>
+    [TransientService]
     public interface IDelivererService
     {
         public Task<RespData<DlvUser>> AddAsync(DlvUserAdd data);

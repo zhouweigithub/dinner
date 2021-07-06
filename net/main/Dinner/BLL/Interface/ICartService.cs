@@ -6,12 +6,14 @@ using System.Threading.Tasks;
 using Model.Database;
 using Model.Request;
 using Model.Response.Com;
+using TanvirArjel.Extensions.Microsoft.DependencyInjection;
 
 namespace BLL.Interface
 {
     /// <summary>
     /// 购物车
     /// </summary>
+    [TransientService]
     public interface ICartService
     {
         public Task<RespDataList<TCart>> GetListAsync(String openid);

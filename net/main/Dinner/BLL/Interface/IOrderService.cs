@@ -8,12 +8,14 @@ using Model.Database;
 using Model.Request;
 using Model.Response;
 using Model.Response.Com;
+using TanvirArjel.Extensions.Microsoft.DependencyInjection;
 
 namespace BLL.Interface
 {
     /// <summary>
     /// 订单信息
     /// </summary>
+    [TransientService]
     public interface IOrderService
     {
         public Task<RespDataList<TOrder>> GetListAsync(string openid, string productName, int pageSize, int page);

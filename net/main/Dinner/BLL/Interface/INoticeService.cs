@@ -7,12 +7,14 @@ using Model;
 using Model.Database;
 using Model.Request;
 using Model.Response.Com;
+using TanvirArjel.Extensions.Microsoft.DependencyInjection;
 
 namespace BLL.Interface
 {
     /// <summary>
     /// 公告信息
     /// </summary>
+    [TransientService]
     public interface INoticeService
     {
         public Task<RespDataList<TNotice>> GetListAsync(DateTime startDate, DateTime endDate, int pageSize, int page);
